@@ -1,0 +1,93 @@
+import { Request, Response, Router } from 'express';
+import { BAD_REQUEST, CREATED, OK } from 'http-status-codes';
+import { ParamsDictionary } from 'express-serve-static-core';
+import Videos from '../models/videos/video.model';
+import { paramMissingError } from '@shared/constants';
+import { writer } from '../middleware/middleware';
+
+// Init shared
+const router = Router()
+const videos = new Videos();
+ 
+
+
+router.get('/all', async (req: Request, res: Response) => {
+    const video = await videos.getAll();
+    
+    return res.status(OK).json({video});
+});
+
+
+
+router.get('/some/:name', async (req: Request, res: Response) => {
+    const { name } = req.params as ParamsDictionary;
+
+    const video = await videos.getSome(name);
+
+    return res.status(OK).json({video});
+
+});
+
+
+
+ router.get('/one/:id', async (req: Request, res: Response) => {
+    const { id } = req.params as ParamsDictionary;
+
+    const video = await videos.getOne(id);
+    return res.status(OK).json({video});
+});
+
+
+/******************************************************************************
+ *                       Add One - "POST /api/video/add"
+ ******************************************************************************/
+
+router.use(writer).post('/add', async (req: Request, res: Response) => {
+    // Check parameters
+    const { video } = req.body;
+    if (!video) {
+        return res.status(BAD_REQUEST).json({
+            error: paramMissingError,
+        });
+    }
+    // Add new video
+    await videos.add(video);
+    return res.status(CREATED).end();
+});
+
+
+/******************************************************************************
+ *                       Update - "PUT /api/video/update"
+ ******************************************************************************/
+
+router.use(writer).put('/update', async (req: Request, res: Response) => {
+    // Check Parameters
+    const { video } = req.body;
+    if (!video) {
+        return res.status(BAD_REQUEST).json({
+            error: paramMissingError,
+        });
+    }
+   
+    // Update video
+    await videos.update(video, req.body.id);
+    return res.status(OK).end();
+});
+
+
+/******************************************************************************
+ *                    Delete - "DELETE /api/video/delete/:id"
+ ******************************************************************************/
+
+router.use(writer).delete('/delete/:id', async (req: Request, res: Response) => {
+    const { id } = req.params as ParamsDictionary;
+    await videos.delete(id);
+    return res.status(OK).end(); 
+});
+
+
+/******************************************************************************
+ *                                     Export
+ ******************************************************************************/
+
+export default router;

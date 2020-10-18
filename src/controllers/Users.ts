@@ -1,17 +1,17 @@
 import { Request, Response, Router } from 'express';
 import { BAD_REQUEST, CREATED, OK } from 'http-status-codes';
 import { ParamsDictionary } from 'express-serve-static-core';
-
-import UserDao from '@daos/User/UserDao.mock';
+import { hashRounds } from '../shared/constants'
+import UserDao from '../models/User/User.model';
 import { paramMissingError } from '@shared/constants';
-import { adminMW } from './middleware';
+import { adminMW } from '../middleware/middleware';
 import { UserRoles } from '@entities/User';
-
+import bcrypt from 'bcrypt'
 
 // Init shared
 const router = Router().use(adminMW);
 const userDao = new UserDao();
-
+ 
 
 /******************************************************************************
  *                      Get All Users - "GET /api/users/all"
@@ -49,14 +49,19 @@ router.post('/add', async (req: Request, res: Response) => {
 router.put('/update', async (req: Request, res: Response) => {
     // Check Parameters
     const { user } = req.body;
+    const newuser = {...user}
     if (!user) {
         return res.status(BAD_REQUEST).json({
             error: paramMissingError,
         });
     }
+    if(user.password) {
+        newuser["pwdHash"] = bcrypt.hashSync(user.password , hashRounds)
+        delete newuser.password
+    }
     // Update user
-    user.id = Number(user.id);
-    await userDao.update(user);
+    console.log(newuser)
+    await userDao.update(newuser, req.body.id);
     return res.status(OK).end();
 });
 
@@ -67,7 +72,7 @@ router.put('/update', async (req: Request, res: Response) => {
 
 router.delete('/delete/:id', async (req: Request, res: Response) => {
     const { id } = req.params as ParamsDictionary;
-    await userDao.delete(Number(id));
+    await userDao.delete(id);
     return res.status(OK).end(); 
 });
 

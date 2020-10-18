@@ -1,0 +1,186 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: black;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+.articlebox {
+  margin: 20px;
+  background-color: rgb(36, 36, 36);
+  height: 370px;
+  width: 200px;
+
+}
+
+.video_box {
+  margin: 20px;
+  background-color: rgb(36, 36, 36);
+  height: 200px;
+  width: 300px;
+  display: grid;
+}
+
+.video_icon {
+  position: absolute;
+  padding: 10px;
+  font-size: x-large;
+}
+
+
+
+.vide_img_box {
+  display: grid;
+  grid-template-rows: 0px 210px 0px;
+}
+
+
+.transHead .head{
+  padding: -20px;
+
+}
+
+.imgBox {
+  /* height: 300px; */
+  display: grid;
+  grid-template-rows: 300px 0px;
+}
+
+.leftFloat {
+  text-align: end;
+  float: right;
+  padding-right: 10px;
+}
+
+.rightFloat {
+  text-align: end;
+  float: left;
+  padding-left: 10px;
+}
+
+.timeInfo {
+  margin: -2px 10px 0px 8px;
+  color: white;
+  font-size: small;
+  text-transform: uppercase;
+  float: left;
+}
+
+.article_info {
+  height: 50px;
+}
+
+
+.article_icon {
+  position: absolute;
+  margin-top: -370px;
+  padding-left: 10px;
+}
+
+
+.head {
+  color: white;
+  text-align: start;
+  padding-left: 5px;
+  font-size: x-small;
+}
+
+.transHead {
+  background-color: rgba(0, 0, 0, 0.342);
+  position: absolute;
+  width: 300px;
+  margin-top: -42px;
+  height: 40px;
+  
+}
+
+.videoMore {
+  background-color: rgb(36, 36, 36);
+  width: 280px;
+  margin-left: 5px;
+  display: grid;
+  grid-template-columns: 10% 40% 40% 10%;
+}
+.timeIcon {
+  float: left;
+}
+
+.videoMore  p {
+  color: white;
+  font-size: x-small;
+  margin-top: 10px;
+  padding-left:4px;
+  text-align: start;
+  text-transform: uppercase;
+}
+
+.videoIco {
+  padding: 10px;
+}
+
+.product_box {
+  width: 300px;
+  height: 300px;
+  margin: 20px;
+  display: grid;
+  grid-template-rows: 300px 20px 30px;
+
+}
+.productAction {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  background-color: rgb(36, 36, 36);
+}
+
+.price {
+  display: grid;
+  grid-template-columns: 50% 50%; 
+  text-align: end;
+
+}
+
+
+.add_cart {
+  text-align: start;
+
+}
+
+.card_cart {
+  padding: 10px;
+}
+
+.price {
+  margin-left: 75px;
+  padding: 7px;
+}
+.price p {
+  color: gold;
+  font-size: small;
+  margin-top: 2px;
+}
+
+.card_view {
+  font-size: x-large;
+  text-align: end;
+}
+
+.productInfo {
+  background-color: rgb(36, 36, 36);
+  color: white;
+  font-size: small;
+  text-align: start;
+}
+
+.productInfo p {
+  padding-left: 10px;
+  margin-top: 2px;
+}

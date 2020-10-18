@@ -46,8 +46,6 @@ build/Release
 # Dependency directories
 node_modules/
 
-env/
-
 # Optional npm cache directory
 .npm
 
@@ -64,4 +62,6 @@ env/
 .yarn-integrity
 
 # dotenv environment variables file
-*.env
+.env
+
+env/production.env

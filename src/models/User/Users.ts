@@ -5,14 +5,14 @@ export interface IUserDao {
     getOne: (email: string) => Promise<IUser | null>;
     getAll: () => Promise<IUser[]>;
     add: (user: IUser) => Promise<void>;
-    update: (user: IUser) => Promise<void>;
-    delete: (id: number) => Promise<void>;
+    update: (user: IUser, id: string) => Promise<void>;
+    delete: (id: string) => Promise<void>;
 }
 
 class UserDao implements IUserDao {
 
 
-    /**
+    /**k
      * @param email
      */
     public async getOne(email: string): Promise<IUser | null> {
@@ -42,9 +42,9 @@ class UserDao implements IUserDao {
 
     /**
      *
-     * @param user
+     * @param user && id 
      */
-    public async update(user: IUser): Promise<void> {
+    public async update(user: IUser, id: string): Promise<void> {
         // TODO
         return {} as any;
     }
@@ -54,7 +54,7 @@ class UserDao implements IUserDao {
      *
      * @param id
      */
-    public async delete(id: number): Promise<void> {
+    public async delete(id: string): Promise<void> {
         // TODO
         return {} as any;
     }

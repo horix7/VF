@@ -1,6 +1,8 @@
 // Strings
 export const paramMissingError = 'One or more of the required parameters was missing.';
 export const loginFailedErr = 'Login failed';
+export const userexists = 'user already registered';
+export const hashRounds = 10;
 
 // Numbers
 export const pwdSaltRounds = 12;

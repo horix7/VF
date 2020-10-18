@@ -25,18 +25,21 @@
     "@server": "dist/Server"
   },
   "dependencies": {
+    "@types/uuid": "^8.3.0",
     "bcrypt": "^5.0.0",
     "command-line-args": "^5.1.1",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
+    "firebase-admin": "^9.2.0",
     "helmet": "^4.1.1",
     "http-status-codes": "^2.1.4",
     "jsonwebtoken": "^8.5.1",
     "module-alias": "^2.2.2",
     "morgan": "^1.10.0",
     "randomstring": "^1.1.5",
+    "uuid": "^8.3.1",
     "winston": "^3.3.3"
   },
   "devDependencies": {
