@@ -1,7 +1,7 @@
 import { Request, Response, Router } from 'express';
 import { BAD_REQUEST, CREATED, OK } from 'http-status-codes';
 import { ParamsDictionary } from 'express-serve-static-core';
-import Content from '../models/fcontent/content';
+import Content from '../models/PremiumContent/condent.model';
 import { paramMissingError } from '@shared/constants';
 import { writer } from '../middleware/middleware';
 

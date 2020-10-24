@@ -1,3 +1,349 @@
+:root {
+  --main--color: gold;
+  --second--color: black;
+  --third--color: rgb(36,36,36);
+  font-size: 16px;
+  font-family: 'Open Sans';
+  --text-primary: #b6b6b6;
+  --text-secondary: #ececec;
+  --bg-primary: black;
+  --bg-secondary: #222222;
+  --transition-speed: 600ms;
+}
+
+body {
+  color: white;
+  background-color: white;
+  margin: 0;
+  padding: 0;
+}
+
+body::-webkit-scrollbar {
+  width: 0.15rem;
+}
+
+
+main {
+  background-color: white;
+  width: 100%;
+}
+
+.articleForm {
+  text-align: end;
+  margin-right: 2%;
+  margin-bottom: 100px;
+}
+.homeIcon {
+  font-size: xx-large;
+  color: gold;
+}
+.articleWriterC {
+  margin-top: 20px;
+}
+
+.tittleInput {
+  width: 80%;
+  height: 40px;
+  border: 1px solid grey;
+  padding-left: 10px;
+  font-size: larger;
+}
+.tittleInput::placeholder {
+  color: grey;
+  font-size: large;
+}
+
+.MuiStepLabel-iconContainer  {
+  color: red;
+}
+
+.editor {
+  width: 80%;
+  margin-left: 20%;
+  text-align: end;
+  height: 300px;
+  overflow: scroll;
+}
+
+button {
+  cursor: pointer;
+}
+.publish {
+  width: 200px;
+  height: 50px;
+  color: gold;
+  background-color: black;
+  border: none;
+  margin-bottom: 20px;
+  cursor: pointesr;
+}
+
+.CreateVideo {
+  text-align: end;
+  width: 30%;
+  margin-left: 60%;
+}
+.inputz {
+  border: 1px solid black;
+  margin-bottom: 20px;
+
+}
+
+i {
+  cursor: pointer;
+}
+
+.inputs {
+  border: none;
+  width: 90%;
+  height: 30px;
+}
+
+.uploadIcon {
+  background-color: black;
+  color: gold;
+}
+.inputIconz {
+  display: grid;
+  text-align: center;
+  grid-template-columns: 10% 80% 10%;
+}
+
+.inputIcon{
+  padding-top: 20%;
+
+}
+
+
+
+
+/* .premiumCheck {
+  background-color: black;
+  width: 20%;
+  margin-top: 20px;
+  text-align: end;
+  margin-left: 80%;
+
+} */
+ .toogle label {
+   color: black;
+ }
+
+ .tooogle label {
+  color: black
+}
+
+.articleForm .artDrop {
+  width: 20%;
+  margin-left: 80%;
+}
+
+ .toogle select {
+   background-color: white;
+ }
+div::-webkit-scrollbar-track , body::-webkit-scrollbar-track {
+  background: black;
+}
+
+div::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb {
+  background: gold;
+}
+
+main {
+  /* margin-left: 5rem; */
+  padding-top: 2rem;
+}
+
+.navBack {
+  background-color: white;
+  width: 100%;
+}
+
+.navbar {
+  position: fixed;
+  background-color: var(--bg-primary);
+  transition: width 600ms ease;
+  /* overflow: scroll; */
+}
+
+.navbar-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.nav-item {
+  width: 100%;
+}
+
+.nav-item:last-child {
+  margin-top: auto;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  height: 5rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  filter: grayscale(100%) opacity(0.7);
+  transition: var(--transition-speed);
+  cursor: pointer;
+  text-align: center;
+  /* margin-left: 10px; */
+}
+
+.nav-link:hover {
+  filter: grayscale(0%) opacity(1);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+}
+
+.nav-link:active {
+  background-color: rgb(58, 51, 8);
+  filter: grayscale(0%) opacity(1);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+}
+
+.link-text {
+  display: none;
+  margin-left: 1rem;
+  font-size: x-large;
+  color: gold;
+
+}
+
+.nav-link .homeIcon {
+  /* width: 2rem;
+  min-width: 2rem; */
+  margin: 0 1.5rem;
+}
+
+.fa-primary {
+  color: #ff7eee;
+}
+
+.fa-secondary {
+  color: #df49a6;
+}
+
+.fa-primary,
+.fa-secondary {
+  transition: var(--transition-speed);
+}
+
+.logo {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  font-size: 1.5rem;
+  letter-spacing: 0.3ch;
+  width: 100%;
+}
+
+.logo .homeIcon {
+  transform: rotate(0deg);
+  transition: var(--transition-speed);
+}
+
+.logo-text
+{
+  display: inline;
+  position: relative;
+  left: -199px;
+  transition: var(--transition-speed);
+}
+
+.navbar:hover .logo svg {
+  transform: rotate(-180deg);
+}
+
+
+
+.dark {
+  --text-primary: #b6b6b6;
+  --text-secondary: #ececec;
+  --bg-primary: #23232e;
+  --bg-secondary: #141418;
+}
+
+.light {
+  --text-primary: #1f1f1f;
+  --text-secondary: #000000;
+  --bg-primary: #ffffff;
+  --bg-secondary: #e4e4e4;
+}
+
+.solar {
+  --text-primary: #576e75;
+  --text-secondary: #35535c;
+  --bg-primary: #fdf6e3;
+  --bg-secondary: #f5e5b8;
+}
+
+.theme-icon {
+  display: none;
+}
+
+.dark #darkIcon {
+  display: block;
+}
+
+.light #lightIcon {
+  display: block;
+}
+
+.solar #solarIcon {
+  display: block;
+}
+
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrapper .file-upload {
+  height: 30px;
+  width: 30px;
+  border-radius: 100px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid white;
+  overflow: hidden;
+  background-image: linear-gradient(to bottom, black, 50%, gold 50%);
+  background-size: 100% 200%;
+  transition: all 1s;
+  color:  white;
+  font-size: 20px;
+}
+.wrapper .file-upload input[type='file'] {
+  height: 200px;
+  width: 200px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.wrapper .file-upload:hover {
+  background-position: 0 -100%;
+  color:  black;
+}
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +351,53 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: black;
+  background-color: rgb(255, 255, 255);
 }
 
+.tableHolder {
+  display: grid;
+  padding: 20px;
+  grid-template-columns: 10% 90%;
+}
+
+.stepperBack {
+  background-color: black;
+  height: 100vh;
+}
+.signUpF {
+  background-color: black;
+  height: 100vh;
+  margin-top: -25px;
+}
+
+ .sawafit {
+  padding-top: 10px;
+  color: gold;
+}
+
+.signUpPages {
+  background-color: black;
+  padding: 10%;
+  text-align: start;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.chartHolder {
+  display: grid;
+  padding: 20px;
+  grid-template-columns: 30% 70%;
+}
+
+
+.buttonSize {
+  padding-top: 20px;
+}
+
+
+
+input {
+  outline: none;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -20,6 +410,55 @@ code {
   height: 370px;
   width: 200px;
 
+}
+
+.appBanner {
+  background-color: gold;
+  height: 55px;
+  padding-top: 15px;
+  display: grid;
+  grid-template-columns: 50% 20% 30%;
+}
+
+.appBanner img {
+  padding: 0px;
+}
+
+
+.appLinks {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.appBanner p {
+  font-size: large;
+  text-transform: capitalize;
+  padding-bottom: 10px;
+}
+.firstMain {
+  display: grid;
+  grid-template-columns: 400px 1fr 40%;
+}
+
+.first_descr {
+  text-align: end;
+  padding: 30px;
+}
+.first_descr p {
+  font-size: 3rem;
+  color: white;
+  text-align: end;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+.main_btn {
+  background-color: gold;
+  border: none;
+  width: 120px;
+  height: 40px;
+  font-size: large;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .video_box {
@@ -141,6 +580,43 @@ code {
   background-color: rgb(36, 36, 36);
 }
 
+.centerAlg {
+  text-align: center;
+  width: 100%;
+}
+.premiumBox {
+  width: 600px;
+}
+.premiumBox div{
+  background-color: var(--third--color);
+  margin: 10px;
+  padding: 0px 5px 2px 10px;
+  
+}
+
+
+.premiumBox .pheading {
+  text-align: start;
+  font-size: x-large;
+  text-transform: uppercase;
+  color: gold;
+  font-weight: bold;
+
+}
+
+
+
+.premiumBox button {
+  float: right;
+  margin-top: -13px;
+}
+.ppricing {
+  color: white;
+  font-size: large;
+  text-align: start;
+}
+
+
 .price {
   display: grid;
   grid-template-columns: 50% 50%; 
@@ -183,4 +659,238 @@ code {
 .productInfo p {
   padding-left: 10px;
   margin-top: 2px;
+}
+
+.naav , .naav1 , .naav2 {
+  color: white;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.naav {
+  text-align: start;
+}
+
+.naav1 {
+  text-align: center;
+}
+
+.naav2 {
+  text-align: end;
+}
+
+.desktopNav {
+  display: grid;
+  padding: 10px;
+  background-color: black;
+  grid-template-columns: 10% 15% 10% 30% 15% 20%;
+}
+.searchBar {
+  background-color: transparent;
+  border: none;
+  color: white;
+
+  
+}
+.search {
+  border: 1px solid gold;
+  width: 140px;
+  margin-left: 50px;
+  border-radius: 20px;
+  
+
+}
+
+.search div {
+  background-color: transparent;
+ padding-left: 10px;
+ padding-right: 10px;
+ height: 23px;
+ width: 120px;
+  text-align: end;
+  display: grid;
+  grid-template-columns: 70% 30%;
+}
+
+ .desktopMobileH2 {
+  display: none;
+}
+
+.menuIcon ,
+.cartIIcon {
+  color: gold;
+}
+
+
+.desktopMobileH .search {
+  background-color: transparent;
+  width: 90%;
+  margin-left: 10%;
+}
+
+
+.desktopMobileH .search div {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 80% 20%;
+}
+
+.desktopMobileH .naav2 {
+  padding: 5px;
+  text-transform: capitalize;
+}
+
+.searchBar1 {
+  width: 100%;
+  color: white;
+  background-color: transparent;
+  border: none;
+}
+
+@media screen and (max-width: 800px) {
+  body {
+    background-color: black;
+  }
+
+  .articleForm .artDrop {
+    width: 40%;
+    margin-left: 60%;
+  }
+  
+  .tittleInput {
+    width: 90%;
+    /* margin: 10px; */
+  }
+  .editor {
+    width: 90%;
+    margin-left: 10%;
+    text-align: end;
+    /* height: 10px; */
+    overflow: scroll;
+  } 
+
+  .desktopNav {
+    display: none;
+  }
+
+  .desktopMobileH {
+    width: 50%;
+    height: 500px;
+    position: absolute;
+    background-color: rgba(16, 14, 0, 0.624);
+    padding-right: 20px;
+    border-right: 1px solid gold;
+  }
+
+  .desktopMobileH2 {
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+    padding: 10px;
+  }
+
+ .firstMain {
+   grid-template-columns: 1fr;
+ }
+
+ .firstMain .first_descr  {
+    margin-top: -80%;
+ }
+
+ .first_descr p {
+   font-size: 2rem;
+ }
+ .appBanner {
+   grid-template-columns: 100% 0%;
+   text-align: center;
+   height: 100%;
+   margin-top: -10%;
+   position: relative;
+ }
+
+ .appLinks {
+   width: 90%;
+   margin-left: 10%;
+   margin-top: -10px;
+ }
+
+
+
+}
+
+
+
+/* Small screens */
+@media only screen and (max-width: 800px) {
+  .navbar {
+    bottom: 0;
+    width: 100vw;
+    height: 4rem;
+  }
+
+  .editor {
+    width: 100%;
+    margin-left:  0%;
+    text-align: end;
+    height: 300px;
+    overflow: scroll;
+  } 
+
+
+  .logo {
+    display: none;
+  }
+
+  .navbar-nav {
+    flex-direction: row;
+  }
+
+  .nav-item {
+    height: 5rem;
+  }
+  .nav-link {
+    justify-content: center;
+    border-radius: 15px;
+  }
+
+
+  .nav-item:last-child {
+    margin-top: 0;
+  }
+  
+
+  .homeIcon {
+    font-size: large;
+  }
+  main {
+    margin: 0;
+  }
+}
+
+/* Large screens */
+@media only screen and (min-width: 800px) {
+  .navbar {
+    top: 0;
+    width: 5rem;
+    height: 100vh;
+  }
+
+  .navbar:hover {
+    width: 16rem;
+  }
+
+  .navbar:hover .link-text {
+    display: inline;
+  }
+
+  .navbar:hover .logo svg
+  {
+    margin-left: 11rem;
+  }
+
+  .navbar:hover .logo-text
+  {
+    left: 0px;
+  }
+
+  
 }

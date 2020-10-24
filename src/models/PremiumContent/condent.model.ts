@@ -1,6 +1,6 @@
 import { IArticle } from '@entities/article';
 import  db  from '../db/db.connect';
-import { IIArticle } from './content';
+import { IIArticle } from './article';
 
 const articleCollection  = db.collection('content')
 

@@ -1,36 +1,30 @@
 import { Request, Response, Router } from 'express';
 import { BAD_REQUEST, CREATED, OK } from 'http-status-codes';
 import { ParamsDictionary } from 'express-serve-static-core';
-import Content from '../models/fcontent/content';
+import Videos from '../models/premiumVidz/video.model';
 import { paramMissingError } from '@shared/constants';
 import { writer } from '../middleware/middleware';
 
 // Init shared
-const router = Router();
-const content = new Content();
+const router = Router()
+const videos = new Videos();
  
 
-/******************************************************************************
- *                      Get All article - "GET /api/article/all"
- ******************************************************************************/
 
 router.get('/all', async (req: Request, res: Response) => {
-    const article = await content.getAll();
-
-    return res.status(OK).json({article});
+    const video = await videos.getAll();
+    
+    return res.status(OK).json({video});
 });
 
 
-/******************************************************************************
- *                      search article - "GET /api/article/all"
- ******************************************************************************/
 
 router.get('/some/:name', async (req: Request, res: Response) => {
     const { name } = req.params as ParamsDictionary;
 
-    const article = await content.getSome(name);
+    const video = await videos.getSome(name);
 
-    return res.status(OK).json({article});
+    return res.status(OK).json({video});
 
 });
 
@@ -39,57 +33,55 @@ router.get('/some/:name', async (req: Request, res: Response) => {
  router.get('/one/:id', async (req: Request, res: Response) => {
     const { id } = req.params as ParamsDictionary;
 
-    const article = await content.getOne(id);
-    return res.status(OK).json({article});
+    const video = await videos.getOne(id);
+    return res.status(OK).json({video});
 });
 
 
 /******************************************************************************
- *                       Add One - "POST /api/article/add"
+ *                       Add One - "POST /api/video/add"
  ******************************************************************************/
 
 router.use(writer).post('/add', async (req: Request, res: Response) => {
     // Check parameters
-
-    const { article } = req.body;
-    if (!article) {
+    const { video } = req.body;
+    if (!video) {
         return res.status(BAD_REQUEST).json({
             error: paramMissingError,
         });
     }
-    // Add new article
-    await content.add(article);
-
+    // Add new video
+    await videos.add(video);
     return res.status(CREATED).end();
 });
 
 
 /******************************************************************************
- *                       Update - "PUT /api/article/update"
+ *                       Update - "PUT /api/video/update"
  ******************************************************************************/
 
 router.use(writer).put('/update', async (req: Request, res: Response) => {
     // Check Parameters
-    const { article } = req.body;
-    if (!article) {
+    const { video } = req.body;
+    if (!video) {
         return res.status(BAD_REQUEST).json({
             error: paramMissingError,
         });
     }
    
-    // Update article
-    await content.update(article, req.body.id);
+    // Update video
+    await videos.update(video, req.body.id);
     return res.status(OK).end();
 });
 
 
 /******************************************************************************
- *                    Delete - "DELETE /api/article/delete/:id"
+ *                    Delete - "DELETE /api/video/delete/:id"
  ******************************************************************************/
 
 router.use(writer).delete('/delete/:id', async (req: Request, res: Response) => {
     const { id } = req.params as ParamsDictionary;
-    await content.delete(id);
+    await videos.delete(id);
     return res.status(OK).end(); 
 });
 
