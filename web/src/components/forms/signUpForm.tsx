@@ -19,9 +19,6 @@ export const SignUpForm: React.FunctionComponent = () => {
   return (
      <div className="signUpF">
 
-
-    <h1 className="sawafit">SAWAFIT</h1>
-
       <div className="signUpPages">
     
     <div className="register">

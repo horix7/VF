@@ -4,16 +4,31 @@ import clsx from 'clsx';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
-import SettingsIcon from '@material-ui/icons/Settings';
-import GroupAddIcon from '@material-ui/icons/GroupAdd';
-import VideoLabelIcon from '@material-ui/icons/VideoLabel';
 import StepConnector from '@material-ui/core/StepConnector';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { StepIconProps } from '@material-ui/core/StepIcon';
+import { PaymentForm } from '../forms/checkoutForms'
+import { SignUpForm }  from '../forms/signUpForm'
+import { ThemeProvider } from '@material-ui/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
+import {Icon } from "@fluentui/react"
 
 
-
+const Newtheme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#ffc107",
+    },
+    secondary: {
+      main: '#000000',
+    },
+    text : {
+        primary: "#ffc107",
+        secondary: "#ffffff"
+    }
+  },
+});
 const ColorlibConnector = withStyles({
   alternativeLabel: {
     top: 22,
@@ -21,13 +36,13 @@ const ColorlibConnector = withStyles({
   active: {
     '& $line': {
       backgroundImage:
-        'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+        'linear-gradient(84deg, rgba(27,26,47,1) 0%, rgba(80,80,0,1) 35%, rgba(198,189,0,1) 100%);',
     },
   },
   completed: {
     '& $line': {
       backgroundImage:
-        'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+        'linear-gradient(84deg, rgba(27,26,47,1) 0%, rgba(80,80,0,1) 35%, rgba(198,189,0,1) 100%);',
     },
   },
   line: {
@@ -52,12 +67,12 @@ const useColorlibStepIconStyles = makeStyles({
   },
   active: {
     backgroundImage:
-      'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+      'linear-gradient(84deg, rgba(27,26,47,1) 0%, rgba(80,80,0,1) 35%, rgba(198,189,0,1) 100%);',
     boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
   },
   completed: {
     backgroundImage:
-      'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+      'linear-gradient(84deg, rgba(27,26,47,1) 0%, rgba(80,80,0,1) 35%, rgba(198,189,0,1) 100%);',
   },
 });
 
@@ -66,9 +81,9 @@ function ColorlibStepIcon(props: StepIconProps) {
   const { active, completed } = props;
 
   const icons: { [index: string]: React.ReactElement } = {
-    1: <SettingsIcon />,
-    2: <GroupAddIcon />,
-    3: <VideoLabelIcon />,
+    1:  <Icon style={{color: "black", fontWeight:"bold"}} iconName="Accounts" />,
+    2:  <Icon style={{color: "black", fontWeight:"bold"}} iconName="PaymentCard"  />,
+    3:  <Icon style={{color: "black", fontWeight:"bold"}} iconName="TextDocument"   />,
   };
 
   return (
@@ -99,19 +114,19 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 function getSteps() {
-  return ['Select campaign settings', 'Create an ad group', 'Create an ad'];
+  return ['Create Account', 'Confirm Payment', 'Reciept'];
 }
 
 function getStepContent(step: number) {
   switch (step) {
     case 0:
-      return 'Select campaign settings...';
+      return <SignUpForm />;
     case 1:
-      return 'What is an ad group anyways?';
+      return <PaymentForm />;
     case 2:
-      return 'This is the bit I really care about!';
+      return 'Receipt';
     default:
-      return 'Unknown step';
+      return ' ';
   }
 }
 
@@ -133,8 +148,10 @@ export default function CustomizedSteppers() {
   };
 
   return (
+    <div className="stepperBack">
+    <ThemeProvider theme={Newtheme}>
     <div className={classes.root}>
-      <Stepper alternativeLabel activeStep={activeStep} connector={<ColorlibConnector />}>
+      <Stepper style={{backgroundColor: "black"}}  alternativeLabel activeStep={activeStep} connector={<ColorlibConnector />}>
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
@@ -170,6 +187,8 @@ export default function CustomizedSteppers() {
           </div>
         )}
       </div>
+    </div>
+    </ThemeProvider>
     </div>
   );
 }

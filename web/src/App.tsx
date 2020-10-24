@@ -5,6 +5,8 @@ import Admin from './containers/adminPage'
 import { SignUpForm} from './components/forms/signUpForm' 
 import {  loadTheme } from "@fluentui/react"
 import StoreCheckout from './components/checkout/Storecheckout'
+import LevelUpCheckOut from './components/checkout/premiumCheckout'
+import Store from './containers/store'
 
  loadTheme({
     palette: {
@@ -38,7 +40,7 @@ initializeIcons();
 function App() {
   return (
     <div className="App">
-        <StoreCheckout/>
+        <Store/>
     </div>
   );
 }

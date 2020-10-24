@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { ShippingAddress , PaymentForm } from '../forms/checkoutForms'
+
 const Newtheme = createMuiTheme({
   palette: {
     primary: {
@@ -94,7 +95,7 @@ export default function HorizontalLabelPositionBelowStepper() {
         ) : (
           <div>
             <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-            <div>
+            <div className="floatBottom">
               <Button
                 disabled={activeStep === 0}
                 onClick={handleBack}
