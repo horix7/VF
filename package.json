@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "tsc && nodemon dist/app.js",
-    "postinstall": "npm start",
+    // "postinstall": "npm start",
     "serve": "npm run build && firebase emulators:start --only function",
     "shell": "npm run build && firebase shell",
     "start": "tsc && node dist/index.js",
