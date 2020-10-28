@@ -1,12 +1,14 @@
 {
-  "name": "vision",
+  "name": "function",
   "version": "0.0.0",
   "scripts": {
-    "build": "node build.js",
-    "lint": "tslint --project \"tsconfig.json\"",
-    "start": "node -r module-alias/register ./dist --env=production",
-    "start:dev": "nodemon",
-    "test": "nodemon --config ./spec/nodemon.json"
+    "build": "tsc",
+    "serve": "npm run build && firebase emulators:start --only function",
+    "shell": "npm run build && firebase shell",
+    "start": "tsc && node dist/index.js",
+    "start:dev": "npm run build && nodemon",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
   },
   "nodemonConfig": {
     "watch": [
@@ -15,24 +17,25 @@
     "ext": "ts, html",
     "ignore": [
       "src/public"
-    ],
-    "exec": "ts-node -r tsconfig-paths/register ./src"
+    ]
   },
-  "_moduleAliases": {
-    "@daos": "dist/daos",
-    "@entities": "dist/entities",
-    "@shared": "dist/shared",
-    "@server": "dist/Server"
+  "engines": {
+    "node": "14"
   },
+  "main": "dist/index.js",
+  "private": true,
   "dependencies": {
+    "@types/cors": "^2.8.8",
     "@types/uuid": "^8.3.0",
     "bcrypt": "^5.0.0",
     "command-line-args": "^5.1.1",
     "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
-    "firebase-admin": "^9.2.0",
+    "firebase-admin": "^9.3.0",
+    "firebase-functions": "^3.11.0",
     "helmet": "^4.1.1",
     "http-status-codes": "^2.1.4",
     "jsonwebtoken": "^8.5.1",
@@ -57,6 +60,7 @@
     "@types/randomstring": "^1.1.6",
     "@types/supertest": "^2.0.10",
     "find": "^0.3.0",
+    "firebase-functions-test": "^0.2.3",
     "fs-extra": "^9.0.1",
     "jasmine": "^3.6.1",
     "jsonfile": "^6.0.1",

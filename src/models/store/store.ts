@@ -1,4 +1,4 @@
-import { IProduct } from '@entities/Product';
+import { IProduct } from '../../entities/Product';
 
 
 export interface IProdui {

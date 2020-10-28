@@ -4,6 +4,8 @@ import { PrimaryButton, DefaultButton } from 'office-ui-fabric-react/lib/Button'
 import { ContextualMenu } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { useBoolean } from '@uifabric/react-hooks';
 import Uploader from '../../server/upload'
+localStorage.setItem("uploadMany", "[]")
+
 
 const dragOptions = {
   moveMenuItemText: 'Move',
@@ -21,8 +23,19 @@ const dialogContentProps = {
 export const UploadMultipleFile: FunctionComponent<any> = (props: any ) => {
   const [hideDialog, { toggle: toggleHideDialog }] = useBoolean(true);
 
-  const [coverPhotos, setCoverPhoto ] = useState(null);
+  const [coverPhotos, setCoverPhotosz ] =  useState<any[]>([]);
 
+  const setCoverPhotos = (item: any ) => {
+    setCoverPhotosz([...coverPhotos,item])
+    const newData =  JSON.parse(localStorage.uploadMany)
+    newData.push(item)
+    localStorage.setItem("uploadMany" , JSON.stringify(newData))
+    
+    setMoreImages([...images, (<Uploader  onUploadScuess={(coverPhot: any) => setCoverPhotos(coverPhot)} />)])
+
+   
+  }
+const [images , setMoreImages ] = useState<any[]>([<Uploader  onUploadScuess={(coverPhot: any) => setCoverPhotos(coverPhot)}  />])
   const modalProps = React.useMemo(
     () => ({
       isBlocking: true,
@@ -31,6 +44,13 @@ export const UploadMultipleFile: FunctionComponent<any> = (props: any ) => {
     }),
     [],
   );
+
+  const increaseImageCorrector = () => {
+
+      props.setImages(JSON.parse(localStorage.uploadMany))
+
+      localStorage.setItem("uploadMany", "[]")
+  }
 
   return (
     <>
@@ -43,13 +63,15 @@ export const UploadMultipleFile: FunctionComponent<any> = (props: any ) => {
         dialogContentProps={dialogContentProps}
         modalProps={modalProps}
         >
-      
+          
+          {images.map((Elem : any ) => Elem)}
         <DialogFooter>
-        <Uploader multiple={true} />
+        
+          
 
         <div className="articleWriterC">
 
-          <PrimaryButton onClick={toggleHideDialog} text="Add Images" />
+          <PrimaryButton onClick={increaseImageCorrector} text="Add " />
           {/* <DefaultButton onClick={toggleHideDialog} text="Don't send" /> */}
         </div>
         </DialogFooter>

@@ -2,182 +2,302 @@
 
 import axios from "axios";
 
+const newAxios = axios.create({
+   headers: {
+      authorization: localStorage.getItem("jwt"),
+      "content-type": "application/json"
+   },
+   withCredentials: true 
+})
 export default class Request {
 
-    Api  = axios.create({
-        baseURL: "localhost:3400",
-        responseType: "json"
-      });
-    
-    
 
     CreateArticle = async (data: any, premium: boolean): Promise<any> => {
 
-       let  route = "/api/content/add"
-       if(premium) route = "/premium" + route
+      console.log(axios)
+     try {
+      let  route = "/content/add"
+      if(premium) route = "/api" + "/premium" + route
+      else route = "/api"  + "/fremium" + route
 
-       const ArticlePost =  this.Api.post(route, data)
+      const ArticlePost = await  newAxios.post(route, data)
 
-       return (await ArticlePost).data
+
+
+      return (await ArticlePost)
+     } catch (error) {
+         return "error"
+     }
 
     }
 
     CreateVideo = async (data: any, premium: boolean): Promise<any> => {
 
-        let  route = "/api/video/add"
-        if(premium) route = "/premium" + route
- 
-        const VideoPost =  this.Api.post(route, data)
- 
-        return (await VideoPost).data
+       try {
+         let  route = "/videos/add"
+         if(premium) route = "/api" + "/premium" + route
+         else route = "/api" + route
+  
+         const VideoPost =  newAxios.post(route, data)
+  
+         return (await VideoPost)
+       } catch (error) {
+            return "error" 
+       }
  
      }
 
     UpdateArticle = async (data: any, premium: boolean): Promise<any> => {
 
-        let  route = "/api/content/update"
-        if(premium) route = "/premium" + route
- 
-        const ArticlePost =  this.Api.put(route, data)
- 
-        return (await ArticlePost).data
- 
+        try {
+         let  route = "/content/update"
+         if(premium) route = "/api" + "/premium" + route
+         else route = "/api"  + "/fremium" + route
+
+  
+         const ArticlePost =  newAxios.put(route, data)
+  
+         return (await ArticlePost)
+  
+        } catch (error) {
+           console.log(error)
+        }
      }
  
     UpdateVideo = async (data: any, premium: boolean): Promise<any> => {
  
-         let  route = "/api/video/update"
-         if(premium) route = "/premium" + route
+        try {
+         let  route = "/videos/update"
+         if(premium) route = "/api" + "/premium" + route
+         else route = "/api" + route
   
-         const VideoPost =  this.Api.put(route, data)
+         const VideoPost =  newAxios.put(route, data)
   
-         return (await VideoPost).data
+         return (await VideoPost)
+        } catch (error) {
+           return "error" 
+        }
   
       }
 
      
     GetArticles = async (premium: boolean): Promise<any> => {
 
-        let  route = "/api/content/all"
-        if(premium) route = "/premium" + route
- 
-        const ArticlePost =  this.Api.get(route)
- 
-        return (await ArticlePost).data
+     try {
+      let  route = "/content/all"
+      if(premium) route = "/api" + "/premium" + route
+      else route = "/api"  + "/fremium" + route
+
+      const ArticlePost =  newAxios.get(route)
+
+      return (await ArticlePost)
+     } catch (error) {
+         return "error"
+     }
  
      }
+
+          
+    GetOneArticle = async (premium: boolean , id: string ): Promise<any> => {
+
+      try {
+       let  route = "/content/one/"
+       if(premium) route = "/api" + "/premium" + route
+       else route = "/api"  + "/fremium" + route
+ 
+       const ArticlePost =  newAxios.get(route + id)
+ 
+       return (await ArticlePost)
+      } catch (error) {
+          return "error"
+      }
+  
+      }
+
  
      GetVideos = async (premium: boolean): Promise<any> => {
  
-         let  route = "/api/video/all"
-         if(premium) route = "/premium" + route
+        try {
+         let  route = "/videos/all"
+         if(premium) route = "/api" + "/premium" + route
+         else route = "/api" + route
   
-         const VideoPost =  this.Api.get(route)
+         const VideoPost =  newAxios.get(route)
   
-         return (await VideoPost).data
+         return (await VideoPost)
+        } catch (error) {
+           return "error" 
+        }
   
       }
  
+
+      GetOneVideo = async (premium: boolean, id: string): Promise<any> => {
+ 
+         try {
+          let  route = "/videos/one/"
+          if(premium) route = "/api" + "/premium" + route
+          else route = "/api" + route
+   
+          const VideoPost =  newAxios.get(route + id)
+   
+          return (await VideoPost)
+         } catch (error) {
+            return "error" 
+         }
+   
+       }
+  
      CreateProduct = async (data: any): Promise<any> => {
 
-        const ProductPost =  this.Api.post("/api/products/add", data)
+       try {
+         const ProductPost =  newAxios.post("/api/products/add", data)
  
-        return (await ProductPost).data
+         return (await ProductPost)
+       } catch (error) {
+          return "error"
+       }
  
      }
 
      UpdateProduct = async (data: any): Promise<any> => {
 
-        const ProductPost =  this.Api.put("/api/products/update", data)
+   try {
+      const ProductPost =  newAxios.put("/api/products/update", data)
  
-        return (await ProductPost).data
+      return (await ProductPost)
+   } catch (error) {
+      return "error" 
+   }
  
      }
 
      UpdateUser = async (data: any): Promise<any> => {
 
-        const userPost =  this.Api.put("/api/users/update", data)
+      try {
+         const userPost =  newAxios.put("/api/users/update", data)
  
-        return (await userPost).data
+         return (await userPost)
+      } catch (error) {
+         return "error" 
+      }
  
      }
 
   SignUp = async (data: any): Promise<any> => {
 
-        const userData =  this.Api.post("/api/auth/signup", data)
+        try {
+         const userData =  newAxios.post("/api/auth/signup", data)
  
-        return (await userData).status
- 
+         return (await userData)
+  
+        } catch (error) {
+            return "error"           
+        }
      }
 
 
      Login = async (data: any): Promise<any> => {
 
-        const userData =  this.Api.post("/api/auth/signup", data)
+       try {
+         const userData =  newAxios.post("/api/auth/login", data)
  
-        return (await userData).status
+         return (await userData)
+       } catch (error) {
+          return "error"
+       }
  
      }
 
      GetUsers = async (): Promise<any> => {
 
-        const AllUsers =  this.Api.get("/api/users/all")
+        try {
+         const AllUsers =  newAxios.get("/api/users/all")
  
-        return (await AllUsers).data
+         return (await AllUsers)
+        } catch (error) {
+           return "error" 
+        }
  
      }
 
      Logout = async (): Promise<any> => {
-
-        const logout =  this.Api.get("/api/auth/logout")
+try {
+   
+   const logout =  newAxios.get("/api/auth/logout")
  
-        return (await logout).status 
+   return (await logout)
+} catch (error) {
+      return "error" 
+}
  
      }
 
     GetProducts = async (): Promise<any> => {
-
-        const ProductPost =  this.Api.get("/api/products/all")
+         try {
+            
+        const ProductPost =  newAxios.get("/api/products/all")
  
-        return (await ProductPost).data
+        return (await ProductPost)
  
+         } catch (error) {
+               return "error"           
+         }
      }
 
      deleteUsers = async (id: string): Promise<any> => {
 
-        const deleted =  this.Api.delete("/api/users/delete/" + id)
+       try {
+         const deleted =  newAxios.delete("/api/users/delete/" + id)
  
-        return (await deleted).status 
+         return (await deleted)
+       } catch (error) {
+          return "error" 
+       }
  
      }
 
      deleteProduct = async (id: string): Promise<any> => {
 
-        const deleted =  this.Api.delete("/api/products/delete/" + id)
+        try {
+         const deleted =  newAxios.delete("/api/products/delete/" + id)
  
-        return  (await deleted).status 
- 
+         return  (await deleted)
+  
+        } catch (error) {
+         return "error"           
+        }
      }
 
      deleteArticle = async (id: string, premium: boolean): Promise<any> => {
 
-        let route = "/api/products/delete/"
-        if(premium) route = "/premium" + route
-
-        const deleted =  this.Api.delete(route + id)
+       try {
+         let route = "/products/delete/"
+         if(premium) route = "/api" + "/premium" + route
+         else route = "/api" + route
  
-        return  (await deleted).status 
- 
+         const deleted =  newAxios.delete(route + id)
+  
+         return  (await deleted)
+  
+       } catch (error) {
+         return "error"         
+       }
      }
 
      deleteVideo = async (id: string, premium: boolean): Promise<any> => {
 
-        let route = "/api/products/delete/"
-        if(premium) route = "/premium" + route
-        
-        const deleted =  this.Api.delete(route + id)
- 
-        return  (await deleted).status 
+     try {
+      let route = "/products/delete/"
+      if(premium) route = "/api" + "/premium" + route
+      else route = "/api" + route
+      
+      const deleted =  newAxios.delete(route + id)
+
+      return  (await deleted)
+     } catch (error) {
+        return "error"
+     }   
  
      }
 } 

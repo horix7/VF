@@ -1,4 +1,4 @@
-import { IArticle } from '@entities/article';
+import { IArticle } from '../../entities/article';
 import  db  from '../db/db.connect';
 import { IIArticle } from './article';
 

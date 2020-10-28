@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import UserRouter from '../controllers/Users';
-import AuthRouter from '../controllers/Auth';
+import AuthRouter from '../controllers/auth';
 import VideoRoutes from '../controllers/videos'
 import ContentRoutes from '../controllers/content'
 import StoreRoutes from '../controllers/products'
@@ -14,7 +14,7 @@ const router = Router();
 router.use('/users', UserRouter);
 router.use('/auth', AuthRouter);
 router.use('/products', StoreRoutes);
-router.use('/content', ContentRoutes);
+router.use('/fremium/content', ContentRoutes);
 router.use('/videos', VideoRoutes);
 router.use('/premium/content', PremiumContent);
 router.use('/premium/videos', PremiumVideo);

@@ -1,4 +1,4 @@
-import { IVideo } from '@entities/video';
+import { IVideo } from '../../entities/video';
 import  db  from '../db/db.connect';
 import { IIVideo } from './videos';
 

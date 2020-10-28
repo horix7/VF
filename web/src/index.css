@@ -32,6 +32,8 @@ main {
   text-align: end;
   margin-right: 2%;
   margin-bottom: 100px;
+  color: black;
+  background-color: white;
 }
 .homeIcon {
   font-size: xx-large;
@@ -42,7 +44,7 @@ main {
 }
 
 .tittleInput {
-  width: 80%;
+  width: 70%;
   height: 40px;
   border: 1px solid grey;
   padding-left: 10px;
@@ -61,32 +63,88 @@ main {
   width: 80%;
   margin-left: 20%;
   text-align: end;
+  color: black;
+  background-color: rgba(34, 34, 34, 0.182);
   height: 300px;
   overflow: scroll;
 }
 
 button {
   cursor: pointer;
+  outline: none;
 }
 .publish {
-  width: 200px;
-  height: 50px;
+  width: 150px;
+  height: 40px;
+  border: 1px solid gold;
   color: gold;
   background-color: black;
-  border: none;
   margin-bottom: 20px;
   cursor: pointesr;
+  border-radius: 25px;
 }
 
 .CreateVideo {
-  text-align: end;
-  width: 30%;
-  margin-left: 60%;
+  text-align: start;
+  width: 90%;
+  margin-left: 5%;
+  display: grid;
+  grid-template-columns: 1fr 1fr ;
 }
 .inputz {
   border: 1px solid black;
   margin-bottom: 20px;
 
+
+
+}
+
+.twoEleme {
+  width: 80%;
+  margin-left: 20%;
+  display: grid;
+  grid-template-columns: 80%  20% ;
+}
+
+.producttittle {
+  height: 30px;
+  width: 95%;
+  padding-left: 20px;
+}
+
+.priceInput {
+  height: 30px;
+  width: 90%;
+  padding-left: 20px;
+}
+
+.towEl {
+  display: grid;
+  grid-template-columns: 50%  50% ;
+  margin: auto;
+  /* column-gap: 20px; */
+
+}
+
+.bigIcon {
+  font-size: xx-large;
+  color: black;
+}
+
+.viewReport {
+  width: 100px;
+  background-color: gold;
+  height: 100px;
+  color: black;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.actionBtn {
+  text-align: center;
+  display: grid;
+  grid-template-columns: 20% 200px 200px ;
+  column-gap: 20px;
 }
 
 i {
@@ -97,11 +155,40 @@ i {
   border: none;
   width: 90%;
   height: 30px;
+  padding-left: 10px;
 }
 
 .uploadIcon {
   background-color: black;
   color: gold;
+  padding-top: 7px;
+
+}
+
+.orders h1 {
+  color: black;
+  text-align: end;
+  padding-right: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  font-size: large;
+}
+
+.twoCards {
+  display: grid;
+  grid-template-rows: 220px 220px;
+  row-gap: 20px;
+  text-align: end;
+}
+
+.price {
+  color: gold;
+  float: right;
+}
+
+.presesntImg {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 .inputIconz {
   display: grid;
@@ -109,11 +196,31 @@ i {
   grid-template-columns: 10% 80% 10%;
 }
 
-.inputIcon{
-  padding-top: 20%;
-
+.inputIconz2 {
+  display: grid;
+  text-align: center;
+  grid-template-columns: 20% 80% ;
 }
 
+.inputIcon{
+  padding-top: 8px;
+  color: black;
+}
+
+.videoPreview {
+  color: black;
+  padding-left: 10%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  padding-right: 10%;
+}
+
+.videoPreview h3 {
+  font-weight: lighter;
+}
+
+.CreateVideo {
+  color: black;
+}
 
 
 
@@ -132,6 +239,29 @@ i {
  .tooogle label {
   color: black
 }
+
+.erromessage {
+  width: 200px;
+  padding-bottom: 20px;
+}
+
+
+.adminLogin {
+  height: 120vh;
+  background-color: rgba(0, 0, 0, 0.168);
+  background-size: contain;
+
+}
+.paddsLef {
+  /* padding-left: 20%; */
+  color: black;
+  font-size: large;
+}
+
+.paddingTop {
+  padding-top: 20px;
+}
+
 
 .articleForm .artDrop {
   width: 20%;
@@ -152,6 +282,10 @@ div::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb {
 main {
   /* margin-left: 5rem; */
   padding-top: 2rem;
+}
+
+.adminregister {
+  padding-top: 20%;
 }
 
 .navBack {
@@ -205,8 +339,8 @@ main {
 
 .mainPage {
   height: 100vh;
-  background-color: black;
-
+  background-color: white;
+  text-align: center;
 }
 .nav-link:active {
   background-color: rgb(58, 51, 8);
@@ -413,6 +547,10 @@ body {
   font-size: large;
 }
 
+.fullEhite {
+  background-color: whi;
+}
+
 .sliderHolder p {
   color: #000000;
   font-size: xx-large;
@@ -429,10 +567,22 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+
+.signUpPagezz {
+  background-color: black;
+  padding-left: 20%;
+  padding-top: 20px;
+  padding-bottom: 30px;
+  text-align: start;
+  display: grid;
+  grid-template-columns: 30% 70%;
+}
+
+  
 .chartHolder {
   display: grid;
   padding: 20px;
-  grid-template-columns: 30% 70%;
+  grid-template-columns: 0% 70%;
 }
 
 
@@ -731,6 +881,7 @@ code {
   padding: 10px;
   background-color: black;
   grid-template-columns: 10% 15% 10% 30% 15% 20%;
+  text-align: center;
 }
 .searchBar {
   background-color: transparent;
@@ -738,6 +889,27 @@ code {
   color: white;
 
   
+}
+
+.homeNavHolder {
+  padding-left: 3%;
+  padding-top: 5px;
+
+}
+
+.categoryHolder {
+  width: max-content;
+  
+}
+
+.catt {
+ 
+}
+
+.chipElement {
+  margin: 10px;
+  border: 1px solid gold;
+  color: white;
 }
 .search {
   border: 1px solid gold;
@@ -804,6 +976,10 @@ code {
     margin-left: 60%;
   }
   
+  .articleForm {
+    width: 100%;
+    padding: 2px;
+  }
   .tittleInput {
     width: 90%;
     /* margin: 10px; */
@@ -814,6 +990,7 @@ code {
     text-align: end;
     /* height: 10px; */
     overflow: scroll;
+    background-color: white;
   } 
 
   .desktopNav {

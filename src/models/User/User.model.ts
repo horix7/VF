@@ -1,4 +1,4 @@
-import { IUser } from '@entities/User';
+import { IUser } from '../../entities/User';
 import  db  from '../db/db.connect';
 import { IUserDao } from './Users';
 

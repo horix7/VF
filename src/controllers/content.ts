@@ -1,9 +1,9 @@
 import { Request, Response, Router } from 'express';
 import { BAD_REQUEST, CREATED, OK } from 'http-status-codes';
 import { ParamsDictionary } from 'express-serve-static-core';
-import Content from '../models/fcontent/content';
-import { paramMissingError } from '@shared/constants';
-import { writer } from '../middleware/middleware';
+import Content from '../models/nremiumContent/condent.model';
+import { paramMissingError } from '../shared/constants';
+import { adminMW } from '../middleware/middleware';
 
 // Init shared
 const router = Router();
@@ -48,7 +48,7 @@ router.get('/some/:name', async (req: Request, res: Response) => {
  *                       Add One - "POST /api/article/add"
  ******************************************************************************/
 
-router.use(writer).post('/add', async (req: Request, res: Response) => {
+router.use(adminMW).post('/add', async (req: Request, res: Response) => {
     // Check parameters
 
     const { article } = req.body;
@@ -68,7 +68,7 @@ router.use(writer).post('/add', async (req: Request, res: Response) => {
  *                       Update - "PUT /api/article/update"
  ******************************************************************************/
 
-router.use(writer).put('/update', async (req: Request, res: Response) => {
+router.use(adminMW).put('/update', async (req: Request, res: Response) => {
     // Check Parameters
     const { article } = req.body;
     if (!article) {
@@ -87,7 +87,7 @@ router.use(writer).put('/update', async (req: Request, res: Response) => {
  *                    Delete - "DELETE /api/article/delete/:id"
  ******************************************************************************/
 
-router.use(writer).delete('/delete/:id', async (req: Request, res: Response) => {
+router.use(adminMW).delete('/delete/:id', async (req: Request, res: Response) => {
     const { id } = req.params as ParamsDictionary;
     await content.delete(id);
     return res.status(OK).end(); 

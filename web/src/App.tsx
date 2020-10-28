@@ -8,6 +8,7 @@ import StoreCheckout from './components/checkout/Storecheckout'
 import LevelUpCheckOut from './components/checkout/premiumCheckout'
 import Store from './containers/store'
 
+localStorage.setItem("backendUrl" , "http://vfitness-8a2c3.firebaseio.com")
  loadTheme({
     palette: {
       themePrimary: '#ffd519',
@@ -40,7 +41,7 @@ initializeIcons();
 function App() {
   return (
     <div className="App">
-        <Store/>
+        <Admin/>
     </div>
   );
 }

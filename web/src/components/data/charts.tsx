@@ -3,35 +3,31 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 
-const data = [
-  {
-    name: 'monday', sales: 20,
-  },
-  {
-    name: 'tuesday', sales: 200,
-  },
-  {
-    name: 'wednsday', sales: 0,
-  },
-  {
-    name: 'thursday', sales: 2,
-  },
-  {
-    name: 'friday', sales: 20,
-  },
-  {
-    name: 'saturday', sales: 22,
-  },
-  {
-    name: 'sunday', sales: 39,
-  },
-];
 
 
-export default class Chart extends PureComponent {
+export default class Chart extends PureComponent<any> {
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/nptzh7ez/';
 
   render() {
+
+    
+const dayz = [ "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
+let data: any[]= [] 
+
+if(this.props.type === "sales") {
+ data =  dayz.map((element: any) => {
+    return {
+      name: element, sales: this.props.chartData[element] || 0
+    }
+  })
+} else if(this.props.type === "views"){
+  data = dayz.map((element: any) => {
+    return {
+      name: element, views: this.props.chartData[element] || 0
+    }
+  })
+}
+
     return (
      <div className="chartHolder">
        <div className="spacing">
@@ -39,7 +35,7 @@ export default class Chart extends PureComponent {
        </div>
 
        <LineChart
-        width={700}
+        width={600}
         height={300}
         data={data}
         margin={{
@@ -52,7 +48,7 @@ export default class Chart extends PureComponent {
         <Tooltip />
         <Legend />
         <Line type="monotone" dataKey="pv" stroke="#8884d8" strokeDasharray="5 5" />
-        <Line type="monotone" dataKey="sales" stroke="#82ca9d" strokeDasharray="3 4 5 2" />
+        <Line type="monotone" dataKey={this.props.type} stroke="#82ca9d" strokeDasharray="3 4 5 2" />
       </LineChart>
 
      </div>

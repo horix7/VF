@@ -1,6 +1,6 @@
 import randomString from 'randomstring';
 import jsonwebtoken, { VerifyErrors } from 'jsonwebtoken';
-import { cookieProps } from '@shared/constants';
+import { cookieProps } from '../shared/constants';
 
 
 interface IClientData {

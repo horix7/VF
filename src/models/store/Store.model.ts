@@ -1,4 +1,4 @@
-import { IProduct } from '@entities/Product';
+import { IProduct } from '../../entities/Product';
 import  db  from '../db/db.connect';
 import { IProdui } from './store';
 
@@ -7,7 +7,7 @@ const productCollection  = db.collection('store')
 class Produi implements IProdui {
 
     /**
-     * getOne
+     * getOne 
      */
     public async getOne( id: string ): Promise<any | null> {
         

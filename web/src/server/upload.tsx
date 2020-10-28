@@ -67,6 +67,8 @@ export default class UploadData extends Component<any> {
 
                 newUploads.push(url)
 
+                this.props.onUploadScuess(url)
+                
                 this.setState({multipleFiles: [...newUploads]})
             } )
         

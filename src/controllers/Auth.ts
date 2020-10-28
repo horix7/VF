@@ -4,9 +4,9 @@ import { BAD_REQUEST, OK, UNAUTHORIZED, CREATED , CONFLICT} from 'http-status-co
 import { v4 as uuidv4 } from 'uuid'
 
 import UserDao from '../models/User/User.model';
-import { JwtService } from '@shared/JwtService';
-import { paramMissingError, loginFailedErr, cookieProps , userexists , hashRounds } from '@shared/constants';
-import { UserRoles } from '@entities/User'
+import { JwtService } from '../shared/JwtService';
+import { paramMissingError, loginFailedErr, cookieProps , userexists , hashRounds } from '../shared/constants';
+import { UserRoles } from '../entities/User'
 
 const router = Router();
 const userDao = new UserDao();
@@ -21,41 +21,44 @@ const jwtService = new JwtService();
 
 
 router.post('/signup', async (req: Request, res: Response) => {
-    // Check parameters
-    const { newUser } = req.body;
-    if (!newUser) {
-        return res.status(BAD_REQUEST).json({
-            error: paramMissingError,
-        });
-    }
-
-    const user = await userDao.getOne(newUser.email);
-    if (user) {
-        return res.status(CONFLICT).json({
-            error: userexists,
-        });
-    }
-
-    // Add new user
-    newUser.role = UserRoles.Standard;
-    newUser.pwdHash = bcrypt.hashSync(newUser.password , hashRounds)
-    newUser.id = uuidv4(newUser)
-
-    delete newUser.password
-    
-    await userDao.add(newUser);
-
-    const jwt = await jwtService.getJwt({
-        id: newUser.id,
-        role: newUser.role,
-    });
-
-    const { key, options } = cookieProps;
-    res.cookie(key, jwt, options);
-    res.header( {token: jwt})
-    // Return
-    return res.status(CREATED).end();
-
+      // Check parameters
+      const { newUser } = req.body;
+      if (!newUser) {
+          return res.status(BAD_REQUEST).json({
+              error: paramMissingError,
+          });
+      }
+  
+      const user = await userDao.getOne(newUser.email);
+      if (user) {
+          return res.status(CONFLICT).json({
+              error: userexists,
+          });
+      }
+  
+      // Add new user
+      newUser.role = UserRoles.Standard;
+      newUser.pwdHash = bcrypt.hashSync(newUser.password , hashRounds)
+      newUser.id = uuidv4(newUser)
+  
+      delete newUser.password
+      
+      await userDao.add(newUser);
+  
+      const jwt = await jwtService.getJwt({
+          id: newUser.id,
+          role: newUser.role,
+      });
+  
+      const { key, options } = cookieProps;
+      res.cookie(key, jwt, options);
+      res.header( {token: jwt})
+      // Return
+      return res.status(CREATED).json({
+          AuthToken: jwt,
+          role: newUser.role
+      }).end();
+  
 });
 
 
@@ -96,7 +99,10 @@ router.post('/login', async (req: Request, res: Response) => {
     res.cookie(key, jwt, options);
     res.header( {token: jwt})
     // Return
-    return res.status(OK).end();
+    return res.status(OK).json({
+        AuthToken: jwt,
+        role: user.role
+    }).end();
 });
 
 

@@ -2,8 +2,8 @@ import { Request, Response, Router } from 'express';
 import { BAD_REQUEST, CREATED, OK } from 'http-status-codes';
 import { ParamsDictionary } from 'express-serve-static-core';
 import Store from '../models/store/Store.model';
-import { paramMissingError } from '@shared/constants';
-import { store_owner } from '../middleware/middleware';
+import { paramMissingError } from '../shared/constants';
+import { adminMW } from '../middleware/middleware';
 import { v4 } from 'uuid';
 
 // Init shared
@@ -48,7 +48,7 @@ router.get('/some/:name', async (req: Request, res: Response) => {
  *                       Add One - "POST /api/products/add"
  ******************************************************************************/
 
-router.use(store_owner).post('/add', async (req: Request, res: Response) => {
+router.use(adminMW).post('/add', async (req: Request, res: Response) => {
     // Check parameters
     const { product } = req.body;
     if (!product) {
@@ -67,7 +67,7 @@ router.use(store_owner).post('/add', async (req: Request, res: Response) => {
  *                       Update - "PUT /api/products/update"
  ******************************************************************************/
 
-router.use(store_owner).put('/update', async (req: Request, res: Response) => {
+router.use(adminMW).put('/update', async (req: Request, res: Response) => {
     // Check Parameters
     const { product } = req.body;
     if (!product) {
@@ -86,7 +86,7 @@ router.use(store_owner).put('/update', async (req: Request, res: Response) => {
  *                    Delete - "DELETE /api/products/delete/:id"
  ******************************************************************************/
 
-router.use(store_owner).delete('/delete/:id', async (req: Request, res: Response) => {
+router.use(adminMW).delete('/delete/:id', async (req: Request, res: Response) => {
     const { id } = req.params as ParamsDictionary;
     await store.delete(id);
     return res.status(OK).end(); 

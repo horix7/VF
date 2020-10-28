@@ -4,7 +4,8 @@ export interface IArticle {
     head: string;
     body: string;
     category: string;
-    made_by: string
+    made_by: string;
+    images: string;
 
 }
 
@@ -12,6 +13,7 @@ export class Article implements IArticle {
 
     public published_on: string;
     public head: string;
+    public images: string;
     public body: string;
     public category: string;
     public made_by: string;
@@ -22,6 +24,7 @@ export class Article implements IArticle {
         published_on?: string,
         body?: string,
         category?: string,
+        images?: string,
         made_by?: string,
     ) {
         if (typeof nameOrHead === 'string' || typeof nameOrHead === 'undefined') {
@@ -30,12 +33,14 @@ export class Article implements IArticle {
             this.body = body || '';
             this.made_by = made_by || '';
             this.category = category || '';
+            this.images = images || '';
         } else {
             this.head = nameOrHead.head;
             this.published_on = nameOrHead.published_on;
             this.body = nameOrHead.body;
             this.category = nameOrHead.category;
             this.made_by = nameOrHead.made_by;
+            this.images = nameOrHead.images;
         }
     }
 }

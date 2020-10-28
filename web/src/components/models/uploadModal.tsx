@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Dialog, DialogType, DialogFooter } from 'office-ui-fabric-react/lib/Dialog';
-import { PrimaryButton, DefaultButton } from 'office-ui-fabric-react/lib/Button';
+import {  DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import { Icon } from "@fluentui/react/lib/Icon"
 import { ContextualMenu } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { useBoolean } from '@uifabric/react-hooks';
@@ -15,16 +15,20 @@ const dragOptions = {
 const modalPropsStyles = { main: { maxWidth: 450 } };
 const dialogContentProps = {
   type: DialogType.normal,
-  title: 'Upload  Image ',
-  subText: 'image description ',
+  title: 'Upload  An Object ',
+  subText: 'supported Files img .jpg .png  video  .mp4 .avi',
 };
 
 
-export const DialogweUploadByBtn: React.FunctionComponent = (props: any ) => {
+export const DialogweUploadByBtn = (props: any ) => {
   const [hideDialog, { toggle: toggleHideDialog }] = useBoolean(true);
 
   const [coverPhoto, setCoverPhoto ] = React.useState("null");
 
+  const setCoverPhotoN = (imgData: any) => {
+    setCoverPhoto(imgData)
+    props.setImage(imgData)
+  }
   const modalProps = React.useMemo(
     () => ({
       isBlocking: true,
@@ -48,7 +52,7 @@ export const DialogweUploadByBtn: React.FunctionComponent = (props: any ) => {
       
         <DialogFooter>
           {/* <PrimaryButton onClick={toggleHideDialog} text="Upload" /> */}
-          <UploadFunc />
+          <UploadFunc onUploadScuess={(coverPhot: any) => setCoverPhotoN(coverPhot)} />
           {/* <DefaultButton onClick={toggleHideDialog} text="Don't send" /> */}
 
         </DialogFooter>
@@ -64,6 +68,11 @@ export const DialogweUploadByIcn = (props: any ) => {
 
   const [coverPhoto, setCoverPhoto ] = React.useState("null");
 
+  const setCoverPhotoN = (imgData: any) => {
+    setCoverPhoto(imgData)
+    props.setImage(imgData)
+  }
+  
   const modalProps = React.useMemo(
     () => ({
       isBlocking: true,
@@ -87,7 +96,7 @@ export const DialogweUploadByIcn = (props: any ) => {
       
         <DialogFooter>
           {/* <PrimaryButton onClick={toggleHideDialog} text="Upload" /> */}
-          <UploadFunc />
+          <UploadFunc onUploadScuess={(coverPhot: any) => setCoverPhotoN(coverPhot)}  />
           {/* <DefaultButton onClick={toggleHideDialog} text="Don't send" /> */}
 
         </DialogFooter>

@@ -1,5 +1,9 @@
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
-import { PrimaryButton  } from 'office-ui-fabric-react';
+import { PrimaryButton,
+    Stack,
+    IStackTokens,
+    MessageBar,
+    MessageBarType,  } from 'office-ui-fabric-react';
 import React, {  FormEvent, Fragment, useState } from 'react'
 import { UploadMultipleFile } from '../models/uploadModalMultiple'
 import ArticleWriter from '../editors/ArticleEditor'
@@ -7,30 +11,94 @@ import { Dropdown, IDropdownOption,DropdownMenuItemType, } from 'office-ui-fabri
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { Toggle } from 'office-ui-fabric-react/lib/Toggle';
 import Moodal from '../models/models'
+import { Icon } from '@fluentui/react/lib/Icon'
+import BackendCalls from '../../server/backendCalls'
+import { Spinner } from 'office-ui-fabric-react/lib/Spinner';
+
+
 // import { CompoundButton } from 'office-ui-fabric-react';
 
 
-export  default function  ProductForm  (props: any) {
+export  default function  ArticleForm  (props: any) {
   
     // eslint-disable-next-line react-hooks/rules-of-hooks
+
+    const backend = new BackendCalls()
+    
     const [selectedItem , setSelectedItem] = useState<IDropdownOption>();
     const [openIt , setOpen ] = useState(false)
-    const [premium , setPremium ] = useState(false)
-    
-        const options: IDropdownOption[] = [
-            { key: 'fitness', text: 'fitness' },
-            { key: 'Meals', text: 'Meals' },
-            { key: 'personal Development', text: 'personal Development' },
-  { key: 'divider_1', text: '-', itemType: DropdownMenuItemType.Divider },
-            { key: 'kk_', text: 'Create New Category' }
+    const [premium , setPremium ] = useState(props.content.premium)
+    const [head , setHead ] = useState(props.content.head)
+    const [body , setBody ] = useState(props.content.body)
+    const [price , setPrice ] = useState(props.content.price)
+    const [images , setImages ] = useState<any>(props.content.images)
+    const [made_by , setMade_by ] = useState(props.content.made_by)
+    const [ catt , setCatt] = useState(props.content.category)
+    const [errorMess, setErrorMess ] = useState(false)
+    const [lodading, setlodading ] = useState(false)
+
+    // const userData:  =[ ]
+
+    const publishProduct = async( ) => {
+        setlodading(true)
+
+            const product = {
+                head: head,
+                description: body,
+                price: price,
+                category: catt,
+                images: images,
+                published_on : new Date().toString(),
+                made_by: "admin"
+            }
+
+            if (Object.values(product).some((elem : any ) => elem === null || elem === undefined || elem === "")) {
+                alert("Missing Some content ")
+                setTimeout(() => {
+                    setlodading(false)
+                }, 2000);
+                
+            } else {
+                const resutlz  = await backend.CreateProduct({product: product})
+
+                if(resutlz === "error") {
+                    setlodading(false)
+                    setErrorMess(true)
+                }else {
+                    props.goBack()
+                }
+            }
+            
+
+        }
+    const [currentOption  , setCurrt] = useState({key: "", text: ""})
+
+        const options: any[] = [
+            currentOption,
+           ...props.categories,
+           { key: 'divider_1', text: '-', itemType: DropdownMenuItemType.Divider },
+           { key: 'kk_', text: 'Create New Category' }
           ];
           
-          const popCategory = (event: FormEvent<HTMLDivElement>, item: any) => {
+          const popCategory = (event: any , item: any) => {
             setSelectedItem(item);
+            
+            setCatt(item.key)
             if(item.key === "kk_") {
                 setOpen(true)
             }
         };
+        const setcategg = (event: any) => {
+            
+            setCurrt({key: event.target.value, text: event?.target.value})
+
+        }
+
+        const addCat = () => {
+            options.unshift(currentOption)
+            console.log(currentOption, options)
+
+        }
            
             function getModalStyle() {
                 const top = 30 ;
@@ -60,22 +128,53 @@ export  default function  ProductForm  (props: any) {
           // eslint-disable-next-line react-hooks/rules-of-hooks
           const [modalStyle] = React.useState(getModalStyle);
      
+        
           const newCategoryForm = (
              <Fragment>
                   <div style={modalStyle} className={classes.paper}>
-                    <TextField placeholder="Category Name" />
+                    <TextField placeholder="Category Name" onChange={(event: any) => setcategg(event)}/>
                     <div className="articleWriterC">
-                    <PrimaryButton text="add" />
+                    <PrimaryButton text="add"  onClick={(event) =>{
+                        addCat()
+                        setOpen(false)
+                        popCategory(event, options[0])
+                        }} />
                     </div>
                 </div>
              </Fragment> 
           )
+
+          const ErroMssage = (p: any) => (
+            <MessageBar
+              messageBarType={MessageBarType.error}
+              isMultiline={false}
+              onDismiss={p.resetChoice}
+              dismissButtonAriaLabel="ShieldAlert"
+            >
+                Something Went Wrong  
+             
+            </MessageBar>
+          );
         return (
             
             <Fragment>
+
                 
                 <div className="articleForm">
-                    <input type="text" className="tittleInput" placeholder="Product Name"/>
+                <Icon iconName="Back" onClick={props.goBack} />
+                <h1> { Object.keys(props.content).length > 1  ? "Update" : "Create"} A Product  </h1>
+                <div className="twoEleme">
+              
+
+                <input type="text" className="producttittle" placeholder="Tittle " onChange={(event: any ) => setHead(event.target.value) }/>
+                <div className="inputz inputIconz2">
+                    <Icon iconName="Money" className="inputIcon"/>
+                  
+                   <input type="number" className="priceInput inputs"  placeholder="Price " onChange={(event: any ) => setPrice(event.target.value) }/>
+
+                <div></div>
+                   </div>
+                </div>
                     <div className="artDrop">
                     <div className="articleWriterC">
                     <Dropdown
@@ -92,16 +191,18 @@ export  default function  ProductForm  (props: any) {
 
                     </div>
 
-                    <UploadMultipleFile info={{upload: "Product Images" , description: "Select Your Profile Pictures "}} />
-                    <Toggle className="toogle" label=" Premium " onChange={() => setPremium(!premium)} checked={premium} />
+                   {images ? <div className="presesntImg">
+                    {images.length > 4 ? [images[0], images[1], images[2], images[3]].map((elem : any ) => (<img width="70px" src={elem} alt="" />)) : images.map((elem: any) => <img width="70px" src={elem} alt=""/>)} 
+                   </div> :  < UploadMultipleFile  setImages={(img: any ) => setImages(img)} />}
 
                     <div className="articleWriterC">
-                    <ArticleWriter />
+                    <ArticleWriter content={body}  changeBody={(event: any ) => setBody(event)}/>
                     
                     </div>
-
                     <div className="articleWriterC">
-                   <button className="publish"> Publish</button>
+                    {errorMess ? <div className="erromessage"><ErroMssage /></div> : null }
+
+                    <button className="publish" onClick={publishProduct}> {lodading ? <Spinner label="publishing..." ariaLive="assertive" labelPosition="right" />  : "Publish"} </button>
 
                     <Moodal modalBody={newCategoryForm} openModal={openIt} closeModal={(bool: boolean ) => setOpen(bool)}/>
                  

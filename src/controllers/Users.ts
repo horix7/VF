@@ -3,9 +3,9 @@ import { BAD_REQUEST, CREATED, OK } from 'http-status-codes';
 import { ParamsDictionary } from 'express-serve-static-core';
 import { hashRounds } from '../shared/constants'
 import UserDao from '../models/User/User.model';
-import { paramMissingError } from '@shared/constants';
+import { paramMissingError } from '../shared/constants';
 import { adminMW } from '../middleware/middleware';
-import { UserRoles } from '@entities/User';
+import { UserRoles } from '../entities/User';
 import bcrypt from 'bcrypt'
 
 // Init shared

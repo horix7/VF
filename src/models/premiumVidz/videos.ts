@@ -1,4 +1,4 @@
-import { IVideo } from '@entities/video';
+import { IVideo } from '../../entities/video';
 
 
 export interface IIVideo {
