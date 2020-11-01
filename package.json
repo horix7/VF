@@ -11,7 +11,7 @@
     "serve": "npm run build && firebase emulators:start --only function",
     "shell": "npm run build && firebase shell",
     "start": "tsc && node dist/index.js",
-    "start:dev": "npm run build && nodemon",
+    "start:dev": "npm run build && nodemon", 
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"
   },
