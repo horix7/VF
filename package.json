@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "tsc && nodemon dist/index.js",
-    "build": "tsc",
+    "build": "tsc -p tsconfig.build.json",
+    "start:prod": "node dist/index.js",
     "serve": "npm run build && firebase emulators:start --only function",
     "shell": "npm run build && firebase shell",
     "start": "tsc && node dist/index.js",
