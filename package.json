@@ -5,6 +5,9 @@
     "dev": "tsc && nodemon dist/index.js",
     "build": "tsc -p tsconfig.build.json",
     "start:prod": "node dist/index.js",
+    "prestart:prod": "rimraf dist && npm run build",
+    "postinstall": "npm run prestart:prod",
+    "heroku-postbuild": "npm install --only=dev --no-shrinkwrap && npm run build",
     "serve": "npm run build && firebase emulators:start --only function",
     "shell": "npm run build && firebase shell",
     "start": "tsc && node dist/index.js",
@@ -22,7 +25,7 @@
     ]
   },
   "engines": {
-    "node": "14"
+    "node": "14.3.0"
   },
   "main": "dist/index.js",
   "private": true,
