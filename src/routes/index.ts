@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import UserRouter from '../controllers/Users';
-import AuthRouter from '../controllers/auth';
+import AuthRouter from '../controllers/Auth';
 import VideoRoutes from '../controllers/videos'
 import ContentRoutes from '../controllers/content'
 import StoreRoutes from '../controllers/products'
