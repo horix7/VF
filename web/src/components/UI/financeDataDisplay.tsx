@@ -36,7 +36,7 @@ export default function SimpleCard() {
             PayPal Account 
         </Typography>
         <Typography variant="h5" component="h2">
-            Pay-Pal/Credit-Card Wallet Data 
+            Pay-Pal/Card Wallet Data 
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
           charges: $0

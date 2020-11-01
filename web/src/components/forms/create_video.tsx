@@ -159,20 +159,8 @@ export  default function  CreateVideo  (props: any) {
            <Icon iconName="Back" onClick={props.goBack} className="paddsLef" />
                 <div className="CreateVideo">
                
-                    <div className="videoPreview">
-                    
-
-                   <div className="video">
-                   <video src={body} width="200px" autoPlay={true} muted controls={false}></video>
-                   <ReactPlayer controls={false} width="500px" muted playing
-                  url={body} />
-                   <h3>{head}</h3>
-
-
-                   </div>
-
-                    </div>
-                   <div>
+                   
+                   <div className="videform">
                  
 
                     <h1>{Object.keys(props.content).length > 1 ? "Update" : "Create"} Video </h1>
@@ -188,7 +176,7 @@ export  default function  CreateVideo  (props: any) {
 
                    </div>
 
-                   <div className="">
+                   <div className="leftMM">
                    
                    <Dropdown
                         placeholder="Select Category"
@@ -201,7 +189,7 @@ export  default function  CreateVideo  (props: any) {
                         // styles={dropdownStyles}
                     />
 
-                   </div>
+                  
                    <div className="articleWriterC">
 
                     < DialogweUploadByBtn  setImage={(img: any ) => setImages(img)} />
@@ -213,10 +201,32 @@ export  default function  CreateVideo  (props: any) {
                         
                      {errorMess ? <div className="erromessage"><ErroMssage /></div> : null }
 
+
                     <button className="publish" onClick={publishVideo}> {lodading ? <Spinner label="publishing..." ariaLive="assertive" labelPosition="right" />  : "Publish"} </button>
+                    </div>
 
                    </div>
 
+                   <div className="videoPreview">
+                    
+
+                    <div className="video">
+                    { window.matchMedia("(max-width: 800px)").matches  ? <div>
+                    <video src={body} width="200px" autoPlay={true} muted controls={false}></video>
+                    <ReactPlayer controls={false} width="200px" muted playing url={body} />
+                    </div>  :
+                     <div>
+                           <video src={body} width="400px" autoPlay={true} muted controls={false}></video>
+                    <ReactPlayer controls={false} width="400px" muted playing url={body} />
+                     </div>
+                  }
+                    <h3>{head}</h3>
+ 
+ 
+                    </div>
+ 
+                     </div>
+                    
                 </div>
             </Fragment>
          )

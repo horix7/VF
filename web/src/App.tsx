@@ -7,6 +7,8 @@ import {  loadTheme } from "@fluentui/react"
 import StoreCheckout from './components/checkout/Storecheckout'
 import LevelUpCheckOut from './components/checkout/premiumCheckout'
 import Store from './containers/store'
+import HomePage from './containers/homePage'
+import AdminDash from './containers/adminPage';
 
 localStorage.setItem("backendUrl" , "http://vfitness-8a2c3.firebaseio.com")
  loadTheme({
@@ -41,7 +43,8 @@ initializeIcons();
 function App() {
   return (
     <div className="App">
-        <Admin/>
+        <AdminDash/>
+
     </div>
   );
 }

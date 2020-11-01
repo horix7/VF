@@ -99,6 +99,17 @@ button {
 
 }
 
+.leftMM {
+  width: 50%;
+  margin-left: 50%;
+  text-align: end;
+}
+
+.videform {
+  width: 90%;
+  margin-left: 10%;
+}
+
 .twoEleme {
   width: 80%;
   margin-left: 20%;
@@ -184,6 +195,18 @@ i {
 .price {
   color: gold;
   float: right;
+}
+
+
+.efak2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.efak2:first-child{
+  text-align: start;
+  margin-left: -10%;
+  width: 90%;
 }
 
 .presesntImg {
@@ -310,6 +333,12 @@ main {
   height: 100%;
 }
 
+.efak {
+  display: grid;
+  grid-template-columns: 40%  40% ;
+  width: 100%;
+}
+
 .nav-item {
   width: 100%;
 }
@@ -337,8 +366,8 @@ main {
   color: var(--text-secondary);
 }
 
-.mainPage {
-  height: 100vh;
+.mainBody {
+  height: 200vh;
   background-color: white;
   text-align: center;
 }
@@ -575,7 +604,7 @@ body {
   padding-bottom: 30px;
   text-align: start;
   display: grid;
-  grid-template-columns: 30% 70%;
+  grid-template-columns: 20% 70%;
 }
 
   
@@ -959,6 +988,11 @@ code {
   text-transform: capitalize;
 }
 
+.videoplayer {
+
+  width: 500px;
+}
+
 .searchBar1 {
   width: 100%;
   color: white;
@@ -971,14 +1005,181 @@ code {
     background-color: black;
   }
 
+  .signUpPages {
+    grid-template-columns: 1fr;
+    padding-left: 20px;
+    width: 100%;
+  }
+
+  .chartHolder {
+    display: grid;
+    padding: 0px;
+    margin-left: -30px;
+    grid-template-columns: 0% 100%;
+    float: left;
+  }
+
+  .efak {
+    display: grid;
+    grid-template-columns: 40%  ;
+  
+  }
+
+  .efak2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  .efakk {
+    margin-left: -80%;
+    padding-top: 20px;
+  }
+
+  .efak2 {
+  
+  }
+
+  .formHolder {
+    padding-top: 20px;
+    /* padding-left: 150px; */
+    width: 80%;
+    margin-left: 0%;
+    text-align: start;
+    padding: 20px;
+    align-items: center;
+    float: none;
+    justify-content: center;
+    padding-bottom: 30px;
+    /* margin-left: 50px; */
+  }
+
+  
+.leftMM {
+  width: 70%;
+  margin-left: 30%;
+  text-align: end;
+}
+
+.videform {
+  width: 100%;
+  margin-left: 0%;
+}
+
+
+  .videoPreview {
+    color: black;
+    padding-left: 0%;
+    padding-right: 0%;
+  }
+.videoplayer {
+
+  width: 200px;
+}
+
+.CreateVideo {
+  text-align: start;
+  width: 99%;
+  display: grid;
+  margin-left: 0px;
+  margin-right: 1px;
+  /* padding: 10px; */
+  grid-template-columns: 100%;
+  grid-auto-flow: dense;
+}
+
+
+  .producttittle {
+    width: 95%;
+    padding: 2px;
+  }
+
+  
+.articleForm {
+  text-align: end;
+  margin-right: 0px;
+  margin-bottom: 100px;
+  padding: 20px;
+  color: black;
+  background-color: white;
+}
+.twoEleme {
+  width: 100%;
+  margin-left: 0%;
+  display: grid;
+  grid-template-columns: 60%  40% ;
+}
+
+
+  .twoCards {
+    display: grid;
+    grid-template-rows: 200px 200px;
+    row-gap: 20px;
+    text-align: end;
+  }
+  
+.orders h1 {
+  color: black;
+  text-align: start;
+  padding-top: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: medium;
+}
+
+
+  .tableHolder {
+    display: grid;
+    padding: 2px;
+    grid-template-columns: 0% 100%;
+  }
+
+  .viewReport {
+    width: 90%;
+    background-color: gold;
+    margin-bottom: 20px;
+    height: 100px;
+    color: black;
+    padding: 20px;
+    cursor: pointer;
+  }
+  
+
+  .signUpPagezz {
+    background-color: black;
+    padding-left: 10%;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    text-align: start;
+    display: grid;
+    grid-template-columns: 0% 90%;
+  }
+  .actionBtn {
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 10px;
+    column-gap: 20px;
+  }
+
+  .towEl {
+    display: grid;
+    grid-template-columns: 100%  ;
+    margin: auto;
+    /* column-gap: 20px; */
+  
+  } 
+  
+
   .articleForm .artDrop {
     width: 40%;
     margin-left: 60%;
   }
   
   .articleForm {
-    width: 100%;
-    padding: 2px;
+    width: 98%;
+    padding: 0px;
   }
   .tittleInput {
     width: 90%;

@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\student\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js start:dev
+  C:\Program Files\nodejs\node.exe C:\Users\student\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js start
 
 PATH: 
-  C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Users\student\AppData\Local\Microsoft\WindowsApps;C:\Users\student\AppData\Roaming\npm;C:\Users\student\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\heroku\bin;C:\Users\student\.deno\bin
+  C:\Users\student\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\student\bin;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\nodejs;C:\Program Files\Git\cmd;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Users\student\AppData\Local\Microsoft\WindowsApps;C:\Users\student\AppData\Roaming\npm;C:\Users\student\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\heroku\bin;C:\Users\student\.deno\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
 
 Yarn version: 
   1.22.10
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  SyntaxError: C:\Users\student\Documents\freelance\backend\package.json: Unexpected token } in JSON at position 210
+  SyntaxError: C:\Users\student\Documents\freelance\backend\package.json: Unexpected token / in JSON at position 106
       at JSON.parse (<anonymous>)
       at C:\Users\student\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:1625:59
       at Generator.next (<anonymous>)
@@ -23,12 +23,17 @@ Trace:
 
 npm manifest: 
   {
-    "name": "vision",
+    "name": "function",
     "version": "0.0.0",
     "scripts": {
-      "lint": "tslint --project \"tsconfig.json\"",
-      "start": "tsc && node dist/src/index.js",
-      "start:dev": "tsc && nodemon dist/src/index.js",
+      "dev": "tsc && nodemon dist/app.js",
+      // "postinstall": "npm start",
+      "serve": "npm run build && firebase emulators:start --only function",
+      "shell": "npm run build && firebase shell",
+      "start": "tsc && node dist/index.js",
+      "start:dev": "npm run build && nodemon",
+      "deploy": "firebase deploy --only functions",
+      "logs": "firebase functions:log"
     },
     "nodemonConfig": {
       "watch": [
@@ -39,12 +44,11 @@ npm manifest:
         "src/public"
       ]
     },
-    "_moduleAliases": {
-      "@daos": "dist/src/models",
-      "@entities": "dist/src/entities",
-      "@shared": "dist/shared",
-      "@server": "dist/Server"
+    "engines": {
+      "node": "14"
     },
+    "main": "dist/index.js",
+    "private": true,
     "dependencies": {
       "@types/cors": "^2.8.8",
       "@types/uuid": "^8.3.0",
@@ -55,7 +59,8 @@ npm manifest:
       "dotenv": "^8.2.0",
       "express": "^4.17.1",
       "express-async-errors": "^3.1.1",
-      "firebase-admin": "^9.2.0",
+      "firebase-admin": "^9.3.0",
+      "firebase-functions": "^3.11.0",
       "helmet": "^4.1.1",
       "http-status-codes": "^2.1.4",
       "jsonwebtoken": "^8.5.1",
@@ -80,6 +85,7 @@ npm manifest:
       "@types/randomstring": "^1.1.6",
       "@types/supertest": "^2.0.10",
       "find": "^0.3.0",
+      "firebase-functions-test": "^0.2.3",
       "fs-extra": "^9.0.1",
       "jasmine": "^3.6.1",
       "jsonfile": "^6.0.1",

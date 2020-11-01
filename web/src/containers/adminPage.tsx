@@ -14,7 +14,7 @@ const backend = new BackendCalls()
 export default class AdminDash extends Component {
 
     state = {
-        openSate : " "
+        openSate : "dash"
     }
 
     componentDidMount () {
@@ -65,22 +65,22 @@ export default class AdminDash extends Component {
 
             <main>
                     <div className="mainBody">
-
+                    {this.state.openSate === "createPro"? <StorePage />  : null}
+            {this.state.openSate === "createArt"? <ContentPage />  : null}
+            {/* {this.state.openSate === "createVid"? <VideoForm content={{}} categories={[]}  />  : null} */}
+            {this.state.openSate === "client" ? <Clients />  : null}
+            {this.state.openSate === "dash" ? <DashPage />  : null}
+           
                     </div>
             </main>
 
             </body>
 
 
-            {this.state.openSate === "createPro"? <StorePage />  : null}
-            {this.state.openSate === "createArt"? <ContentPage />  : null}
-            {this.state.openSate === "createVid"? <VideoForm content={{}} categories={[]}  />  : null}
-            {this.state.openSate === "client" ? <Clients />  : null}
-            {this.state.openSate === "dash" ? <DashPage />  : null}
-           
+         
 
           </> :  <AdminLogin /> }
             </Fragment>
-        )
+        )   
     }
 }

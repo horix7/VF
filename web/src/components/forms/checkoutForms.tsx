@@ -37,19 +37,24 @@ export const ShippingAddress: React.FunctionComponent = () => {
   return (
       <div className="formHolder">
 
-    <Stack horizontal tokens={stackTokens} styles={stackStyles}>
-      <Stack {...columnProps}>
+    <Stack className="efak" horizontal tokens={stackTokens} styles={stackStyles}>
+     <div>
+     <Stack {...columnProps}>
         <TextField label="Your Names" required />
         <TextField label="Phone Number" required type="phone" mask="m\ask: (999) 999 - 9999"  />
         <TextField label="Your Email "  required />
         
       </Stack> 
 
-      <Stack {...columnProps}>       
+     </div>
+     
+     <div>
+     <Stack className="efakk" {...columnProps}>       
         <TextField label="Your Country " iconProps={iconProps} required />
         <TextField placeholder="Street Address" />
       </Stack> 
 
+     </div>
     </Stack>
     </div>
 
@@ -61,16 +66,18 @@ export const PaymentForm: React.FunctionComponent = () => {
     return (
     
     <div className="formHolder">
-      <Stack horizontal tokens={stackTokens} styles={stackStyles}>
-        <Stack {...columnProps}>
+      <div  className="efak2" >
+        <div>
         <ChoiceGroup  defaultSelectedKey="MOMO" options={options} />
-        </Stack>
-        <Stack {...columnProps}>
-          <MaskedTextField label="Your Phone Number " mask="(999) 99999 - 9999"  />
-          <PrimaryButton text="Pay"/>
+        </div>
+        <div>
+                
+         <MaskedTextField label="Your Phone Number " mask="(999) 99999 - 9999"  />
+         <PrimaryButton className="articleWriterC" text="Pay"/>
 
-        </Stack>
-      </Stack>
+        </div>
+        </div>
+
       </div>
 
     );
