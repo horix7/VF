@@ -22,6 +22,7 @@ import { Spinner } from 'office-ui-fabric-react/lib/Spinner';
 export  default function  ArticleForm  (props: any) {
   
     // eslint-disable-next-line react-hooks/rules-of-hooks
+    // window.location.href = "#topper"    
 
     const backend = new BackendCalls()
     
@@ -69,6 +70,38 @@ export  default function  ArticleForm  (props: any) {
             
 
         }
+
+      const  updateArticle =  async( ) => {
+        setlodading(true)
+
+            const article = {
+                head: head,
+                body: body,
+                category: catt,
+                images: images,
+            }
+
+            if (Object.values(article).some((elem : any ) => elem === null || elem === undefined || elem === "")) {
+                alert("Missing Some content ")
+                setTimeout(() => {
+                    setlodading(false)
+                }, 2000);
+                
+            } else {
+                const resutlz  = await backend.UpdateArticle({article: article, id: props.content.id }, premium)
+
+                if(resutlz === "error") {
+                    setlodading(false)
+                    setErrorMess(true)
+                }else {
+                    props.goBack()
+                }
+            }
+            
+
+        }
+        
+
     const [currentOption  , setCurrt] = useState({key: "", text: ""})
 
         const options: any[] = [
@@ -129,7 +162,7 @@ export  default function  ArticleForm  (props: any) {
         
           const newCategoryForm = (
              <Fragment>
-                  <div style={modalStyle} className={classes.paper}>
+                  <div  style={modalStyle} className={classes.paper}>
                     <TextField placeholder="Category Name" onChange={(event: any) => setcategg(event)}/>
                     <div className="articleWriterC">
                     <PrimaryButton text="add"  onClick={(event) =>{
@@ -158,10 +191,10 @@ export  default function  ArticleForm  (props: any) {
             <Fragment>
 
                 
-                <div className="articleForm">
+                <div id="topper" className="articleForm">
                 <Icon iconName="Back" onClick={props.goBack} />
                 <h1> { Object.keys(props.content).length > 1  ? "Update" : "Create"} an Article  </h1>
-                    <input type="text" className="tittleInput" placeholder="Tittle " onChange={(event: any ) => setHead(event.target.value) }/>
+                    <input type="text" className="tittleInput" placeholder="Tittle " value={head} onChange={(event: any ) => setHead(event.target.value) }/>
                     <div className="artDrop">
                     <div className="articleWriterC">
                     <Dropdown
@@ -188,7 +221,7 @@ export  default function  ArticleForm  (props: any) {
                     <div className="articleWriterC">
                     {errorMess ? <div className="erromessage"><ErroMssage /></div> : null }
 
-                    <button className="publish" onClick={publishArticle}> {lodading ? <Spinner label="publishing..." ariaLive="assertive" labelPosition="right" />  : "Publish"} </button>
+                    {Object.keys(props.content).length > 1 ? <button className="publish" onClick={updateArticle}> {lodading ? <Spinner label="Updating..." ariaLive="assertive" labelPosition="right" />  : "Update"} </button> : <button className="publish" onClick={publishArticle}> {lodading ? <Spinner label="publishing..." ariaLive="assertive" labelPosition="right" />  : "Publish"} </button>}
 
                     <Moodal modalBody={newCategoryForm} openModal={openIt} closeModal={(bool: boolean ) => setOpen(bool)}/>
                  

@@ -24,10 +24,10 @@ import EditIcon from '@material-ui/icons/Edit';
 
 interface Data {
   name: string;
-  published_on: Date;
   type : string;
-  id : string;
   category: string;
+  published_on: string;
+  id : string;
   
 
 }
@@ -38,9 +38,10 @@ interface Data {
 function createData(
   name: string,
   type: string,
-  id: string,
   category: string,
-  published_on: Date,
+  published_on: string,
+  id: string,
+
 ): Data {
   return { name, category, type, published_on, id };
 
@@ -168,7 +169,8 @@ const useToolbarStyles = makeStyles((theme: Theme) =>
 );
 
 interface EnhancedTableToolbarProps {
-  numSelected: number;
+  numSelected: any;
+  selected:any;
   editorElem: any;
   deleteElem: any;
 }
@@ -176,7 +178,8 @@ interface EnhancedTableToolbarProps {
 const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
   const classes = useToolbarStyles();
   const { numSelected } = props;
-
+  
+  console.log(props.selected)
   return (
     <Toolbar
       className={clsx(classes.root, {
@@ -189,7 +192,7 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
         </Typography>
       ) : (
         <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-          Videos
+          videos 
         </Typography>
       )}
       {numSelected > 0 ? (
@@ -261,7 +264,7 @@ export default function EnhancedTable(props: any) {
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n: any) => n.name);
+      const newSelecteds = rows.map((n: any) => n.id);
       setSelected(newSelecteds);
       return;
     }
@@ -270,6 +273,8 @@ export default function EnhancedTable(props: any) {
 
   const handleClick = (event: React.MouseEvent<unknown>, name: any) => {
     const selectedIndex = selected.indexOf(name);
+
+    console.log(rows)
     let newSelected: string[] = [];
 
     if (selectedIndex === -1) {
@@ -313,7 +318,27 @@ export default function EnhancedTable(props: any) {
     </div>
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar numSelected={selected.length} editorElem={() => props.updateProps(selected)} deleteElem={() => props.deletedProps(selected)  } />
+        <EnhancedTableToolbar numSelected={selected.length} selected={selected} editorElem={() => props.editorElem(selected.map((elem: any) => {
+         return rows.map((element: any) => {
+            if(element.id === elem) {
+              return {
+                id: elem,
+                is: "video",
+                premium: element.type === "premium"
+              }
+            }  
+         });
+        }))} deleteElem={() => props.deleteElem(selected.map((elem: any) => {
+          return rows.map((element: any) => {
+             if(element.id === elem) {
+               return {
+                 id: elem,
+                 is: "video",
+                 premium: element.type === "premium"
+               }
+             }  
+          });
+         }))} />
         <TableContainer>
           <Table
             className={classes.table}
@@ -334,7 +359,7 @@ export default function EnhancedTable(props: any) {
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
+                  const isItemSelected = isSelected(row.id);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (

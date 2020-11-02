@@ -17,6 +17,8 @@ import { Spinner } from 'office-ui-fabric-react/lib/Spinner';
 export  default function  CreateVideo  (props: any) {
   
     // eslint-disable-next-line react-hooks/rules-of-hooks
+     
+
     const [selectedItem , setSelectedItem] = useState<IDropdownOption>();
     const [openIt , setOpen ] = useState(false)
     const [premium , setPremium ] = useState(props.content.premium)
@@ -63,6 +65,42 @@ export  default function  CreateVideo  (props: any) {
           
 
       }
+
+
+        
+      
+    const updateVideo = async( ) => {
+        setlodading(true)
+  
+            const video = {
+                head: head,
+                body: body,
+                category: catt,
+                images: images,
+            }
+  
+            if (Object.values(video).some((elem : any ) => elem === null || elem === undefined || elem === "")) {
+                alert("Missing Some content ")
+                setTimeout(() => {
+                    setlodading(false)
+                }, 2000);
+                
+            } else {
+                const resutlz  = await backend.UpdateVideo({video: video, id: props.content.id}, premium)
+  
+                if(resutlz === "error") {
+                    setlodading(false)
+                    setErrorMess(true)
+                }else {
+                    props.goBack()
+                }
+            }
+            
+  
+        }
+  
+  
+          
 
     // const userData
 
@@ -126,7 +164,7 @@ export  default function  CreateVideo  (props: any) {
           const iconPropStyle = "uploadIcon"
           const newCategoryForm = (
             <Fragment>
-                 <div style={modalStyle} className={classes.paper}>
+                 <div  style={modalStyle} className={classes.paper}>
                    <TextField placeholder="Category Name" onChange={(event: any) => setcategg(event)}/>
                    <div className="articleWriterC">
                    <PrimaryButton text="add"  onClick={(event) =>{
@@ -156,6 +194,8 @@ export  default function  CreateVideo  (props: any) {
             
           
         <Fragment>
+            <div id="topper" > 
+            </div>
            <Icon iconName="Back" onClick={props.goBack} className="paddsLef" />
                 <div className="CreateVideo">
                
@@ -202,7 +242,8 @@ export  default function  CreateVideo  (props: any) {
                      {errorMess ? <div className="erromessage"><ErroMssage /></div> : null }
 
 
-                    <button className="publish" onClick={publishVideo}> {lodading ? <Spinner label="publishing..." ariaLive="assertive" labelPosition="right" />  : "Publish"} </button>
+                   {Object.keys(props.content).length > 1 ?  <button className="publish" onClick={updateVideo}> {lodading ? <Spinner label="Updating..." ariaLive="assertive" labelPosition="right" />  : "Update"} </button> :  <button className="publish" onClick={publishVideo}> {lodading ? <Spinner label="publishing..." ariaLive="assertive" labelPosition="right" />  : "Publish"} </button>}
+
                     </div>
 
                    </div>

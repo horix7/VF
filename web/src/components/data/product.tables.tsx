@@ -165,14 +165,19 @@ const useToolbarStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+
 interface EnhancedTableToolbarProps {
-  numSelected: number;
+  numSelected: any;
+  selected:any;
+  editorElem: any;
+  deleteElem: any;
 }
 
 const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
   const classes = useToolbarStyles();
   const { numSelected } = props;
 
+  console.log(props.selected)
   return (
     <Toolbar
       className={clsx(classes.root, {
@@ -190,12 +195,13 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
       )}
       {numSelected > 0 ? (
           <Fragment>
-        <Tooltip title="update">
+      {numSelected > 1 ? null : <Tooltip title="update" onClick={props.editorElem}>
            <IconButton aria-label="update">
            <EditIcon />
          </IconButton>
-        </Tooltip>
-        <Tooltip title="Delete">
+        </Tooltip> }
+        
+        <Tooltip title="Delete" onClick={props.deleteElem}>
           <IconButton aria-label="delete">
             <DeleteIcon />
           </IconButton>
@@ -239,7 +245,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function EnhancedTable(props: any) {
-  const rows = props.data.map((product: any) =>  createData( product.head, product.price, product.category, product.published_on , product.id))
+  const rows = props.data.map((product: any) =>  createData( product.head, product.price, product.category,  product.id ,product.published_on))
 
   const classes = useStyles();
   const [order, setOrder] = React.useState<Order>('asc');
@@ -257,7 +263,7 @@ export default function EnhancedTable(props: any) {
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n: any) => n.name);
+      const newSelecteds = rows.map((n: any) => n.id);
       setSelected(newSelecteds);
       return;
     }
@@ -309,7 +315,9 @@ export default function EnhancedTable(props: any) {
     </div>
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+
+        <EnhancedTableToolbar numSelected={selected.length} selected={selected} editorElem={() => props.editContent(selected[0])} deleteElem={() => props.deleteContents(selected)  } />
+
         <TableContainer>
           <Table
             className={classes.table}
@@ -330,13 +338,13 @@ export default function EnhancedTable(props: any) {
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
+                  const isItemSelected = isSelected(row.id);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.name)}
+                      onClick={(event) => handleClick(event, row.id)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}

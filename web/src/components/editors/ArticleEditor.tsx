@@ -14,6 +14,7 @@ import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 componentDidMount() {
 
+
         if(this.props.content) {
             const blocksFromHtml = htmlToDraft(this.props.content);
             const { contentBlocks, entityMap } = blocksFromHtml;

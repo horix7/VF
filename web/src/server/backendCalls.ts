@@ -3,6 +3,7 @@
 import axios from "axios";
 
 const newAxios = axios.create({
+   url: "https://sawafitness.herokuapp.com",
    headers: {
       authorization: localStorage.getItem("jwt"),
       "content-type": "application/json"
@@ -147,6 +148,9 @@ export default class Request {
          }
    
        }
+
+     
+  
   
      CreateProduct = async (data: any): Promise<any> => {
 
@@ -171,6 +175,7 @@ export default class Request {
    }
  
      }
+
 
      UpdateUser = async (data: any): Promise<any> => {
 
@@ -245,6 +250,18 @@ try {
          }
      }
 
+     GetOneProducts = async (id: string ): Promise<any> => {
+      try {
+         
+     const ProductPost =  newAxios.get("/api/products/one/" + id)
+
+     return (await ProductPost)
+
+      } catch (error) {
+            return "error"           
+      }
+  }
+
      deleteUsers = async (id: string): Promise<any> => {
 
        try {
@@ -272,9 +289,9 @@ try {
      deleteArticle = async (id: string, premium: boolean): Promise<any> => {
 
        try {
-         let route = "/products/delete/"
+         let route = "/content/delete/"
          if(premium) route = "/api" + "/premium" + route
-         else route = "/api" + route
+         else route = "/api" + "/fremium" + route
  
          const deleted =  newAxios.delete(route + id)
   
@@ -288,7 +305,7 @@ try {
      deleteVideo = async (id: string, premium: boolean): Promise<any> => {
 
      try {
-      let route = "/products/delete/"
+      let route = "/videos/delete/"
       if(premium) route = "/api" + "/premium" + route
       else route = "/api" + route
       

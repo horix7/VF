@@ -26,7 +26,7 @@ export default class ArticleAdmin extends Component<any> {
     }
 
 
-    async componentDidMount ( ) {
+     fetDataFromNet = async ( )  => {
        const premiumData = await  backend.GetArticles(true)
 
        const fremiumData =await  backend.GetArticles(false)
@@ -35,57 +35,209 @@ export default class ArticleAdmin extends Component<any> {
 
        const fremiumDataVid =await  backend.GetVideos(false)
 
+       const premiumDataN = premiumData.data.article.map((elem: any ) => {
+           return {
+               id: elem.id,
+               head: elem.head,
+               body: elem.body,
+               category: elem.category,
+               published_on: elem.published_on,
+               type: "premium",
+            
+           }
+       })
+
+
+       const fremiumDataN = fremiumData.data.article.map((elem: any ) => {
+        return {
+            id: elem.id,
+            head: elem.head,
+            body: elem.body,
+            category: elem.category,
+            published_on: elem.published_on,
+            type: "standard",
+         
+        }
+    })
+
+    const premiumDataNV = premiumDataVid.data.video.map((elem: any ) => {
+        return {
+            id: elem.id,
+            head: elem.head,
+            body: elem.body,
+            category: elem.category,
+            published_on: elem.published_on,
+            type: "premium",
+         
+        }
+    })
+
+    const fremiumDataNV = fremiumDataVid.data.video.map((elem: any ) => {
+     return {
+         id: elem.id,
+         head: elem.head,
+         body: elem.body,
+         category: elem.category,
+         published_on: elem.published_on,
+         type: "standard",
+      
+     }
+ })
 
       this.setState({
-          data: [...premiumData.data.article , ...fremiumData.data.article],
-          videoDatat: [ ...fremiumDataVid.data.video, ...premiumDataVid.data.video],
-            doneLoading: true,
-          articleCategory: [...premiumData.data.article.map((elem: any) => elem.category), ...fremiumData.data.article.map((elem: any) => elem.category)],
-          videoCategory: [...premiumDataVid.data.video.map((elem: any) => elem.category), ...fremiumDataVid.data.video.map((elem: any) => elem.category)]
+          data: [...fremiumDataN, ...premiumDataN],
+          videoData: [ ...fremiumDataNV , ...premiumDataNV],
+          doneLoading: true,
+          articleCategory: [...premiumData.data.article.map((elem: any) => {return { key: elem.category, text: elem.category}}), ...fremiumData.data.article.map((elem: any) => {return { key: elem.category, text: elem.category}})],
+          videoCategory: [...premiumDataVid.data.video.map((elem: any) => {return { key: elem.category, text: elem.category}}), ...fremiumDataVid.data.video.map((elem: any) => {return { key: elem.category, text: elem.category}})]
 
       })
 
     }
 
-    deleteElements = (deleteItems: any) => {
 
-        deleteItems.forEach(async (element: any) => {
-            await backend.deleteArticle(element.id, element.premium)
-        });
+    async componentDidMount() {
+        this.fetDataFromNet()
+    }
+
+    deleteElements = (deleteItems: any) => {
+        
+        let  indeqx = 0
+
+        let newItem = deleteItems[0].filter( (elem: any ) =>{
+            return  elem !== undefined
+        })
+       
+        console.log(newItem)
+         
+        this.setState({
+            doneLoading: false
+        }) 
+
+         const  deletOne = async () => {
+            const element = newItem[indeqx]
+
+           await backend.deleteArticle(element.id, element.premium)
+            console.log(element)
+            indeqx++
+
+            if(indeqx === newItem.length) {
+              
+                this.componentDidMount()
+         } else {
+             deletOne()
+         }
+           
+
+       }
+
+       deletOne()
+    }
+
+    
+    deleteVideos = (deleteItems: any) => {
+
+        
+        let  indeqx = 0
+
+        let newItem = deleteItems[0].filter( (elem: any ) =>{
+            return  elem !== undefined
+        })
+       
+         
+        this.setState({
+            doneLoading: false
+        }) 
+
+         const  deletOne = async () => {
+            const element = newItem[indeqx]
+
+            await backend.deleteVideo(element.id, element.premium)
+
+            indeqx++
+
+            if(indeqx === newItem.length) {
+             
+                this.componentDidMount()
+         } else {
+             deletOne()
+         }
+           
+
+       }
+
+       deletOne()
 
     }
 
+    
 
     openEditor = () => {
         const { openEditor } = {...this.state}
         this.setState( {
             openEditor: !openEditor 
         })
+
+        if(openEditor) {
+           this.setState({
+               doneLoading: "false"
+           })
+            this.fetDataFromNet()
+        } else {
+            window.location.href = "#topper"  
+        }
     }
+
+
     opeEditor2 = () => {
         const { editor2 } = {...this.state}
 
         this.setState( {
             editor2: !editor2 
         })
+
+        if(editor2 ) {
+            
+           this.setState({
+               doneLoading: "false"
+           })
+            this.fetDataFromNet()
+        } else {
+            window.location.href = "#topper"  
+        }
     }
 
     updateElement = async (updateItem : any ) => {
         
         
-
-        if(updateItem.is === "content") {
-            const articleInfo = await backend.GetOneArticle(updateItem.premium, updateItem.id)
-            this.openEditor()
-        this.setState({
-            articleContent:  articleInfo
+        
+        let newItem = updateItem[0].filter( (elem: any ) =>{
+            return  elem !== undefined
         })
 
+        newItem = newItem[0]
+
+        if(newItem.is === "content") {
+
+                this.setState({
+                    doneLoading: false
+                })
+            const articleInfo = await backend.GetOneArticle(newItem.premium, newItem.id)
+           
+        this.setState({
+            doneLoading: true,
+            articleContent: { ...articleInfo.data.article.data,  id: newItem.id, premium: newItem.premium}
+        })
+        this.openEditor()
         } else {
 
-        const videoInfo = await backend.GetOneVideo(updateItem.premium, updateItem.id)    
+            this.setState({
+                doneLoading: false
+            })
+            const videoInfo = await backend.GetOneVideo(newItem.premium, newItem.id)    
         this.setState({
-            articleContent:  videoInfo
+            doneLoading: true,
+            videoContent: { ...videoInfo.data.video.data, id: newItem.id, premium: newItem.premium}
         })
         this.opeEditor2()
 
@@ -105,12 +257,24 @@ export default class ArticleAdmin extends Component<any> {
                 <div className="actionBtn">
                 <div></div>
 
-            <div className="viewReport " onClick={this.openEditor}>
+            <div className="viewReport " onClick={() => {
+                this.setState({
+                    videoContent: {},
+                    articleContent: {}
+                })
+                this.openEditor()
+            }}>
              <Icon iconName="PageAdd" className="bigIcon"/>
              <p>Publish An Article </p>
              </div>
 
-             <div className="viewReport"  onClick={this.opeEditor2} >
+             <div className="viewReport"  onClick={() => {
+                   this.setState({
+                    videoContent: {},
+                    articleContent: {}
+                })
+                 this.opeEditor2()}} >
+
              <Icon iconName="Video" className="bigIcon"/>
              <p>Publsih A Video </p>
              </div>
@@ -120,8 +284,8 @@ export default class ArticleAdmin extends Component<any> {
 
            </div>
             
-            <Tables data={this.state.data} editorElem  deleteElem />    
-            <VideoTables data={this.state.videoData} editorElem  deleteElem />
+            <Tables data={this.state.data} editorElem={(elem: any) => this.updateElement(elem)}  deleteElem={(elem: any) => this.deleteElements(elem)} />    
+            <VideoTables data={this.state.videoData} editorElem={(elem: any) => this.updateElement(elem)}  deleteElem={(elem: any) => this.deleteVideos(elem)} />
             </>}
         </Fragment>
        )

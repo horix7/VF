@@ -29,7 +29,7 @@ export  default function  ArticleForm  (props: any) {
     const [openIt , setOpen ] = useState(false)
     const [premium , setPremium ] = useState(props.content.premium)
     const [head , setHead ] = useState(props.content.head)
-    const [body , setBody ] = useState(props.content.body)
+    const [body , setBody ] = useState(props.content.description)
     const [price , setPrice ] = useState(props.content.price)
     const [images , setImages ] = useState<any>(props.content.images)
     const [made_by , setMade_by ] = useState(props.content.made_by)
@@ -39,6 +39,12 @@ export  default function  ArticleForm  (props: any) {
 
     // const userData:  =[ ]
 
+    const SetNewImages = (imgs: any) => {
+
+        const newImg = [...images, ...imgs]
+        setImages(newImg)
+
+    }
     const publishProduct = async( ) => {
         setlodading(true)
 
@@ -71,6 +77,40 @@ export  default function  ArticleForm  (props: any) {
             
 
         }
+
+        const updateProduct =  async() => {
+            setlodading(true)
+    
+                const product = {
+                    head: head,
+                    description: body,
+                    price: price,
+                    category: catt,
+                    images: images,
+                    made_by: "admin"
+                }
+    
+                console.log(product , props.content)
+                if (Object.values(product).some((elem : any ) => elem === null || elem === undefined || elem === "")) {
+                    alert("Missing Some content ")
+                    setTimeout(() => {
+                        setlodading(false)
+                    }, 2000);
+                    
+                } else {
+                    const resutlz  = await backend.UpdateProduct({id: props.content.id ,product: product})
+    
+                    if(resutlz === "error") {
+                        setlodading(false)
+                        setErrorMess(true)
+                    }else {
+                        props.goBack()
+                    }
+                }
+                
+    
+            }
+    
     const [currentOption  , setCurrt] = useState({key: "", text: ""})
 
         const options: any[] = [
@@ -166,11 +206,11 @@ export  default function  ArticleForm  (props: any) {
                 <div className="twoEleme">
               
 
-                <input type="text" className="producttittle" placeholder="Tittle " onChange={(event: any ) => setHead(event.target.value) }/>
+                <input type="text" className="producttittle" placeholder="Tittle " value={head} onChange={(event: any ) => setHead(event.target.value) }/>
                 <div className="inputz inputIconz2">
                     <Icon iconName="Money" className="inputIcon"/>
                   
-                   <input type="number" className="priceInput inputs"  placeholder="Price " onChange={(event: any ) => setPrice(event.target.value) }/>
+                   <input type="number" className="priceInput inputs"  placeholder="Price " value={price} onChange={(event: any ) => setPrice(event.target.value) }/>
 
                 <div></div>
                    </div>
@@ -193,8 +233,8 @@ export  default function  ArticleForm  (props: any) {
 
                    {images ? <div className="presesntImg">
                     {images.length > 4 ? [images[0], images[1], images[2], images[3]].map((elem : any ) => (<img width="70px" src={elem} alt="" />)) : images.map((elem: any) => <img width="70px" src={elem} alt=""/>)} 
-                   </div> :  < UploadMultipleFile  setImages={(img: any ) => setImages(img)} />}
-
+                   </div> : null}
+                   < UploadMultipleFile  setImages={(img: any ) => SetNewImages(img)} />
                     <div className="articleWriterC">
                     <ArticleWriter content={body}  changeBody={(event: any ) => setBody(event)}/>
                     
@@ -202,8 +242,9 @@ export  default function  ArticleForm  (props: any) {
                     <div className="articleWriterC">
                     {errorMess ? <div className="erromessage"><ErroMssage /></div> : null }
 
-                    <button className="publish" onClick={publishProduct}> {lodading ? <Spinner label="publishing..." ariaLive="assertive" labelPosition="right" />  : "Publish"} </button>
-
+                    
+                    {Object.keys(props.content).length > 1 ? <button className="publish" onClick={updateProduct}> {lodading ? <Spinner label="updating..." ariaLive="assertive" labelPosition="right" />  : "Update"} </button> : <button className="publish" onClick={publishProduct}> {lodading ? <Spinner label="publishing..." ariaLive="assertive" labelPosition="right" />  : "Publish"} </button>
+} 
                     <Moodal modalBody={newCategoryForm} openModal={openIt} closeModal={(bool: boolean ) => setOpen(bool)}/>
                  
                     </div>

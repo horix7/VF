@@ -15,8 +15,8 @@ const dragOptions = {
 const modalPropsStyles = { main: { maxWidth: 450 } };
 const dialogContentProps = {
   type: DialogType.normal,
-  title: 'Upload  Image ',
-  subText: 'image description ',
+  title: 'Upload  Images',
+  subText: '.jpg .png .gif supported',
 };
 
 
@@ -71,8 +71,11 @@ const [images , setMoreImages ] = useState<any[]>([<Uploader  onUploadScuess={(c
 
         <div className="articleWriterC">
 
-          <PrimaryButton onClick={increaseImageCorrector} text="Add " />
-          {/* <DefaultButton onClick={toggleHideDialog} text="Don't send" /> */}
+          <PrimaryButton onClick={() => {
+            increaseImageCorrector()
+            toggleHideDialog()
+          }} text="Add " />
+          {/* <DefaultButton onClick={} text="Don't send" /> */}
         </div>
         </DialogFooter>
       </Dialog>

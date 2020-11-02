@@ -211,6 +211,8 @@ i {
 
 .presesntImg {
   display: grid;
+  width: 80%;
+  margin-left: 20%;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 .inputIconz {
