@@ -2,14 +2,7 @@
 
 import axios from "axios";
 
-const newAxios = axios.create({
-   url: "https://sawafitness.herokuapp.com",
-   headers: {
-      authorization: localStorage.getItem("jwt"),
-      "content-type": "application/json"
-   },
-   withCredentials: true 
-})
+axios.defaults.withCredentials = true
 export default class Request {
 
 
@@ -21,7 +14,15 @@ export default class Request {
       if(premium) route = "/api" + "/premium" + route
       else route = "/api"  + "/fremium" + route
 
-      const ArticlePost = await  newAxios.post(route, data)
+      const ArticlePost = await  axios({
+         url: "https://sawafitness.herokuapp.com" + route,
+         method: "post",
+         data: data,
+         headers: {
+             "Content-Type": "application/json",
+             "Accept": "application/json"
+         }
+      })
 
 
 
@@ -39,7 +40,15 @@ export default class Request {
          if(premium) route = "/api" + "/premium" + route
          else route = "/api" + route
   
-         const VideoPost =  newAxios.post(route, data)
+         const VideoPost = await  axios({
+            url: "https://sawafitness.herokuapp.com" + route,
+            method: "post",
+            data: data,
+            headers: {
+               "Content-Type": "application/json",
+               "Accept": "application/json"
+            }
+         })
   
          return (await VideoPost)
        } catch (error) {
@@ -56,7 +65,15 @@ export default class Request {
          else route = "/api"  + "/fremium" + route
 
   
-         const ArticlePost =  newAxios.put(route, data)
+         const ArticlePost = await  axios({
+            url: "https://sawafitness.herokuapp.com" + route,
+            method: "put",
+            data: data,
+            headers: {
+               "Content-Type": "application/json",
+               "Accept": "application/json"
+            }
+         })
   
          return (await ArticlePost)
   
@@ -72,7 +89,15 @@ export default class Request {
          if(premium) route = "/api" + "/premium" + route
          else route = "/api" + route
   
-         const VideoPost =  newAxios.put(route, data)
+         const VideoPost = await  axios({
+            url: "https://sawafitness.herokuapp.com" + route,
+            method: "put",
+            data: data,
+            headers: {
+               "Content-Type": "application/json",
+               "Accept": "application/json"
+            }
+         })
   
          return (await VideoPost)
         } catch (error) {
@@ -89,7 +114,14 @@ export default class Request {
       if(premium) route = "/api" + "/premium" + route
       else route = "/api"  + "/fremium" + route
 
-      const ArticlePost =  newAxios.get(route)
+      const ArticlePost = await  axios({
+            url: "https://sawafitness.herokuapp.com" + route,
+            method: "get",
+            headers: {
+               "Content-Type": "application/json",
+               "Accept": "application/json"
+            }
+         })
 
       return (await ArticlePost)
      } catch (error) {
@@ -106,7 +138,14 @@ export default class Request {
        if(premium) route = "/api" + "/premium" + route
        else route = "/api"  + "/fremium" + route
  
-       const ArticlePost =  newAxios.get(route + id)
+       const ArticlePost =   await  axios({
+            url: "https://sawafitness.herokuapp.com" + route,
+            method: "get",
+            headers: {
+               "Content-Type": "application/json",
+               "Accept": "application/json"
+            }
+         })
  
        return (await ArticlePost)
       } catch (error) {
@@ -123,7 +162,14 @@ export default class Request {
          if(premium) route = "/api" + "/premium" + route
          else route = "/api" + route
   
-         const VideoPost =  newAxios.get(route)
+         const VideoPost = await  axios({
+            url: "https://sawafitness.herokuapp.com" + route,
+            method: "get",
+            headers: {
+               "Content-Type": "application/json",
+               "Accept": "application/json"
+            }
+         })
   
          return (await VideoPost)
         } catch (error) {
@@ -140,7 +186,14 @@ export default class Request {
           if(premium) route = "/api" + "/premium" + route
           else route = "/api" + route
    
-          const VideoPost =  newAxios.get(route + id)
+          const VideoPost =   await  axios({
+            url: "https://sawafitness.herokuapp.com" + route,
+            method: "get",
+            headers: {
+               "Content-Type": "application/json",
+               "Accept": "application/json"
+            }
+         })
    
           return (await VideoPost)
          } catch (error) {
@@ -155,7 +208,7 @@ export default class Request {
      CreateProduct = async (data: any): Promise<any> => {
 
        try {
-         const ProductPost =  newAxios.post("/api/products/add", data)
+         const ProductPost =  axios.post("https://sawafitness.herokuapp.com/api/products/add", data)
  
          return (await ProductPost)
        } catch (error) {
@@ -167,7 +220,7 @@ export default class Request {
      UpdateProduct = async (data: any): Promise<any> => {
 
    try {
-      const ProductPost =  newAxios.put("/api/products/update", data)
+      const ProductPost =  axios.put("https://sawafitness.herokuapp.com/api/products/update", data)
  
       return (await ProductPost)
    } catch (error) {
@@ -180,7 +233,7 @@ export default class Request {
      UpdateUser = async (data: any): Promise<any> => {
 
       try {
-         const userPost =  newAxios.put("/api/users/update", data)
+         const userPost = axios.put("https://sawafitness.herokuapp.com/api/users/update", data)
  
          return (await userPost)
       } catch (error) {
@@ -192,7 +245,7 @@ export default class Request {
   SignUp = async (data: any): Promise<any> => {
 
         try {
-         const userData =  newAxios.post("/api/auth/signup", data)
+         const userData =  axios.post( "https://sawafitness.herokuapp.com/api/auth/signup", data)
  
          return (await userData)
   
@@ -205,8 +258,16 @@ export default class Request {
      Login = async (data: any): Promise<any> => {
 
        try {
-         const userData =  newAxios.post("/api/auth/login", data)
- 
+         const userData = await  axios({
+            url: "https://sawafitness.herokuapp.com" + "/api/auth/login",
+            method: "post",
+            data: data,
+            headers: {
+               "Content-Type": "application/json",
+               "Accept": "application/json"
+            }
+         })
+          
          return (await userData)
        } catch (error) {
           return "error"
@@ -217,8 +278,15 @@ export default class Request {
      GetUsers = async (): Promise<any> => {
 
         try {
-         const AllUsers =  newAxios.get("/api/users/all")
- 
+         const AllUsers =   await  axios({
+            url: "https://sawafitness.herokuapp.com" + "/api/users/all",
+            method: "get",
+            headers: {
+               "Content-Type": "application/json",
+               "Accept": "application/json"
+            }
+         })
+          
          return (await AllUsers)
         } catch (error) {
            return "error" 
@@ -229,7 +297,7 @@ export default class Request {
      Logout = async (): Promise<any> => {
 try {
    
-   const logout =  newAxios.get("/api/auth/logout")
+   const logout =  axios.get("https://sawafitness.herokuapp.com/api/auth/logout")
  
    return (await logout)
 } catch (error) {
@@ -241,7 +309,7 @@ try {
     GetProducts = async (): Promise<any> => {
          try {
             
-        const ProductPost =  newAxios.get("/api/products/all")
+        const ProductPost =  axios.get("https://sawafitness.herokuapp.com/api/products/all")
  
         return (await ProductPost)
  
@@ -253,7 +321,7 @@ try {
      GetOneProducts = async (id: string ): Promise<any> => {
       try {
          
-     const ProductPost =  newAxios.get("/api/products/one/" + id)
+     const ProductPost =  axios.get("https://sawafitness.herokuapp.com/api/products/one/" + id)
 
      return (await ProductPost)
 
@@ -265,7 +333,7 @@ try {
      deleteUsers = async (id: string): Promise<any> => {
 
        try {
-         const deleted =  newAxios.delete("/api/users/delete/" + id)
+         const deleted =  axios.delete("https://sawafitness.herokuapp.com/api/users/delete/" + id)
  
          return (await deleted)
        } catch (error) {
@@ -277,7 +345,7 @@ try {
      deleteProduct = async (id: string): Promise<any> => {
 
         try {
-         const deleted =  newAxios.delete("/api/products/delete/" + id)
+         const deleted =  axios.delete("https://sawafitness.herokuapp.com/api/products/delete/" + id)
  
          return  (await deleted)
   
@@ -293,7 +361,7 @@ try {
          if(premium) route = "/api" + "/premium" + route
          else route = "/api" + "/fremium" + route
  
-         const deleted =  newAxios.delete(route + id)
+         const deleted =  axios.delete("https://sawafitness.herokuapp.com" + route + id)
   
          return  (await deleted)
   
@@ -309,7 +377,7 @@ try {
       if(premium) route = "/api" + "/premium" + route
       else route = "/api" + route
       
-      const deleted =  newAxios.delete(route + id)
+      const deleted = axios.delete("https://sawafitness.herokuapp.com" + route + id)
 
       return  (await deleted)
      } catch (error) {

@@ -10,7 +10,6 @@ import Store from './containers/store'
 import HomePage from './containers/homePage'
 import AdminDash from './containers/adminPage';
 
-localStorage.setItem("backendUrl" , "http://vfitness-8a2c3.firebaseio.com")
  loadTheme({
     palette: {
       themePrimary: '#ffd519',
