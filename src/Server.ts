@@ -7,7 +7,7 @@ import { BAD_REQUEST } from 'http-status-codes';
 import 'express-async-errors';
 
 import BaseRouter from './routes';
-import cors from 'cors'
+// import cors from 'cors'
 import logger from './shared/Logger';
 import cookieParser from 'cookie-parser'
 
@@ -23,7 +23,7 @@ app.use(cookieParser(process.env.COOKIE_SECRET))
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 // app.use(cookieParser(cookieProps.secret));
-app.use(cors())
+// app.use(cors())
 // Show routes called in console during development
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
