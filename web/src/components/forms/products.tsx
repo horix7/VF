@@ -31,7 +31,7 @@ export  default function  ArticleForm  (props: any) {
     const [head , setHead ] = useState(props.content.head)
     const [body , setBody ] = useState(props.content.description)
     const [price , setPrice ] = useState(props.content.price)
-    const [images , setImages ] = useState<any>(props.content.images)
+    const [images , setImages ] = useState<any>(props.content.images || [])
     const [made_by , setMade_by ] = useState(props.content.made_by)
     const [ catt , setCatt] = useState(props.content.category)
     const [errorMess, setErrorMess ] = useState(false)
@@ -39,7 +39,7 @@ export  default function  ArticleForm  (props: any) {
 
     // const userData:  =[ ]
 
-    const SetNewImages = (imgs: any) => {
+    const SetNewImages = (imgs: any[]) => {
 
         const newImg = [...images, ...imgs]
         setImages(newImg)
@@ -234,7 +234,7 @@ export  default function  ArticleForm  (props: any) {
                    {images ? <div className="presesntImg">
                     {images.length > 4 ? [images[0], images[1], images[2], images[3]].map((elem : any ) => (<img width="70px" src={elem} alt="" />)) : images.map((elem: any) => <img width="70px" src={elem} alt=""/>)} 
                    </div> : null}
-                   < UploadMultipleFile  setImages={(img: any ) => SetNewImages(img)} />
+                   < UploadMultipleFile  setImages={(img: any[] ) => SetNewImages(img)} />
                     <div className="articleWriterC">
                     <ArticleWriter content={body}  changeBody={(event: any ) => setBody(event)}/>
                     

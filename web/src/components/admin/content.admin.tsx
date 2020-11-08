@@ -88,8 +88,9 @@ export default class ArticleAdmin extends Component<any> {
           data: [...fremiumDataN, ...premiumDataN],
           videoData: [ ...fremiumDataNV , ...premiumDataNV],
           doneLoading: true,
-          articleCategory: [...premiumData.data.article.map((elem: any) => {return { key: elem.category, text: elem.category}}), ...fremiumData.data.article.map((elem: any) => {return { key: elem.category, text: elem.category}})],
-          videoCategory: [...premiumDataVid.data.video.map((elem: any) => {return { key: elem.category, text: elem.category}}), ...fremiumDataVid.data.video.map((elem: any) => {return { key: elem.category, text: elem.category}})]
+          articleCategory:[ ...[...new Set (premiumData.data.article.map((elem: any) => elem.category))].map((elem : any) =>  {return { key: elem, text: elem}}),...[ ...new Set (fremiumData.data.article.map( (elem: any) => elem.category))].map((elem : any) =>  {return { key: elem, text: elem}})],
+
+          videoCategory:[   ...[...new Set(premiumDataVid.data.video.map((elem: any) => elem.category))].map((elem : any) =>  {return { key: elem, text: elem}}), ...[...new Set(fremiumDataVid.data.video.map((elem: any) =>  elem.category))].map((elem : any) =>  {return { key: elem, text: elem}})]
 
       })
 
@@ -223,7 +224,6 @@ export default class ArticleAdmin extends Component<any> {
                     doneLoading: false
                 })
             const articleInfo = await backend.GetOneArticle(newItem.premium, newItem.id)
-           
         this.setState({
             doneLoading: true,
             articleContent: { ...articleInfo.data.article.data,  id: newItem.id, premium: newItem.premium}
@@ -251,7 +251,7 @@ export default class ArticleAdmin extends Component<any> {
 
             {this.state.doneLoading ? null : <BackDrop /> }
 
-            {this.state.openEditor || this.state.editor2 ?  this.state.editor2 ? <VideFrom goBack={this.opeEditor2} content={this.state.videoContent} categories={this.state.videoCategory}  />  :
+            {this.state.openEditor || this.state.editor2 ?  this.state.editor2 ? <VideFrom goBack={this.opeEditor2} content={this.state.videoContent}  categories={this.state.videoCategory}  />  :
              <ArticleFrom goBack={this.openEditor}  content={this.state.articleContent} categories={this.state.articleCategory}  />   : <>
             <div className="towEl">
                 <div className="actionBtn">

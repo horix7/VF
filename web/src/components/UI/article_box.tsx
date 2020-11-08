@@ -1,45 +1,52 @@
-import React, {Component, Fragment } from 'react'
-import capture from '../../assets/chineke.jpg'
+import React, { Component, Fragment } from "react";
+import { HiOutlineShare } from "react-icons/hi";
+import { IconContext } from "react-icons";
 
-// import {  } from '@fluentui/react'
+import { IoMdImages } from "react-icons/io";
+import {trimWorlds} from '../../server/conast&func'
 
-import { HiOutlineShare } from 'react-icons/hi'
-import { IconContext} from 'react-icons'
+import {
+    BrowserRouter as Router,
+    Link,
+} from 'react-router-dom'
 
-import {IoMdImages} from 'react-icons/io'
+export default class Article extends Component<any> {
+  state = {};
 
-export default class Article extends Component {
+  render() {
+    return (
+      <Fragment>
+           
+                 <div className="articlebox">
+          <div className="imgBox">
+            <div>
+              <img
+                src={this.props.data.images}
+                width="100%"
+                alt=""
+                style={{objectFit: "cover", height: "100%"}}
+              />
+            </div>
+            <IconContext.Provider
+              value={{ color: "gold", className: "article_icon" }}
+            >
+              <IoMdImages />
+            </IconContext.Provider>
+          </div>
 
-    state = {
-
-    }
-
-
-    render() {
-
-        return (
-            <Fragment>
-
-                <div className="articlebox">
-                    <div className="imgBox">
-                        <div>
-                        <img src={capture} height="300px" width="200px" alt=""/>
-                        </div>
-                        <IconContext.Provider value={{ color: "gold", className: "article_icon" }}>
-                            <IoMdImages/>
-                        </IconContext.Provider>
-                    </div>
-
-                    <div className="article_info">
-
-                        <p className="head">first article to ever be published nowfirst article to ever be published now </p>
-                        
-                        <IconContext.Provider value={{ color: "gold" , className:"leftFloat"}}>
-                            <HiOutlineShare/>
-                        </IconContext.Provider>
-                    </div>
-                </div>
-            </Fragment>
-        )
-    }
+          <div className="article_info">
+          <Link to={'content/articles/' + this.props.data.id}>
+            <p className="head"> {trimWorlds(this.props.data.head)}</p>
+           </Link>
+            <IconContext.Provider
+              value={{ color: "gold", className: "leftFloat" }}
+            >
+              <HiOutlineShare />
+            </IconContext.Provider>
+          </div>
+        </div>
+    
+      </Fragment>
+    );
+  }
 }

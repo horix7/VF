@@ -1,7 +1,6 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import { initializeIcons } from '@uifabric/icons';
 import './App.css';
-import Admin from './containers/adminPage'
 import { SignUpForm} from './components/forms/signUpForm' 
 import {  loadTheme } from "@fluentui/react"
 import StoreCheckout from './components/checkout/Storecheckout'
@@ -9,6 +8,18 @@ import LevelUpCheckOut from './components/checkout/premiumCheckout'
 import Store from './containers/store'
 import HomePage from './containers/homePage'
 import AdminDash from './containers/adminPage';
+import ProdductPage from './containers/product'
+import ArticlePage from './containers/article'
+import Video from './containers/videoArea'
+import Content from './containers/contentVideoz'
+import Footer from './components/navigation/footer'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+
+
 
  loadTheme({
     palette: {
@@ -42,7 +53,48 @@ initializeIcons();
 function App() {
   return (
     <div className="App">
-        <AdminDash/>
+
+        <Switch>
+
+        <Route exact path="/admin"> 
+              <AdminDash/>
+          </Route>
+
+          <Route exact path="/auth"> 
+              <SignUpForm/>
+          </Route>
+
+          <Route path="/checkout/:id" render={(props: any) => <StoreCheckout {...props}/>}/> 
+              
+          <Route exact path="/content"> 
+              <Content/>
+              <Footer />
+
+          </Route>
+
+          <Route path="/content/articles/:id" render={(props: any) => (  <Fragment> <ArticlePage {...props}/>  <Footer /></Fragment>)} /> 
+             
+
+          <Route path="/content/video/:id" render={(props: any) => <Fragment> <Video {...props}/>  <Footer /> </Fragment>} /> 
+
+          <Route  path="/levelup/:id" render={(props: any) => <LevelUpCheckOut {...props}/>} /> 
+              
+          <Route  exact path="/store"> 
+              <Store/>
+              <Footer />
+
+          </Route>
+
+          <Route path="/store/product/:id" render={(props: any) => (<Fragment>  <ProdductPage {...props}/>  <Footer /></Fragment> )} /> 
+             
+             
+          <Route path="/" exact> 
+              <HomePage/>
+              <Footer />
+
+          </Route>
+         
+        </Switch>
 
     </div>
   );

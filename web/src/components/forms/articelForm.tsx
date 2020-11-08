@@ -40,6 +40,7 @@ export  default function  ArticleForm  (props: any) {
     // const userData:  =[ ]
 
     const publishArticle = async( ) => {
+
         setlodading(true)
 
             const article = {
@@ -51,6 +52,7 @@ export  default function  ArticleForm  (props: any) {
                 made_by: "admin"
             }
 
+            console.log(article)
             if (Object.values(article).some((elem : any ) => elem === null || elem === undefined || elem === "")) {
                 alert("Missing Some content ")
                 setTimeout(() => {

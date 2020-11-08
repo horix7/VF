@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Dialog, DialogType, DialogFooter } from 'office-ui-fabric-react/lib/Dialog';
-import {  DefaultButton } from 'office-ui-fabric-react/lib/Button';
+import {  DefaultButton  } from 'office-ui-fabric-react/lib/Button';
 import { Icon } from "@fluentui/react/lib/Icon"
+import {TextField} from "@fluentui/react"
 import { ContextualMenu } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { useBoolean } from '@uifabric/react-hooks';
 import UploadFunc from '../../server/upload'
@@ -51,6 +52,11 @@ export const DialogweUploadByBtn = (props: any ) => {
         >
       
         <DialogFooter>
+          <div className="articleWriterC">
+
+          </div>
+          <TextField placeholder="Image Url " onChange={(event: any) => setCoverPhotoN(event.target.value)}/>
+
           {/* <PrimaryButton onClick={toggleHideDialog} text="Upload" /> */}
           <UploadFunc onUploadScuess={(coverPhot: any) => setCoverPhotoN(coverPhot)} />
           {/* <DefaultButton onClick={toggleHideDialog} text="Don't send" /> */}
@@ -95,6 +101,7 @@ export const DialogweUploadByIcn = (props: any ) => {
         >
       
         <DialogFooter>
+          <TextField placeholder="Image Url " onChange={(event: any) => setCoverPhoto(event.target.value)}/>
           {/* <PrimaryButton onClick={toggleHideDialog} text="Upload" /> */}
           <UploadFunc onUploadScuess={(coverPhot: any) => setCoverPhotoN(coverPhot)}  />
           {/* <DefaultButton onClick={toggleHideDialog} text="Don't send" /> */}

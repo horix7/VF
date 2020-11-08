@@ -3,14 +3,46 @@ import Homenav from '../components/navigation/home_nav'
 import homeImg from '../assets/chineke.jpg'
 import appleAppImg from '../assets/apple.png'
 import googleAppImg from '../assets/google.png'
+import { Icon } from '@fluentui/react/lib/Icon';
+import BackendCalls from '../server/backendCalls'
+import { ProductDsiplayer, ArticleSlider } from '../components/UI/displayProAndContentz'
+import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
 
+
+
+const backend = new BackendCalls()
 export default class Home extends Component {
     state = {
+        products: [],
+        articles: [],
+        loading: true
+    }
+
+
+    fetchDataFromNet = async() => {
+
+        const productData = await backend.GetProducts()
+
+        const articleData = await backend.GetArticles(false)
+
+        this.setState({
+            products: productData.data.products ,
+            articles: articleData.data.article,
+            loading: false 
+        })
 
     }
 
 
+    componentDidMount () {
+        this.fetchDataFromNet()
+
+    }
+
+
+
     render() {
+
         return (
             <Fragment>
                 <Homenav />
@@ -36,7 +68,19 @@ export default class Home extends Component {
 
 
                     <div className="recentContent">
+                        <div className="moreBar">
+                            <div className="starter">
+                                <Icon iconName="ShopServer" />
+                               <p> Our Products </p>
+                            </div>
+                            <div className="ender">
+                               <p> View All </p>
+                            <Icon iconName="IncreaseIndentArrow" />
+                            </div>
+                        </div>
 
+                      {this.state.articles.length > 1 ? <ArticleSlider articles={this.state.articles} /> :  <ProgressIndicator />} 
+                   
                     </div>
 
                     <div className="podcatsContent">
@@ -44,7 +88,7 @@ export default class Home extends Component {
                     </div>
 
                     <div className="recentProducts">
-
+                      {this.state.products.length > 1 ? <ProductDsiplayer products={this.state.products} /> : <ProgressIndicator />} 
                     </div>
 
                     <div className="level_up">
@@ -76,8 +120,8 @@ export default class Home extends Component {
 
                     </div>
 
-                    {/* <footer></footer> */}
                 </div>
+
 
             </Fragment>
         )

@@ -8,7 +8,12 @@ import { IconContext} from 'react-icons'
 import { AiOutlineYoutube } from 'react-icons/ai'
 import { AiOutlineClockCircle } from 'react-icons/ai'
 
-export default class Video extends Component {
+import {
+    BrowserRouter as Router,
+    Link,
+} from 'react-router-dom'
+
+export default class Video extends Component<any> {
 
     state = {
 
@@ -19,7 +24,8 @@ export default class Video extends Component {
 
         return (
             <Fragment>
-
+               
+                    
                 <div className="video_box">
                     <div className="vide_img_box">
                         <IconContext.Provider value={{ color: "gold", className: "video_icon" }}>
@@ -27,11 +33,14 @@ export default class Video extends Component {
                         </IconContext.Provider>
 
                         <div>
-                        <img src={capture} height="210px" width="300px" alt=""/>
+                        <img src={capture} width="100%" className="imageCoverV" alt=""/>
+                        <Link to={'content/video/' + this.props.data.id}>
+                            
                         <div className="transHead">
                         <p className="head">first article to ever be published nowfirst article to ever be published now </p>
 
                         </div>
+                        </Link>
                         </div>
 
                        
@@ -55,6 +64,7 @@ export default class Video extends Component {
                 </div>
 
                
+                   
             </Fragment>
         )
     }

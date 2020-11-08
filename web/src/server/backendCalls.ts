@@ -15,7 +15,7 @@ export default class Request {
       else route = "/api"  + "/fremium" + route
 
       const ArticlePost = await  axios({
-         url: "http://localhost:3400" + route,
+         url: "http://localhost:3000" + route,
          method: "post",
          data: data,
          headers: {
@@ -41,7 +41,7 @@ export default class Request {
          else route = "/api" + route
   
          const VideoPost = await  axios({
-            url: "http://localhost:3400" + route,
+            url: "http://localhost:3000" + route,
             method: "post",
             data: data,
             headers: {
@@ -66,7 +66,7 @@ export default class Request {
 
   
          const ArticlePost = await  axios({
-            url: "http://localhost:3400" + route,
+            url: "http://localhost:3000" + route,
             method: "put",
             data: data,
             headers: {
@@ -90,7 +90,7 @@ export default class Request {
          else route = "/api" + route
   
          const VideoPost = await  axios({
-            url: "http://localhost:3400" + route,
+            url: "http://localhost:3000" + route,
             method: "put",
             data: data,
             headers: {
@@ -115,7 +115,7 @@ export default class Request {
       else route = "/api"  + "/fremium" + route
 
       const ArticlePost = await  axios({
-            url: "http://localhost:3400" + route,
+            url: "http://localhost:3000" + route,
             method: "get",
             headers: {
                "Content-Type": "application/json",
@@ -139,7 +139,7 @@ export default class Request {
        else route = "/api"  + "/fremium" + route
  
        const ArticlePost =   await  axios({
-            url: "http://localhost:3400" + route,
+            url: "http://localhost:3000" + route + id,
             method: "get",
             headers: {
                "Content-Type": "application/json",
@@ -163,7 +163,7 @@ export default class Request {
          else route = "/api" + route
   
          const VideoPost = await  axios({
-            url: "http://localhost:3400" + route,
+            url: "http://localhost:3000" + route,
             method: "get",
             headers: {
                "Content-Type": "application/json",
@@ -187,7 +187,7 @@ export default class Request {
           else route = "/api" + route
    
           const VideoPost =   await  axios({
-            url: "http://localhost:3400" + route,
+            url: "http://localhost:3000" + route + id,
             method: "get",
             headers: {
                "Content-Type": "application/json",
@@ -208,7 +208,7 @@ export default class Request {
      CreateProduct = async (data: any): Promise<any> => {
 
        try {
-         const ProductPost =  axios.post("http://localhost:3400/api/products/add", data)
+         const ProductPost =  axios.post("http://localhost:3000/api/products/add", data)
  
          return (await ProductPost)
        } catch (error) {
@@ -220,7 +220,7 @@ export default class Request {
      UpdateProduct = async (data: any): Promise<any> => {
 
    try {
-      const ProductPost =  axios.put("http://localhost:3400/api/products/update", data)
+      const ProductPost =  axios.put("http://localhost:3000/api/products/update", data)
  
       return (await ProductPost)
    } catch (error) {
@@ -233,7 +233,7 @@ export default class Request {
      UpdateUser = async (data: any): Promise<any> => {
 
       try {
-         const userPost = axios.put("http://localhost:3400/api/users/update", data)
+         const userPost = axios.put("http://localhost:3000/api/users/update", data)
  
          return (await userPost)
       } catch (error) {
@@ -245,7 +245,7 @@ export default class Request {
   SignUp = async (data: any): Promise<any> => {
 
         try {
-         const userData =  axios.post( "http://localhost:3400/api/auth/signup", data)
+         const userData =  axios.post( "http://localhost:3000/api/auth/signup", data)
  
          return (await userData)
   
@@ -259,7 +259,7 @@ export default class Request {
 
        try {
          const userData = await  axios({
-            url: "http://localhost:3400" + "/api/auth/login",
+            url: "http://localhost:3000" + "/api/auth/login",
             method: "post",
             data: data,
             headers: {
@@ -279,7 +279,7 @@ export default class Request {
 
         try {
          const AllUsers =   await  axios({
-            url: "http://localhost:3400" + "/api/users/all",
+            url: "http://localhost:3000" + "/api/users/all",
             method: "get",
             headers: {
                "Content-Type": "application/json",
@@ -297,7 +297,7 @@ export default class Request {
      Logout = async (): Promise<any> => {
 try {
    
-   const logout =  axios.get("http://localhost:3400/api/auth/logout")
+   const logout =  axios.get("http://localhost:3000/api/auth/logout")
  
    return (await logout)
 } catch (error) {
@@ -309,7 +309,7 @@ try {
     GetProducts = async (): Promise<any> => {
          try {
             
-        const ProductPost =  axios.get("http://localhost:3400/api/products/all")
+        const ProductPost =  axios.get("http://localhost:3000/api/products/all")
  
         return (await ProductPost)
  
@@ -321,7 +321,7 @@ try {
      GetOneProducts = async (id: string ): Promise<any> => {
       try {
          
-     const ProductPost =  axios.get("http://localhost:3400/api/products/one/" + id)
+     const ProductPost =  axios.get("http://localhost:3000/api/products/one/" + id)
 
      return (await ProductPost)
 
@@ -333,7 +333,7 @@ try {
      deleteUsers = async (id: string): Promise<any> => {
 
        try {
-         const deleted =  axios.delete("http://localhost:3400/api/users/delete/" + id)
+         const deleted =  axios.delete("http://localhost:3000/api/users/delete/" + id)
  
          return (await deleted)
        } catch (error) {
@@ -345,7 +345,7 @@ try {
      deleteProduct = async (id: string): Promise<any> => {
 
         try {
-         const deleted =  axios.delete("http://localhost:3400/api/products/delete/" + id)
+         const deleted =  axios.delete("http://localhost:3000/api/products/delete/" + id)
  
          return  (await deleted)
   
@@ -361,7 +361,7 @@ try {
          if(premium) route = "/api" + "/premium" + route
          else route = "/api" + "/fremium" + route
  
-         const deleted =  axios.delete("http://localhost:3400" + route + id)
+         const deleted =  axios.delete("http://localhost:3000" + route + id)
   
          return  (await deleted)
   
@@ -377,7 +377,7 @@ try {
       if(premium) route = "/api" + "/premium" + route
       else route = "/api" + route
       
-      const deleted = axios.delete("http://localhost:3400" + route + id)
+      const deleted = axios.delete("http://localhost:3000" + route + id)
 
       return  (await deleted)
      } catch (error) {

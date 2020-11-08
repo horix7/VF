@@ -100,7 +100,7 @@ export default class StoreAdmin extends Component<any> {
             {this.state.doneLoading ? null : <BackDrop /> }
 
             {this.state.openEditor ?
-             <ProductForm  goBack={this.openEditor} content={this.state.content} categories={this.state.data.map((elem: any) => {return  {key: elem.category, text: elem.category}})}  /> : <>
+             <ProductForm  goBack={this.openEditor} content={this.state.content} categories={[...new Set(this.state.data.map((elem: any) => elem.category))].map((elem) =>  {return  {key: elem, text: elem}})}  /> : <>
             <div className="towEl">
                 <div className="actionBtn">
                 <div></div>

@@ -35,7 +35,7 @@ export const UploadMultipleFile: FunctionComponent<any> = (props: any ) => {
 
    
   }
-const [images , setMoreImages ] = useState<any[]>([<Uploader  onUploadScuess={(coverPhot: any) => setCoverPhotos(coverPhot)}  />])
+const [images , setMoreImages ] = useState<any[]>([<Uploader  onUploadScuess={(coverPhot: any) => setCoverPhotos(coverPhot)} />])
   const modalProps = React.useMemo(
     () => ({
       isBlocking: true,
@@ -47,8 +47,10 @@ const [images , setMoreImages ] = useState<any[]>([<Uploader  onUploadScuess={(c
 
   const increaseImageCorrector = () => {
 
-      props.setImages(JSON.parse(localStorage.uploadMany))
+    const imgArray = JSON.parse(localStorage.uploadMany)
+      props.setImages(imgArray)
 
+      console.log(imgArray)
       localStorage.setItem("uploadMany", "[]")
   }
 

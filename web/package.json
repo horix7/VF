@@ -20,6 +20,7 @@
     "@types/react-dom": "^16.9.8",
     "@types/react-draft-wysiwyg": "^1.13.0",
     "@types/react-router-dom": "^5.1.6",
+    "@types/react-slick": "^0.23.4",
     "@types/react-vis": "^1.11.5",
     "@types/recharts": "^1.8.16",
     "axios": "^0.21.0",
@@ -29,6 +30,7 @@
     "feather-icons": "^4.28.0",
     "firebase": "^7.24.0",
     "http-proxy-middleware": "^1.0.6",
+    "mdbreact": "^4.27.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-draft-wysiwyg": "^1.14.5",
@@ -37,8 +39,10 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.0",
+    "react-slick": "^0.27.12",
     "react-vis": "^1.11.7",
     "recharts": "^1.8.5",
+    "slick-carousel": "^1.8.1",
     "typescript": "^3.7.5"
   },
   "scripts": {
