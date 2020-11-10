@@ -10,6 +10,7 @@ import {PrimaryButton} from "@fluentui/react"
 import {PivotIconCountExample} from '../components/UI/moreProducts'
 import BackendCalls from '../server/backendCalls'
 import BackDrop from '../components/UI/backDrop'
+import { Spinner, SpinnerSize } from 'office-ui-fabric-react/lib/Spinner';
 
 const backend = new BackendCalls()
 
@@ -18,11 +19,15 @@ export default class ProductPage extends Component<any> {
         amount: 1,
         product_info: {
             head: null,
+            id: null,
             images: [],
             price: null ,
             description: null,
             review_id: null
-        }
+        },
+
+        loadingBtn: false,
+        added: false 
 
     }
 
@@ -44,14 +49,46 @@ export default class ProductPage extends Component<any> {
            }
     }
 
+    addToCart = () => {
+
+        this.setState({
+            loadingBtn: true
+        })  
+        
+        interface MainArr {
+            [key: string]: any
+          }
+          
+    
+
+        let { product_info } = this.state
+        
+        let newProduct: MainArr ={...product_info}
+
+        newProduct["amount"] = this.state.amount
+        const newCart = JSON.parse(localStorage.cart)
+        newCart.push(newProduct)
+        localStorage.setItem("cart", JSON.stringify(newCart))
+
+        
+        setTimeout(() => {
+            this.setState({
+                loadingBtn: false,
+                added: true
+            })  
+
+        }, 2000);
+
+
+    }
 
     getProductData = async() => {
 
-        let  product = await backend.GetOneProducts(this.props.match.params.id)
-        product = product.data.products.data
+        let  newproduct = await backend.GetOneProducts(this.props.match.params.id)
+        const product = newproduct.data.products.data
 
         this.setState({
-            product_info: product
+            product_info: {...product, id: newproduct.data.products.id }
         })
 
     }
@@ -112,10 +149,10 @@ export default class ProductPage extends Component<any> {
                                      $<p>{this.state.product_info.price}</p>
                                </div>
 
-                               <PrimaryButton> 
-                                   <Icon iconName="ShoppingCart" />
-                                   &nbsp; Buy Now 
-                               </PrimaryButton>
+                               {this.state.loadingBtn ? <Spinner style={{color: "black"}} color="black" size={SpinnerSize.medium} />  :  <PrimaryButton onClick={this.addToCart}> 
+                                    <Icon iconName="ShoppingCart" />
+                                   &nbsp; { JSON.parse(localStorage.cart).some((elem: any) => this.state.product_info.id === elem.id) ? " Add More" : " Add To Cart"}
+                            </PrimaryButton> }
                                </div>
                         </div>
                     </div>
@@ -123,7 +160,7 @@ export default class ProductPage extends Component<any> {
                     <div className="more">
                             <PivotIconCountExample info={{
                                 description: this.state.product_info.description,
-                                review: this.state.product_info.review_id
+                                review_id: this.state.product_info.review_id
                             }} />
                     </div>
                 </div>

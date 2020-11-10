@@ -26,7 +26,7 @@ export default class Request {
 
 
 
-      return (await ArticlePost)
+      return ArticlePost
      } catch (error) {
          return "error"
      }
@@ -50,7 +50,7 @@ export default class Request {
             }
          })
   
-         return (await VideoPost)
+         return VideoPost
        } catch (error) {
             return "error" 
        }
@@ -75,7 +75,7 @@ export default class Request {
             }
          })
   
-         return (await ArticlePost)
+         return ArticlePost
   
         } catch (error) {
            console.log(error)
@@ -99,7 +99,7 @@ export default class Request {
             }
          })
   
-         return (await VideoPost)
+         return VideoPost
         } catch (error) {
            return "error" 
         }
@@ -123,7 +123,7 @@ export default class Request {
             }
          })
 
-      return (await ArticlePost)
+      return ArticlePost
      } catch (error) {
          return "error"
      }
@@ -147,7 +147,7 @@ export default class Request {
             }
          })
  
-       return (await ArticlePost)
+       return ArticlePost
       } catch (error) {
           return "error"
       }
@@ -171,7 +171,7 @@ export default class Request {
             }
          })
   
-         return (await VideoPost)
+         return VideoPost
         } catch (error) {
            return "error" 
         }
@@ -186,7 +186,7 @@ export default class Request {
           if(premium) route = "/api" + "/premium" + route
           else route = "/api" + route
    
-          const VideoPost =   await  axios({
+          const VideoPost =  axios({
             url: "http://localhost:3000" + route + id,
             method: "get",
             headers: {
@@ -268,7 +268,7 @@ export default class Request {
             }
          })
           
-         return (await userData)
+         return userData
        } catch (error) {
           return "error"
        }
@@ -287,7 +287,7 @@ export default class Request {
             }
          })
           
-         return (await AllUsers)
+         return AllUsers
         } catch (error) {
            return "error" 
         }
@@ -317,6 +317,37 @@ try {
                return "error"           
          }
      }
+
+     getReviews = async (id: string): Promise<any> => {
+      try {
+         
+     const ProductPost =  axios.get("http://localhost:3000/api/reviews/all/" + id)
+
+     return (await ProductPost)
+
+      } catch (error) {
+            return "error"           
+      }
+  }
+
+  
+  addReview = async (id: string, review: any): Promise<any> => {
+   try {
+
+  const ProductPost =  await axios.post("http://localhost:3000/api/reviews/add/" + id, {comment: review} , {
+   headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+   }
+  })
+
+
+  return (ProductPost)
+
+   } catch (error) {
+         return "error"           
+   }
+}
 
      GetOneProducts = async (id: string ): Promise<any> => {
       try {

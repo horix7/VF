@@ -1,6 +1,9 @@
 import { IArticle } from '../../entities/article';
 import  db  from '../db/db.connect';
 import { IIArticle } from './article';
+import CommentsReviews from '../reviewsAndComments/comments'
+
+const comments = new CommentsReviews()
 
 const articleCollection  = db.collection('freeContent')
 
@@ -47,8 +50,9 @@ class Articles implements IIArticle {
 
     public async add(article: IArticle): Promise<void> {
         try {
-            
             await articleCollection.add(article)
+            
+            await comments.add({}, article.published_on)
 
             return;
         } catch (err) {

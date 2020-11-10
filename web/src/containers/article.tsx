@@ -19,10 +19,10 @@ export default class Article extends Component<any> {
 
     getArticleData = async () => {
         let article = await backend.GetOneArticle(false , this.props.match.params.id)
-        article = article.data.article.data
+        let newarticle = article.data.article.data
 
         this.setState({
-            article_info: {...article}
+            article_info: {...newarticle, id: article.data.article.id}
         })
 
     }
@@ -61,7 +61,7 @@ export default class Article extends Component<any> {
                         </div>
 
                         <div className="recentContent">
-                           <PivotIconCountExample />
+                           <PivotIconCountExample info={{review_id: this.state.article_info.review_id || this.state.article_info.id }} />
                         </div>
                     </div>
                 </div>

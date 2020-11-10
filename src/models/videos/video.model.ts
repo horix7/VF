@@ -1,6 +1,9 @@
 import { IVideo } from '../../entities/video';
 import  db  from '../db/db.connect';
 import { IIVideo } from './videos';
+import CommentsReviews from '../reviewsAndComments/comments'
+
+const comments = new CommentsReviews()
 
 const VideoCollection  = db.collection('Videos')
 
@@ -49,6 +52,7 @@ class IVideos implements IIVideo {
         try {
             
             await VideoCollection.add(Video)
+            await comments.add({}, Video.published_on)
 
             return;
         } catch (err) {

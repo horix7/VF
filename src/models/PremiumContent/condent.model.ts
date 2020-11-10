@@ -1,7 +1,9 @@
 import { IArticle } from '../../entities/article';
 import  db  from '../db/db.connect';
 import { IIArticle } from './article';
+import CommentsReviews from '../reviewsAndComments/comments'
 
+const comments = new CommentsReviews()
 const articleCollection  = db.collection('content')
 
 class Articles implements IIArticle {
@@ -49,6 +51,7 @@ class Articles implements IIArticle {
         try {
             
             await articleCollection.add(article)
+            await comments.add({}, article.published_on)
 
             return;
         } catch (err) {

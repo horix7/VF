@@ -43,7 +43,7 @@ export class PivotIconCountExample extends React.Component<any>{
         </PivotItem>
        
         <PivotItem headerText="Reviews" itemIcon="Starburst">
-          <ActivityItemBasic review_id={this.props.info.review} />
+          <ActivityItemBasic review_id={this.props.info.review_id} />
         </PivotItem>
         <PivotItem headerText="Related Products" itemIcon="Product" itemCount={this.state.products.length}>
           { this.state.products.length > 1  ? <ProductDsiplayer products={this.state.products} /> : <ProgressIndicator />}

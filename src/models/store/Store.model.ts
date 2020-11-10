@@ -1,6 +1,9 @@
 import { IProduct } from '../../entities/Product';
 import  db  from '../db/db.connect';
 import { IProdui } from './store';
+import CommentsReviews from '../reviewsAndComments/comments'
+
+const comments = new CommentsReviews()
 
 const productCollection  = db.collection('store')
 
@@ -49,6 +52,7 @@ class Produi implements IProdui {
         try {
             
             await productCollection.add(product)
+            await comments.add({}, product.published_on)
 
             return;
         } catch (err) {

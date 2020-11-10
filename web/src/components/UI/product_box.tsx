@@ -1,23 +1,64 @@
 import React, { Component, Fragment } from "react";
 import { IconContext } from "react-icons";
 import { FiShoppingCart } from "react-icons/fi";
+import { MdAddShoppingCart } from "react-icons/md";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import {trimWorlds} from "../../server/conast&func"
-
-import {
-    BrowserRouter as Router,
-    Link,
-} from 'react-router-dom'
-
+import { Spinner, SpinnerSize } from 'office-ui-fabric-react/lib/Spinner';
 
 export default class Video extends Component<any> {
-  state = {};
+  state = {
+    loadingBtn : false,
+    clicked: false,
+    secondLoading: false
+  };
+
+
+  addToCart = () => {
+   
+    this.setState({
+      clicked: true,
+    })
+
+    const newCart = JSON.parse(localStorage.cart)
+    newCart.push(this.props.data)
+    localStorage.setItem("cart", JSON.stringify(newCart))
+    
+    setTimeout(() => {
+      this.setState({
+        loadingBtn: true
+      })
+    }, 2000);
+
+     
+  }
+
+  addToCart2 = () => {
+   
+    this.setState({
+      secondLoading: true,
+    })
+
+    const newCart = JSON.parse(localStorage.cart)
+    newCart.push(this.props.data)
+    localStorage.setItem("cart", JSON.stringify(newCart))
+    
+    setTimeout(() => {
+      this.setState({
+        secondLoading: false
+      })
+    }, 2000);
+
+     
+  }
+  
 
   render() {
+
     return (
       <Fragment>
               
-              <div className="product_box">
+          <div className="product_box">
           <div className="productImg">
             <img
               src={this.props.data.images[0]}
@@ -26,18 +67,18 @@ export default class Video extends Component<any> {
               style={{objectFit: "cover"}}
             />
           </div>
-          <Link to={"store/product/" + this.props.data.id}>
+          <a  href={ window.location.protocol + "//" + window.location.host + "/store/product/" + this.props.data.id}>
           <div className="productInfo">
             <p> {trimWorlds(this.props.data.head)}</p>
           </div>
 
-          </Link>
+          </a>
           <div className="productAction">
             <div className="add_cart">
               <IconContext.Provider
                 value={{ color: "gold", className: "card_cart" }}
               >
-                <FiShoppingCart />
+                { !this.state.loadingBtn ? this.state.clicked ? <Spinner style={{marginTop: "10px" , textAlign: "start"}} size={SpinnerSize.small} />  : <FiShoppingCart onClick={this.addToCart} /> : this.state.secondLoading ?  <Spinner style={{marginTop: "10px" , textAlign: "start"}} size={SpinnerSize.small} /> : <MdAddShoppingCart onClick={this.addToCart2} />}
               </IconContext.Provider>
             </div>
             <div className="price">

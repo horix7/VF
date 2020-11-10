@@ -14,11 +14,9 @@ import Video from './containers/videoArea'
 import Content from './containers/contentVideoz'
 import Footer from './components/navigation/footer'
 import {
-  BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
-
 
 
  loadTheme({
@@ -51,6 +49,9 @@ import {
 initializeIcons();
 
 function App() {
+  if(!localStorage.cart) {
+    localStorage.setItem("cart", "[]")
+  }
   return (
     <div className="App">
 

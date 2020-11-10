@@ -1,5 +1,4 @@
 import React, { Fragment, Component } from "react";
-import video from "../assets/videoTrial.mp4";
 import HomeNav from "../components/navigation/home_nav";
 import imgTrial from "../assets/shoes.jpg";
 import { Icon } from "@fluentui/react";
@@ -54,7 +53,7 @@ export default class Video extends Component {
 
         <div className="mainVideo">
           <div className="video">
-            <video src={video} controls width="800px"></video>
+            <video src={"video"} controls width="800px"></video>
             <label>
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat
               nam officiis similique hic, quaerat expedita repudiandae ipsum

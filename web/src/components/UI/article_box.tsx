@@ -6,7 +6,6 @@ import { IoMdImages } from "react-icons/io";
 import {trimWorlds} from '../../server/conast&func'
 
 import {
-    BrowserRouter as Router,
     Link,
 } from 'react-router-dom'
 
@@ -35,9 +34,9 @@ export default class Article extends Component<any> {
           </div>
 
           <div className="article_info">
-          <Link to={'content/articles/' + this.props.data.id}>
+          <a href={   window.location.protocol  + "//"  + window.location.host  + '/content/articles/' + this.props.data.id}>
             <p className="head"> {trimWorlds(this.props.data.head)}</p>
-           </Link>
+           </a>
             <IconContext.Provider
               value={{ color: "gold", className: "leftFloat" }}
             >

@@ -8,11 +8,6 @@ import { IconContext} from 'react-icons'
 import { AiOutlineYoutube } from 'react-icons/ai'
 import { AiOutlineClockCircle } from 'react-icons/ai'
 
-import {
-    BrowserRouter as Router,
-    Link,
-} from 'react-router-dom'
-
 export default class Video extends Component<any> {
 
     state = {
@@ -34,13 +29,13 @@ export default class Video extends Component<any> {
 
                         <div>
                         <img src={capture} width="100%" className="imageCoverV" alt=""/>
-                        <Link to={'content/video/' + this.props.data.id}>
+                        <a href={   window.location.protocol  + "//" + window.location.host + '/content/video/' + this.props.data.id}>
                             
                         <div className="transHead">
                         <p className="head">first article to ever be published nowfirst article to ever be published now </p>
 
                         </div>
-                        </Link>
+                        </a>
                         </div>
 
                        

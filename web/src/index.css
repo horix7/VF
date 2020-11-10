@@ -179,6 +179,19 @@ video {
   
 }
 
+.total {
+  padding: 10px;
+  text-transform: uppercase;
+  font-size: large;
+}
+
+.total span {
+  text-align: end;
+  color: gold;
+  margin-left: 20px;
+}
+
+
 .morevideos div {
   width: 98.5%;
 }
@@ -315,6 +328,22 @@ video {
   color: gold;
 }
 
+.contentHolder {
+  background-color: black;
+}
+
+.gridz {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.gridz div {
+  flex: 300px;
+}
+
+.multiper {
+  font-size: x-small;
+}
 a {
   text-decoration: none;
 }
@@ -1179,6 +1208,12 @@ code {
   text-align: start;
 }
 
+.commentHolder2 {
+  text-align: start;
+  width: 90%;
+  margin-left: 8%;
+}
+
 
 .more {
   background-color: black;
@@ -1320,6 +1355,17 @@ code {
 
 }
 
+.cartHolder span {
+  position: absolute;
+  background-color: gold;
+  color: black;
+  padding: 3px;
+  margin: 12px 0px 0px -10px;
+  font-size: xx-small;
+  border-radius: 30px;
+
+} 
+
 .naav:hover , .naav1:hover , .naav2:hover {
  color: gold;
   
@@ -1327,6 +1373,11 @@ code {
 
 .naav {
   text-align: start;
+}
+
+.navIconz {
+  font-size: large;
+  padding: 5px;
 }
 
 .naav1 {
@@ -1342,7 +1393,7 @@ code {
   padding: 20px 0px 10px 20px;
   background-color: black;
   border-bottom: 1px solid rgba(255, 255, 255, 0.459);
-  grid-template-columns: 10% 15% 10% 30% 15% 20%;
+  grid-template-columns: 10% 15% 10% 30% 5% 10% 20%;
   text-align: center;
 }
 
@@ -1354,10 +1405,20 @@ code {
   
 }
 
+.twoIconx {
+ display: grid;
+ grid-template-columns: 50% 50% ;
+ text-align: start;
+}
 
 .categoryHolder {
   width: max-content;
   
+}
+
+.searBar {
+  width: 90%;
+  margin-right: 10%;
 }
 
 .mainPage {
@@ -1412,7 +1473,7 @@ code {
   grid-template-columns: 80% 20%;
 }
 
-.desktopMobileH .naav2 {
+.desktopMobileH .naav {
   padding: 5px;
   text-transform: capitalize;
 }

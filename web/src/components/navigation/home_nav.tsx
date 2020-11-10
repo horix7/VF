@@ -2,11 +2,14 @@ import React, {Component, Fragment } from 'react'
 import logo from '../../assets/LOGO.png'
 import { Icon } from '@fluentui/react/lib/Icon';
 import {NavLink } from 'react-router-dom'
+import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
+import { CartHolder } from '../UI/cart'
 
 export default class HomeNav extends Component {
 
     state = {
         mobile_menu: false,
+        cart: false
     }
  
     showMobileMenu = () =>  {
@@ -18,10 +21,18 @@ export default class HomeNav extends Component {
 
     }
 
+    openCart = () => {
+        const {cart } = this.state
+        this.setState({
+            cart: !cart
+        })
+    }
+
     render() {
 
         return (
             <Fragment>
+                <CartHolder open={this.state.cart} closeCart={this.openCart}/>
                 <nav>
                     <div className="desktopNav">
                        <NavLink to={'/'}> <div className="naav"> Home </div> </NavLink>
@@ -34,14 +45,10 @@ export default class HomeNav extends Component {
                             <img src={logo} width="35%" alt=""/>
                         </div></NavLink>
                         
-                        <div className="naav2"> updagrade </div>
-                        <div className="naav2">
-                               <div className="search">
-                                    <div>
-                                        <input type="text" className="searchBar"/>
-                                    <Icon iconName="Search" style={{fontSize: "small", marginTop:"3px" , cursor:"pointer"}} /> 
-                                    </div>
-                               </div>
+                       <NavLink to='/auth'>  <div className="naav2"> <div className="twoIconx"> {localStorage.current_user ?  JSON.parse(localStorage.current_user).upgraded ? <Icon className="navIconz"style={{color: "gold" , fontWeight: "bolder"}} iconName="6PointStar"/> : <Icon className="navIconz" iconName="SignOut"/>  :  <Icon className="navIconz" iconName="Signin"/>}  </div> </div> </NavLink>
+                         <div className="naav" onClick={this.openCart}><div className="cartHolder"><Icon className="navIconz" iconName="ShoppingCart" /> <span> {JSON.parse(localStorage.cart).length}</span></div></div>
+                        <div className="naav2 searBar">
+                               <SearchBox placeholder="Search" onSearch={newValue => console.log('value is ' + newValue)} />
                         </div>
 
                         </div>
@@ -57,33 +64,24 @@ export default class HomeNav extends Component {
                         </div>
                        </NavLink>
 
-                       <NavLink to="/checkout">
-                       <div className="cartBox naav2">
-                            <div className="cartIcon">
-                                <Icon iconName="ShoppingCart" className="cartIIcon"/>
-                            </div>
+                       <div className="naav2" onClick={this.openCart}>
+                        <div className="cartHolder"><Icon className="navIconz" iconName="ShoppingCart" /> <span> {JSON.parse(localStorage.cart).length}</span></div>
                         </div>
-                       </NavLink>
                         </div>
 
                         {this.state.mobile_menu ? 
                         <div className="desktopMobileH">
-                        <div className="naav">
-                               <div className="search">
-                                    <div>
-                                        <input type="text" className="searchBar1"/>
-                                    <Icon iconName="Search" style={{fontSize: "small", marginTop:"3px" , cursor:"pointer" , textAlign: "center", color: "gold"}} /> 
-                                    </div>
-                               </div>
+                        <div className="naav searBar">
+                        <SearchBox placeholder="Search" onSearch={newValue => console.log('value is ' + newValue)} />
                              </div>
-                       <NavLink to="/"> <div className="naav2"> Home </div> </NavLink>
-                       <NavLink to="/content" >  <div className="naav2"> Content/Video </div> </NavLink>
-                        <NavLink to="/store"> <div className="naav2">
+                       <NavLink to="/"> <div className="naav"> Home </div> </NavLink>
+                       <NavLink to="/content" >  <div className="naav"> Content/Video </div> </NavLink>
+                        <NavLink to="/store"> <div className="naav">
                         <Icon iconName="Shop"  style={{ color: "gold"}}/>
                             Store 
                              </div></NavLink>
                         
-                        <div className="naav2"> Upgrade </div>
+                        <div className="naav"> Upgrade </div>
                        
 
                     </div>
