@@ -1,6 +1,6 @@
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
 import { PrimaryButton , MessageBar , MessageBarType  } from 'office-ui-fabric-react';
-import React, {  FormEvent, Fragment, useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import { DialogweUploadByIcn, DialogweUploadByBtn } from '../models/uploadModal'
 import { Dropdown, IDropdownOption,DropdownMenuItemType, } from 'office-ui-fabric-react/lib/Dropdown';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';

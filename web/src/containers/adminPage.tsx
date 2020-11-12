@@ -18,14 +18,11 @@ export default class AdminDash extends Component {
     }
 
     componentDidMount () {
-        Axios.get(`${localStorage.backendUrl}`, {
-            headers: {
-                "Access-Control-Allow-Origin": "*"
-            }
-        })
-        .then(results => {
-            console.log(results.data)
-        })
+
+        const body  =document.querySelector("body") as HTMLBodyElement
+        
+        body.style.backgroundColor = "white"
+       
     }
     setActive:Function = (elementId : string) => {
         const elemnt = document.getElementById(elementId)

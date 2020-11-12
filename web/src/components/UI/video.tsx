@@ -28,11 +28,11 @@ export default class Video extends Component<any> {
                         </IconContext.Provider>
 
                         <div>
-                        <img src={capture} width="100%" className="imageCoverV" alt=""/>
+                        <img src={this.props.data.images} width="100%" className="imageCoverV" alt=""/>
                         <a href={   window.location.protocol  + "//" + window.location.host + '/content/video/' + this.props.data.id}>
                             
                         <div className="transHead">
-                        <p className="head">first article to ever be published nowfirst article to ever be published now </p>
+                        <p className="head">{this.props.data.head} </p>
 
                         </div>
                         </a>

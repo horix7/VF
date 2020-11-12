@@ -3,10 +3,12 @@ import Homenav from '../components/navigation/home_nav'
 import homeImg from '../assets/chineke.jpg'
 import appleAppImg from '../assets/apple.png'
 import googleAppImg from '../assets/google.png'
-import { Icon } from '@fluentui/react/lib/Icon';
 import BackendCalls from '../server/backendCalls'
-import { ProductDsiplayer, ArticleSlider } from '../components/UI/displayProAndContentz'
+import { ProductDsiplayer, ArticleSlider, VideoPlayer } from '../components/UI/displayProAndContentz'
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
+import { Link } from "react-router-dom"
+import { FaStoreAlt, FaStream, FaArrowRight } from "react-icons/fa";
+import { DefaultButton } from "@fluentui/react"
 
 
 
@@ -15,6 +17,7 @@ export default class Home extends Component {
     state = {
         products: [],
         articles: [],
+        videos: [],
         loading: true
     }
 
@@ -24,10 +27,12 @@ export default class Home extends Component {
         const productData = await backend.GetProducts()
 
         const articleData = await backend.GetArticles(false)
+        const videoData = await backend.GetVideos(false)
 
         this.setState({
             products: productData.data.products ,
             articles: articleData.data.article,
+            videos: videoData.data.video,
             loading: false 
         })
 
@@ -58,7 +63,7 @@ export default class Home extends Component {
                     </div>
 
                     <div className="appBanner">
-                        <p>Our App available on </p>
+                        <span>Our App available on </span>
                         <div></div>
                        <div className="appLinks">
                        <img src={googleAppImg} width="150px"  alt=""/>
@@ -67,26 +72,59 @@ export default class Home extends Component {
                     </div>
 
 
-                    <div className="recentContent">
-                        <div className="moreBar">
-                            <div className="starter">
-                                <Icon iconName="ShopServer" />
-                               <p> Our Products </p>
+                    <div className="smallHeadrInfo">
+                            <div className="iconName">
+                                <FaStream color="gold" />  &nbsp;
+                                <span>Articles / Video</span>
                             </div>
-                            <div className="ender">
-                               <p> View All </p>
-                            <Icon iconName="IncreaseIndentArrow" />
-                            </div>
-                        </div>
 
+                           <Link to="/content" >
+                                <div className="viewMore">
+                                <span style={{color: "white"}}>more</span>   &nbsp;
+                                <FaArrowRight color="gold" className="moreIcon" />
+                                
+                            </div>
+                           </Link>
+                        
+                        </div>
+        
+                    <div>
                       {this.state.articles.length > 1 ? <ArticleSlider articles={this.state.articles} /> :  <ProgressIndicator />} 
+                      {this.state.videos.length > 1 ? <VideoPlayer videos={this.state.videos} /> :  <ProgressIndicator />} 
+                      
+                     
+                    </div>
+
                    
+                    <div className="adbbaneer">
+
+                        <div>
+                        <p>Upgrade To Our Premium Package </p>
+                        <DefaultButton text="level up" />
+                        </div>
+                    
                     </div>
 
                     <div className="podcatsContent">
 
                     </div>
 
+                    <div className="smallHeadrInfo">
+                            <div className="iconName">
+                                <FaStoreAlt color="gold" />  &nbsp;
+                                <span>Our Products</span>
+                            </div>
+
+                           <Link to="/store" >
+                                <div className="viewMore">
+                            <span style={{color: "white"}}>more</span>   &nbsp;
+                            <FaArrowRight color="gold" className="moreIcon" />
+                                
+                            </div>
+                           </Link>
+                        
+                        </div>
+                    
                     <div className="recentProducts">
                       {this.state.products.length > 1 ? <ProductDsiplayer products={this.state.products} /> : <ProgressIndicator />} 
                     </div>

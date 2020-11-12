@@ -1,69 +1,69 @@
 import React, { Fragment, Component } from "react";
 import HomeNav from "../components/navigation/home_nav";
-import imgTrial from "../assets/shoes.jpg";
-import { Icon } from "@fluentui/react";
-import VideoBox from "../components/UI/video"
-import Slider from 'react-slick'
 import '../../node_modules/slick-carousel/slick/slick.css'
 import '../../node_modules/slick-carousel/slick/slick-theme.css'
+import BackendCalls from '../server/backendCalls'
+import ReactPlayer from "react-player"
+import { PivotIconCountExample } from '../components/UI/moreArticle'
+import Backdrop from '../components/UI/backDrop'
+import { VideoPlayer } from '../components/UI/displayProAndContentz'
 
-export default class Video extends Component {
-  state = {};
+const backend = new BackendCalls()
+
+export default class Video extends Component<any> {
+  state: { [key: string] : any}= {
+    videoData: {},
+    videos: [],
+    loading: true,
+    
+  };
+
+  getContentData = async () => {
+    const video = await backend.GetOneVideo(false ,  this.props.match.params.id )
+    const allData = await backend.GetVideos(false)
+
+    this.setState({
+      videoData: {...video.data.video.data, id: video.data.video.id},
+      videos: allData.data.video,
+      loading: false
+    })
+
+
+  }
+
+  componentDidMount(){
+    this.getContentData()
+  }
+
 
   render() {
-    const settings = {
-        dots: false,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        initialSlide: 0,
-        responsive: [
-          {
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 1,
-              infinite: true,
-              dots: true
-            }
-          },
-          {
-            breakpoint: 600,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1,
-              initialSlide: 2
-            }
-          },
-          {
-            breakpoint: 480,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1
-            }
-          }
-        ]
-      };
 
+      const checkVideoType = (id: string) => {
+
+        let newId = id.split("")
+        newId.length = 38
+        const mnewid = newId.join('')
+
+        return mnewid === "https://firebasestorage.googleapis.com"
+      }
 
     return (
       <Fragment>
         <HomeNav />
-
+        {this.state.loading ?  <Backdrop />:
+        <>
+        
         <div className="mainVideo">
           <div className="video">
-            <video src={"video"} controls width="800px"></video>
-            <label>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat
-              nam officiis similique hic, quaerat expedita repudiandae ipsum
-              provident quis deserunt quam iste nesciunt, consectetur, doloribus
-              in commodi! Deleniti, hic. Amet?
+                   
+            { !checkVideoType(this.state.videoData.body)?  <ReactPlayer controls={true} width="100%"  height="98%" className="videoPlayer" style={{objectFit: "cover"}} playing url={this.state.videoData.body} />  : <video src={this.state.videoData.body} controls width="100%"  height="98%" className="videoPlayer" style={{objectFit: "cover"}} ></video>}
+            <label className="videoLabel">
+             {this.state.videoData.head}
             </label>
           </div>
 
           <div className="featuredv">
-            <div className="featuredV">
+            {/* <div className="featuredV">
               <img src={imgTrial} width="70px" height="40px" alt="" />
               <p>
                 Lorem ipsum dolor cing elit. Quasi libero d rem a asperiores ab.
@@ -73,57 +73,17 @@ export default class Video extends Component {
                 <Icon iconName="Recent" />
                 <div>10 min </div>
               </div>
-            </div>
-
-            <div className="featuredV">
-              <img src={imgTrial} width="70px" height="40px" alt="" />
-              <p>
-                Lorem ipsum dolor cing elit. Quasi libero d rem a asperiores ab.
-              </p>
-              <div className="iconzz">
-                <Icon iconName="Share" />
-                <Icon iconName="Recent" />
-                <div>10 min </div>
-              </div>
-            </div>
-            <div className="featuredV">
-              <img src={imgTrial} width="70px" height="40px" alt="" />
-              <p>
-                Lorem ipsum dolor cing elit. Quasi libero d rem a asperiores ab.
-              </p>
-              <div className="iconzz">
-                <Icon iconName="Share" />
-                <Icon iconName="Recent" />
-                <div>10 min </div>
-              </div>
-            </div>
-
-            <div className="featuredV">
-              <img src={imgTrial} width="70px" height="40px" alt="" />
-              <p>
-                Lorem ipsum dolor cing elit. Quasi libero d rem a asperiores ab.
-              </p>
-              <div className="iconzz">
-                <Icon iconName="Share" />
-                <Icon iconName="Recent" />
-                <div>10 min </div>
-              </div>{" "}
-            </div>
+            </div> */}
+           <PivotIconCountExample info={{review_id: this.state.videoData.id }} />
+           
           </div>
         </div>
 
-        <div className="morevideos">
-           <div>
-           <Slider {...settings} >
-                <div><VideoBox /></div>
-                <VideoBox />
-                <VideoBox />
-                <VideoBox />
-                <VideoBox />
-            </Slider>
-           </div>
+        <div className="">
+        <VideoPlayer videos={this.state.videos} />
         </div>
-        <div className="moreContent"></div>
+
+        </>}
       </Fragment>
     );
   }

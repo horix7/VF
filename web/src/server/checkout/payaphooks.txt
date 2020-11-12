@@ -1,0 +1,81 @@
+import React, { useState, useRef, useEffect, MutableRefObject } from 'react';
+
+function Product(product : any) {
+  const [paidFor, setPaidFor] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState({ error: false , message: null});
+  let paypalRef = useRef() as MutableRefObject<HTMLInputElement>;
+
+  useEffect(() => {
+      const script = document.createElement("script")
+      script.src = "https://www.paypal.com/sdk/js?client-id=AS4y_8Qwikqft0YayGIz6H7wmTyc0NCZM9YIaxz7NqDJvGp9MVsRXcYt2thPnr3ww7n-SMniDd5wCE_r"
+      script.addEventListener('load', () => setLoaded(true))
+      document.body.appendChild(script)
+
+    if(loaded) {
+    setTimeout(() => {
+     (window as any).paypal
+      .Buttons({
+        createOrder: (data: any, actions: any) => {
+          return actions.order.create({
+            purchase_units: [
+              {
+                description: product.description,
+                amount: {
+                  currency_code: 'USD',
+                  value: product.price,
+                },
+              },
+            ],
+          });
+        },
+        onApprove: async (data: any, actions: any) => {
+          const order = await actions.order.capture();
+          setPaidFor(true);
+          console.log(order);
+        },
+        onError: (err: any )=> {
+          setError(err);
+          console.error(err);
+        },
+      })
+      .render(paypalRef.current);
+          })
+      }
+
+  }, [product.description, product.price]);
+
+  if (paidFor) {
+    return (
+      <div>
+        <h1>Congrats, you just bought {product.name}!</h1>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      {error.error && <div>Uh oh, an error occurred! {error.message}</div>}
+      <h1>
+        {product.description} for ${product.price}
+      </h1>
+      <div ref={paypalRef} />
+    </div>
+  );
+}
+
+ function Payment (props: any) {
+  const product = {
+    price: 777.77,
+    name: 'comfy chair',
+    description: 'fancy chair, like new',
+  };
+
+  return (
+    <div className="App">
+      <Product product={product} />
+    </div>
+  );
+}
+
+export default Payment;

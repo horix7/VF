@@ -3,6 +3,7 @@ import { DefaultButton, PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { Panel } from 'office-ui-fabric-react/lib/Panel';
 import { useBoolean } from '@uifabric/react-hooks';
 import InteractiveList  from './cartTable'
+import { Link } from 'react-router-dom';
 
 
 const buttonStyles = { root: { marginRight: 8 } };
@@ -15,9 +16,11 @@ export const CartHolder = (props: any ) => {
   const onRenderFooterContent = React.useCallback(
     () => (
       <div>
+        <Link to="/checkout/order">
         <PrimaryButton onClick={dismissPanel} styles={buttonStyles}>
           Checkout 
         </PrimaryButton>
+        </Link>
         <DefaultButton onClick={props.closeCart}>Close</DefaultButton>
       </div>
     ),

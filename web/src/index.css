@@ -16,10 +16,11 @@
 
 * {
   font-family: 'Noto sans', sans-serif;
+  word-wrap: break-word;
 }
 body {
   color: white;
-  background-color: white;
+  background-color: black;
   margin: 0;
   padding: 0;
 }
@@ -31,6 +32,7 @@ body::-webkit-scrollbar {
 .towWayUpload div{
   margin-bottom: 20px;
 }
+
 
 main {
   background-color: white;
@@ -124,7 +126,7 @@ button {
   background-color: black;
   text-align: end;
   display: grid;
-  grid-template-columns: 70% 20% ;
+  grid-template-columns: 70% 30% ;
 
 }
 
@@ -134,10 +136,11 @@ video {
 }
 
 .video {
-  display: grid;
   padding: 10px;
-  height: 550px;
+  height: 500px;
   object-fit: contain;
+  display: grid;
+  grid-template-rows: 90% 10%;
 }
 
 .video label {
@@ -145,6 +148,7 @@ video {
   text-align: start;
   width: 90%;
   padding: 10px;
+  height: 200px;
 }
 
 .featuredV {
@@ -441,6 +445,17 @@ i {
 
 }
 
+.contentHolder {
+  text-align: start;
+
+}
+.videoPlayer {
+  height: 2px;
+  background-color: rgb(116, 93, 0);
+}
+
+
+
 .orders h1 {
   color: black;
   text-align: end;
@@ -491,7 +506,7 @@ i {
 }
 
 .productImg img {
-  height: 300px;
+  height: 350px;
 }
 
 .adder {
@@ -576,6 +591,7 @@ i {
 }
 
 
+
 .article {
   background-color: black;
 }
@@ -605,7 +621,42 @@ i {
   text-align: start;
 }
 
+.backAnext {
+  color: gold;
+  padding-top: 20px;
+}
+.adbbaneer {
+  background-color: gold;
+  color: black;
+  padding: 10px;
+}
+.paymentLoader {
+  padding-top: 20px;
+  width: 50%;
+}
 
+.pricePresent {
+  padding-bottom: 20px;
+}
+
+.pricePresent span {
+  color: gold;
+}
+.adbbaneer div {
+  width: 90%;
+  display: grid;
+  grid-template-columns: 1fr 100px;
+  text-align: start;
+  height: 30px;
+  
+}
+
+.adbbaneer div p {
+  margin-top: -0.5px;
+  font-size: large;
+  font-weight: bold;
+  text-transform: uppercase;
+}
 .madeBy {
   text-transform: lowercase;
   padding: 0px 0px 30px 0px;
@@ -913,7 +964,7 @@ body {
   font-family:  'Noto Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(255, 255, 255);
+  background-color: black
 }
 
 .tableHolder {
@@ -1031,7 +1082,7 @@ code {
   margin: 20px;
   background-color: rgb(36, 36, 36);
   height: 340px;
-  width: 90%;
+  width: 300px;
 
 }
 
@@ -1054,9 +1105,12 @@ code {
 }
 .appBanner p {
   font-size: large;
-  text-transform: capitalize;
-  padding-bottom: 10px;
+  text-transform: uppercase;
+  color: black;
+  padding-bottom: 2px;
 }
+
+
 .firstMain {
   display: grid;
   grid-template-columns: 400px 1fr 40%;
@@ -1088,7 +1142,7 @@ code {
   margin: 20px;
   background-color: rgb(36, 36, 36);
   height: 250px;
-  width: 100%;
+  width: 400px;
   display: grid;
 }
 
@@ -1102,14 +1156,15 @@ code {
 
 .vide_img_box {
   display: grid;
-  width: 10%;
+  width: 100%;
   grid-template-rows: 0px 210px 0px;
 }
 
 
 .transHead .head{
-  padding: -20px;
-
+  word-wrap: break-word;
+  width: 400px;
+  margin-top: -1px;
 }
 
 .imgBox {
@@ -1162,19 +1217,20 @@ code {
 .transHead {
   background-color: rgba(0, 0, 0, 0.342);
   position: absolute;
-  width: 300px;
+  width: 410px;
   margin-top: -42px;
-  height: 40px;
+  height: 38px;
   
 }
 
 .videoMore {
   background-color: rgb(36, 36, 36);
-  width: 280px;
+  width: 90%;
   margin-left: 5px;
   display: grid;
   grid-template-columns: 10% 40% 40% 10%;
 }
+
 .timeIcon {
   float: left;
 }
@@ -1221,22 +1277,48 @@ code {
 }
 
 
+.smallHeadrInfo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 40px;
+  width: 95%;
+  margin-left: 2%;
+}
+
+.moreIcon {
+  margin-bottom: -3px;
+}
+.iconName {
+  text-align: start;
+  float: left;
+}
+
+.viewMore {
+  float: right;
+  text-align: end;
+}
+
+.sliderMnger {
+  width: 95%;
+}
 
 .product_box {
-  width: 95%;
+  width: 400px;
   text-align: center;
   /* height: 300px; */
   background-color: black;
   margin: 20px;
   display: grid;
-  grid-template-rows: 300px 20px 30px;
+  grid-template-rows: 350px 20px 30px;
 
 }
 .productAction {
   display: grid;
   padding-bottom: 40px;
+  width: 100%;
   grid-template-columns: 50% 50%;
   background-color: rgb(36, 36, 36);
+
 }
 
 .centerAlg {
@@ -1411,10 +1493,6 @@ code {
  text-align: start;
 }
 
-.categoryHolder {
-  width: max-content;
-  
-}
 
 .searBar {
   width: 90%;

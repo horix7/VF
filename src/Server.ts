@@ -5,7 +5,6 @@ import http from 'http'
 import express, { Request, Response, NextFunction } from 'express';
 import { BAD_REQUEST } from 'http-status-codes';
 import 'express-async-errors';
-
 import BaseRouter from './routes';
 import logger from './shared/Logger';
 import cookieParser from 'cookie-parser'

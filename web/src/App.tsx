@@ -65,7 +65,7 @@ function App() {
               <SignUpForm/>
           </Route>
 
-          <Route path="/checkout/:id" render={(props: any) => <StoreCheckout {...props}/>}/> 
+          <Route path="/checkout/order" render={() => <StoreCheckout />}/> 
               
           <Route exact path="/content"> 
               <Content/>

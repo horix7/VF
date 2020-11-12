@@ -44,12 +44,12 @@ function getSteps() {
   return ['Delivery Address', 'Confirm Payment', "Receipt"];
 }
 
-function getStepContent(stepIndex: number) {
+function getStepContent(stepIndex: number , total: any , shippingCkeck: Function , back: Function) {
   switch (stepIndex) {
     case 0:
-      return <ShippingAddress />;
+      return <ShippingAddress next={shippingCkeck} back={back}/>;
     case 1:
-      return <PaymentForm />;
+      return <PaymentForm total={total}  next={shippingCkeck} back={back} />;
     case 2:
       return 'Done Receipt';
     default:
@@ -58,6 +58,7 @@ function getStepContent(stepIndex: number) {
 }
 
 export default function HorizontalLabelPositionBelowStepper() {
+
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
@@ -73,6 +74,15 @@ export default function HorizontalLabelPositionBelowStepper() {
   const handleReset = () => {
     setActiveStep(0);
   };
+
+  const dataInfo = JSON.parse(localStorage.cart)
+
+  const total = dataInfo.map((elem: any) =>{
+    if(elem.amount) {
+      return Number(elem.price) * Number(elem.amount )
+    } else return Number(elem.price)
+  }).reduce((a: number,b: number) => a + b )
+
 
   return (
       <div className="stepperBack">
@@ -94,19 +104,8 @@ export default function HorizontalLabelPositionBelowStepper() {
           </div>
         ) : (
           <div>
-            <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-            <div className="floatBottom">
-              <Button
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                className={classes.backButton}
-              >
-                Back
-              </Button>
-              <Button variant="contained" color="primary" onClick={handleNext}>
-                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-              </Button>
-            </div>
+            <Typography className={classes.instructions}>{getStepContent(activeStep, total , handleNext , handleBack)}</Typography>
+           
           </div>
         )}
       </div>
