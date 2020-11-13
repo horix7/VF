@@ -349,6 +349,39 @@ try {
    }
 }
 
+CreateAnOrder = async ( data: any): Promise<any> => {
+   try {
+
+  const ProductPost =  await axios.post("http://localhost:3000/api/orders/add/" , {product: data} , {
+   headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+   }
+  })
+
+
+  return (ProductPost)
+
+   } catch (error) {
+         return "error"           
+   }
+}
+
+
+GetAllOrders = async (): Promise<any> => {
+   try {
+
+  const ProductPost =  await axios.get("http://localhost:3000/api/orders/all/")
+
+
+  return (ProductPost)
+
+   } catch (error) {
+         return "error"           
+   }
+}
+
+
      GetOneProducts = async (id: string ): Promise<any> => {
       try {
          

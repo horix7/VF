@@ -146,7 +146,7 @@ export default class ProductPage extends Component<any> {
                                </div>
 
                                <div className="priceInfo">
-                                     $<p>{this.state.product_info.price}</p>
+                                     $<span>{this.state.product_info.price}</span>
                                </div>
 
                                {this.state.loadingBtn ? <Spinner style={{color: "black"}} color="black" size={SpinnerSize.medium} />  :  <PrimaryButton onClick={this.addToCart}> 

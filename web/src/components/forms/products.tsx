@@ -14,6 +14,8 @@ import Moodal from '../models/models'
 import { Icon } from '@fluentui/react/lib/Icon'
 import BackendCalls from '../../server/backendCalls'
 import { Spinner } from 'office-ui-fabric-react/lib/Spinner';
+import FullScreenDialog from '../UI/fullscreenDialog'
+
 
 
 // import { CompoundButton } from 'office-ui-fabric-react';
@@ -199,13 +201,10 @@ export  default function  ArticleForm  (props: any) {
             
             <Fragment>
 
+            <FullScreenDialog open={true} close={props.goBack} head={ Object.keys(props.content).length > 1  ? "Update  A Product" : "Create  A Product"} >
                 
                 <div className="articleForm">
-                <Icon iconName="Back" onClick={props.goBack} />
-                <h1> { Object.keys(props.content).length > 1  ? "Update" : "Create"} A Product  </h1>
                 <div className="twoEleme">
-              
-
                 <input type="text" className="producttittle" placeholder="Tittle " value={head} onChange={(event: any ) => setHead(event.target.value) }/>
                 <div className="inputz inputIconz2">
                     <Icon iconName="Money" className="inputIcon"/>
@@ -249,7 +248,7 @@ export  default function  ArticleForm  (props: any) {
                  
                     </div>
                 </div>
- 
+             </FullScreenDialog>
             </Fragment>
         )
 }

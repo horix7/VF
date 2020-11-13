@@ -4,7 +4,7 @@ import '../../node_modules/slick-carousel/slick/slick.css'
 import '../../node_modules/slick-carousel/slick/slick-theme.css'
 import BackendCalls from '../server/backendCalls'
 import ReactPlayer from "react-player"
-import { PivotIconCountExample } from '../components/UI/moreArticle'
+import { PivotIconCountExample } from '../components/UI/moreVide'
 import Backdrop from '../components/UI/backDrop'
 import { VideoPlayer } from '../components/UI/displayProAndContentz'
 

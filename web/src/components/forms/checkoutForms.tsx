@@ -8,7 +8,9 @@ import { ActionButton, PrimaryButton , MessageBar, MessageBarType  } from 'offic
 import PayPalCheckout from '../../server/checkout/paypalCheckout'
 import axios from 'axios'
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
+import BackendCalls from '../../server/backendCalls'
 
+const backend = new BackendCalls()
 
 
 const options: IChoiceGroupOption[] = [
@@ -110,15 +112,30 @@ render() {
 export const PaymentForm: React.FunctionComponent<any> = (props: any) => {
     const [key, setKey ] = React.useState("MOMO")
 
-    const [sucess, setScucess] = React.useState(false) 
+    const [sucess, setScucess] = React.useState(true) 
     const [loadingBtn, setLoading] = React.useState(false)
+    const [loadinNext, setLoadNext] = React.useState(false)
     const [label, setLabel] = React.useState("Requesting Payment")
     const [phone, setphone] = React.useState(null)
     const [errorMade, seterrorMade] = React.useState(false)
     
 
-    const checkAllAndSubmit = () => {
-      if(sucess) props.next()
+    const checkAllAndSubmit = async() => {
+      if(sucess) {
+        setLoadNext(true)
+        const createOrder = await backend.CreateAnOrder({
+          user: {...JSON.parse(localStorage.address), total: props.total},
+          data: JSON.parse(localStorage.cart)
+        })
+
+        if(createOrder.status === 201) {
+         
+          props.next()
+        }
+
+        console.log(createOrder)
+        
+      }
       else alert("payment not made")
     }
 
@@ -129,6 +146,7 @@ export const PaymentForm: React.FunctionComponent<any> = (props: any) => {
           url: link,
       })
           .then((response: any ) => {
+            console.log(response.data)
               if (response.data.token === "pending") {
                   setLabel("Verify Payment On Your Mobile ")
                   chechStatusMomo(id)
@@ -155,8 +173,7 @@ export const PaymentForm: React.FunctionComponent<any> = (props: any) => {
   
   }
   
-  
-  
+
   
    const payMomo = async ( ) => {
   
@@ -242,7 +259,7 @@ export const PaymentForm: React.FunctionComponent<any> = (props: any) => {
       </div>
       <div className="backAnext">
         <ActionButton text="back" onClick={props.back} />
-        <PrimaryButton text="next" onClick={checkAllAndSubmit} />
+         { loadinNext ? <ProgressIndicator /> : <PrimaryButton text="next" onClick={checkAllAndSubmit} />}
         </div>
       </>
 

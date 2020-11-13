@@ -5,7 +5,7 @@ import ArtBox from '../components/UI/article_box'
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
 import HomeNav from '../components/navigation/home_nav'
 import { DefaultButton } from '@fluentui/react'
-
+import { FaYoutube , FaNewspaper } from "react-icons/fa";
 
 const backend = new BackendCalls()
 
@@ -130,6 +130,19 @@ export default class Content extends Component<any> {
             <Fragment>
                 <HomeNav />
                 <div className="contentHolder">
+                        
+                <div className="smallHeadrInfo">
+                        <div className="iconName2">
+                            <FaNewspaper color="gold" />  &nbsp;
+                            <span>Articles </span>
+                        </div>
+
+                        <div className="viewMore">
+                        
+                        </div>
+                    
+                    </div>
+                
                     <div className="gridz">
                         {this.state.displayArticles.data.length > 0 ? 
                         this.state.displayArticles.data.map((elem: any, key: React.Key) => ( <div className="gridHolder"  key={key}> <ArtBox data={elem}/> </div>)) : <ProgressIndicator /> }
@@ -139,6 +152,18 @@ export default class Content extends Component<any> {
                 </div>
 
                  <div className="contentHolder" id="video">
+                 <div className="smallHeadrInfo">
+                        <div className="iconName2">
+                            <FaYoutube color="gold" />  &nbsp;
+                            <span>Videos</span>
+                        </div>
+
+                        <div className="viewMore">
+                        
+                        </div>
+                    
+                    </div>
+   
                  <div className="gridz">
                         {this.state.displayVideos.data.length > 0 ? 
                         this.state.displayVideos.data.map((elem: any, key: React.Key) => ( <div className="gridHolder"  key={key}> <VideoBox data={elem}/> </div>)) : <ProgressIndicator /> }

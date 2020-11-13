@@ -109,8 +109,6 @@ export default class ArticleAdmin extends Component<any> {
             return  elem !== undefined
         })
        
-        console.log(newItem)
-         
         this.setState({
             doneLoading: false
         }) 
@@ -119,7 +117,6 @@ export default class ArticleAdmin extends Component<any> {
             const element = newItem[indeqx]
 
            await backend.deleteArticle(element.id, element.premium)
-            console.log(element)
             indeqx++
 
             if(indeqx === newItem.length) {

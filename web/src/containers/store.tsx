@@ -208,6 +208,7 @@ export default class StorePage extends Component<any> {
 </div>
 
 <div className="morePros">
+    
 <div className="smallHeadrInfo">
         <div className="iconName">
             <FaGripHorizontal color="gold" />  &nbsp;

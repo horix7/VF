@@ -8,6 +8,9 @@ import Typography from '@material-ui/core/Typography';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { ShippingAddress , PaymentForm } from '../forms/checkoutForms'
+import OrderTable from '..//data/orderTable'
+import { Link } from 'react-router-dom';
+import { PrimaryButton } from '@fluentui/react';
 
 const Newtheme = createMuiTheme({
   palette: {
@@ -51,7 +54,7 @@ function getStepContent(stepIndex: number , total: any , shippingCkeck: Function
     case 1:
       return <PaymentForm total={total}  next={shippingCkeck} back={back} />;
     case 2:
-      return 'Done Receipt';
+      return <> <OrderTable data={JSON.parse(localStorage.cart)} total={total} />  <br />  <Link style={{paddingTop: "30px"}} onClick={() =>  localStorage.setItem("cart", "[]")}   className="articleWriterC" to="/"> <PrimaryButton text="Finish" /> </Link> </>;
     default:
       return 'Unknown stepIndex';
   }

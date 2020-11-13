@@ -76,7 +76,6 @@ main {
   text-align: end;
   color: black;
   background-color: rgba(34, 34, 34, 0.182);
-  height: 300px;
   overflow: scroll;
 }
 
@@ -450,7 +449,6 @@ i {
 
 }
 .videoPlayer {
-  height: 2px;
   background-color: rgb(116, 93, 0);
 }
 
@@ -481,12 +479,13 @@ i {
 .efak2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
+  width: 100%;
+
 }
 
 .efak2:first-child{
   text-align: start;
   margin-left: -10%;
-  width: 90%;
 }
 
 .presesntImg {
@@ -539,17 +538,12 @@ i {
 
 .priceInfo {
   font-size: x-large;
-  display: grid;
-  grid-template-columns: 20px 50px;
   padding-bottom: 20px;
   padding-top: 10px;
   color: gold;
 
 }
 
-.priceInfo p {
-  margin-top: -1px;
-}
 
 .proImg {
   padding: 50px;
@@ -1293,6 +1287,10 @@ code {
   float: left;
 }
 
+
+.iconName2 {
+  font-size: large;
+}
 .viewMore {
   float: right;
   text-align: end;
@@ -1556,10 +1554,7 @@ code {
   text-transform: capitalize;
 }
 
-.videoplayer {
 
-  width: 500px;
-}
 
 .searchBar1 {
   width: 100%;
@@ -1573,6 +1568,88 @@ code {
     background-color: black;
   }
 
+  
+.commentHolder {
+  width: 90%;
+  margin-left: 5%;
+  padding: 10px;
+  text-align: start;
+}
+  .prod {
+    grid-template-columns: 100%;
+    column-gap: 0%;
+  }
+  
+.commentForm {
+  width: 100%;
+  margin-top: 50px;
+}
+
+
+  .proSpecs {
+    padding: 20px;
+    margin-top: -40px;
+  }
+  
+  .video {
+    padding: 10px;
+    height: 350px;
+    object-fit: cover;
+  }
+  
+.articleTittle p {
+  font-size: large;
+  text-align: start;
+  padding: 0px 10px;
+}
+  .articleContent {
+    grid-template-columns: 100%;
+  }
+
+  .sliderMnger {
+    width: 88%;
+  }
+
+  
+  .premiumBox {
+    width: 90%;
+    margin-bottom: 50px;
+  }
+
+  .mainVideo {
+    background-color: black;
+    text-align: end;
+    display: grid;
+    grid-template-columns: 100%
+  
+  }
+
+  .product_box {
+    width: 300px;
+    text-align: center;
+    background-color: black;
+    margin: 20px;
+    display: grid;
+    grid-template-rows: 260px 20px 20px;
+  
+  }
+
+  .transHead .head{
+    word-wrap: break-word;
+    width: 300px;
+    margin-top: -1px;
+  }
+  
+  .transHead {
+    width: 310px;
+    
+  }
+  .video_box {
+    margin: 20px;
+    height: 250px;
+    width: 300px;
+  }
+
   .footer {
     font-size: 14px;
   }
@@ -1582,12 +1659,15 @@ code {
     display: block;
     width: 100%;
     margin-bottom: 40px;
-    text-align: center;
+    text-align: start;
   }
   .footer .footer-center i {
     margin-left: 0;
   }
 
+  .productImg img {
+    height: 100%;
+  }
   .signUpPages {
     grid-template-columns: 1fr;
     padding-left: 20px;
@@ -1615,18 +1695,17 @@ code {
   }
 
   .efakk {
-    margin-left: -80%;
-    padding-top: 20px;
+    margin-left: -50%;
+    padding-top: 30px;
   }
 
-  .efak2 {
   
-  }
 
   .formHolder {
     padding-top: 20px;
     /* padding-left: 150px; */
-    width: 80%;
+    width: 90%;
+    text-align: center;
     margin-left: 0%;
     text-align: start;
     padding: 20px;
@@ -1655,11 +1734,6 @@ code {
     padding-left: 0%;
     padding-right: 0%;
   }
-.videoplayer {
-
-  width: 200px;
-}
-
 .CreateVideo {
   text-align: start;
   width: 99%;
@@ -1785,9 +1859,9 @@ code {
     width: 50%;
     height: 500px;
     position: absolute;
-    background-color: rgba(16, 14, 0, 0.624);
+    background-color: black;
     padding-right: 20px;
-    border-right: 1px solid gold;
+    border-right: 1px solid rgb(39, 33, 0);
   }
 
   .desktopMobileH2 {
@@ -1839,7 +1913,6 @@ code {
     width: 100%;
     margin-left:  0%;
     text-align: end;
-    height: 300px;
     overflow: scroll;
   } 
 

@@ -1,19 +1,17 @@
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
 import { PrimaryButton,
-    Stack,
-    IStackTokens,
     MessageBar,
     MessageBarType,  } from 'office-ui-fabric-react';
-import React, {  FormEvent, Fragment, useState } from 'react'
+import React, {  Fragment, useState } from 'react'
 import { DialogweUploadByBtn } from '../models/uploadModal'
 import ArticleWriter from '../editors/ArticleEditor'
 import { Dropdown, IDropdownOption,DropdownMenuItemType, } from 'office-ui-fabric-react/lib/Dropdown';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { Toggle } from 'office-ui-fabric-react/lib/Toggle';
 import Moodal from '../models/models'
-import { Icon } from '@fluentui/react/lib/Icon'
 import BackendCalls from '../../server/backendCalls'
 import { Spinner } from 'office-ui-fabric-react/lib/Spinner';
+import FullScreenDialog from '../UI/fullscreenDialog'
 
 
 // import { CompoundButton } from 'office-ui-fabric-react';
@@ -192,10 +190,9 @@ export  default function  ArticleForm  (props: any) {
             
             <Fragment>
 
+            <FullScreenDialog open={true} close={props.goBack} head={ Object.keys(props.content).length > 1  ? "Update   an Article " : "Create   an Article "} >
                 
                 <div id="topper" className="articleForm">
-                <Icon iconName="Back" onClick={props.goBack} />
-                <h1> { Object.keys(props.content).length > 1  ? "Update" : "Create"} an Article  </h1>
                     <input type="text" className="tittleInput" placeholder="Tittle " value={head} onChange={(event: any ) => setHead(event.target.value) }/>
                     <div className="artDrop">
                     <div className="articleWriterC">
@@ -229,7 +226,7 @@ export  default function  ArticleForm  (props: any) {
                  
                     </div>
                 </div>
- 
+            </FullScreenDialog>
             </Fragment>
         )
 }

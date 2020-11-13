@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { PivotItem, Pivot } from 'office-ui-fabric-react/lib/Pivot';
-import {ActivityItemBasic } from './comments'
+import {ActivityItemBasic } from './commentsVideo'
+
+
 
 export const PivotIconCountExample = (props: any) => {
   return (

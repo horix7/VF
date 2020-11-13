@@ -68,7 +68,7 @@ router.get("/payment/:id" , async (req: Request, res: Response) => {
                 "Authorization": `Bearer ${result.data.data.token}`
 
             }
-        })
+        }) 
 
         return res.status(OK).json({
             data: paymentPost.data.data

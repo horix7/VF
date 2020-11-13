@@ -1,7 +1,6 @@
 /* eslint-disable no-restricted-globals */
 import React , { Component, Fragment } from 'react'
 import Chart from '../data/charts'
-import {Icon } from '@fluentui/react/lib/Icon'
 import OrderTable from '../data/ordersTables'
 import BackendCalls from '../../server/backendCalls'
 import BackDrop from '../UI/backDrop'
@@ -15,16 +14,18 @@ export default class StoreAdmin extends Component<any> {
         products: [],
         doneLoading: false,
         data2: [],
+        data1: [],
         data: []
     }
 
     
     async componentDidMount ( ) {
         const premiumData = await  backend.GetProducts()
+        const premiumData2 = await  backend.GetAllOrders()
  
-        console.log(premiumData)
        this.setState({
            data: [...premiumData.data.products],
+           data2: [...premiumData2.data.products],
         doneLoading: true
 
        })
@@ -55,7 +56,7 @@ export default class StoreAdmin extends Component<any> {
 
             <div className="orders" id="orders">
                 <h1>new SubScribers</h1>
-               <OrderTable data={this.state.data2} />
+               <OrderTable data={this.state.data1} />
 
                 <h1>Store Orders</h1>
                <OrderTable data={this.state.data2} />

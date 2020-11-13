@@ -58,8 +58,6 @@ export default function InteractiveList() {
     }
 
 
-    console.log(newLocaler, secondArray)
-
     seetCart(newLocaler)
     localStorage.setItem("cart", JSON.stringify(newLocaler))
 
@@ -83,7 +81,7 @@ export default function InteractiveList() {
                   <ListItemText
                     style={{color: "white"}}
                     primary={trimWorldsSmall(elem.head)}
-                   secondary={(<div className={classes.secondary}>  $ {Number(elem.price)}   &nbsp;  <span className="multiper"> <Icon iconName="CalculatorMultiply"/> </span>  &nbsp;   { Number(elem.amount || 1 )}</div>)}
+                   secondary={(<div className={classes.secondary}>  {localStorage.sign } {Number(elem.price) * localStorage.currency}   &nbsp;  <span className="multiper"> <Icon iconName="CalculatorMultiply"/> </span>  &nbsp;   { Number(elem.amount || 1 )}</div>)}
                   />
                   <ListItemSecondaryAction>
                     <IconButton edge="end" aria-label="delete">
@@ -96,11 +94,11 @@ export default function InteractiveList() {
             </List>
             <ActionButton text="Clear All " iconProps={clearIcon} onClick={() => deleteElem(false)}/>
             <div className="total">
-              ToTal Amount : <span className="total_price"> $ &nbsp; { localCart.length >= 1 ?  localCart.map((elem: any) =>{
+              ToTal Amount : <span className="total_price"> {localStorage.sign } &nbsp; { localCart.length >= 1 ?  localCart.map((elem: any) =>{
                 if(elem.amount) {
-                  return Number(elem.price) * Number(elem.amount )
+                  return Number(elem.price) * Number(elem.amount)
                 } else return Number(elem.price)
-              }).reduce((a: number,b: number) => a + b ) : 0 }</span>
+              }).reduce((a: number,b: number) => a + b ) * localStorage.currency : 0 }</span>
             </div>
           </div>
     </div>

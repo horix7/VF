@@ -1,6 +1,4 @@
 import React, { Component, Fragment } from "react";
-import Axios from 'axios'
-import VideoForm from '../components/forms/create_video'
 import AdminNav  from '../components/navigation/admin_nav'
 import StorePage from '../components/admin/storePage'
 import ContentPage from '../components/admin/content.admin'
@@ -20,7 +18,7 @@ export default class AdminDash extends Component {
     componentDidMount () {
 
         const body  =document.querySelector("body") as HTMLBodyElement
-        
+
         body.style.backgroundColor = "white"
        
     }

@@ -10,6 +10,7 @@ import Moodal from '../models/models'
 import ReactPlayer from "react-player"
 import BackendCalls from '../../server/backendCalls'
 import { Spinner } from 'office-ui-fabric-react/lib/Spinner';
+import FullScreenDialog from '../UI/fullscreenDialog'
 
 // import { CompoundButton } from 'office-ui-fabric-react';
 
@@ -160,6 +161,16 @@ export  default function  CreateVideo  (props: any) {
           // getModalStyle is not a pure function, we roll the style only on the first render
           // eslint-disable-next-line react-hooks/rules-of-hooks
           const [modalStyle] = React.useState(getModalStyle);
+
+          
+      const checkVideoType = (id: string) => {
+
+        let newId = id.split("")
+        newId.length = 38
+        const mnewid = newId.join('')
+
+        return mnewid === "https://firebasestorage.googleapis.com"
+      }
      
           const iconPropStyle = "uploadIcon"
           const newCategoryForm = (
@@ -190,20 +201,19 @@ export  default function  CreateVideo  (props: any) {
             </MessageBar>
           );
 
+
         return (
             
           
         <Fragment>
+            <FullScreenDialog open={true} close={props.goBack} head={Object.keys(props.content).length > 1 ? "Update Video" : "Create Video"}>
+
+            
             <div id="topper" > 
             </div>
-           <Icon iconName="Back" onClick={props.goBack} className="paddsLef" />
                 <div className="CreateVideo">
-               
-                   
                    <div className="videform">
-                 
 
-                    <h1>{Object.keys(props.content).length > 1 ? "Update" : "Create"} Video </h1>
                     <div className="inputz">
                     <input type="text" placeholder="Video Tittle " value={head}  className="inputs" onChange={(event: any ) => setHead(event.target.value)}/>
                     </div>
@@ -251,15 +261,11 @@ export  default function  CreateVideo  (props: any) {
                    <div className="videoPreview">
                     
 
-                    <div className="video">
-                    { window.matchMedia("(max-width: 800px)").matches  ? <div>
-                    <video src={body} width="200px" autoPlay={true} muted controls={false}></video>
-                    <ReactPlayer controls={false} width="200px" muted playing url={body} />
+                    <div>
+                    { checkVideoType(body) ? <div>
+                    <video src={body} width="100%" className="previewdVid" autoPlay={true} muted controls={false}></video>
                     </div>  :
-                     <div>
-                           <video src={body} width="400px" autoPlay={true} muted controls={false}></video>
-                    <ReactPlayer controls={false} width="400px" muted playing url={body} />
-                     </div>
+                    <ReactPlayer controls={false} width="100%" className="previewdVid" muted playing url={body} />
                   }
                     <h3>{head}</h3>
  
@@ -269,6 +275,7 @@ export  default function  CreateVideo  (props: any) {
                      </div>
                     
                 </div>
+                </FullScreenDialog>
             </Fragment>
          )
 }

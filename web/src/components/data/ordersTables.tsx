@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, Key} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Collapse from '@material-ui/core/Collapse';
@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import OrderTable from '../data/orderTableAdmin'
 
 const useRowStyles = makeStyles({
   root: {
@@ -46,7 +47,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
-
+  
   return (
     <Fragment>
 
@@ -69,33 +70,9 @@ function Row(props: { row: ReturnType<typeof createData> }) {
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
               <Typography variant="h6" gutterBottom component="div">
-                Delivery Info 
+                Order Details  
               </Typography>
-              <Table size="small" aria-label="purchases">
-                <TableHead>
-                  <TableRow>
-                    <TableCell> </TableCell>
-                    <TableCell>product </TableCell>
-                    <TableCell align="right"> ammount </TableCell>
-                    <TableCell align="right"> Total Price  </TableCell>
-                  </TableRow>
-                </TableHead> 
-                <TableBody>
-                  {row.info.map((historyRow: any ) => (
-                    <TableRow key={historyRow.id}>
-                      <TableCell component="th" scope="row">
-                        {historyRow.id}
-                      </TableCell>
-                      <TableCell>{historyRow.name}</TableCell>
-                      <TableCell align="right">{historyRow.ammount}</TableCell>
-                      <TableCell align="right">
-                        { row.total }
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                
-                </TableBody>
-              </Table>
+              <OrderTable data={row.info} />
             </Box>
           </Collapse>
         </TableCell>
@@ -106,7 +83,9 @@ function Row(props: { row: ReturnType<typeof createData> }) {
 }
 
 export default function CollapsibleTable(props: any) {
-  const rows = props.data.map((element: any) => createData(element.name,  element.phone,element.country , element.address, element.date, element.total , element.info))
+
+  const rows = props.data.map((element: any) => createData(element.product.user.names,  element.product.user.phone,element.product.user.country , element.product.user.address, element.product.user.house , element.product.user.total , element.product.data))
+    
   return (
     <div className="tableHolder">
   <div className="spacing">
@@ -119,14 +98,14 @@ export default function CollapsibleTable(props: any) {
             <TableCell />
             <TableCell>Customer Name  </TableCell>
             <TableCell align="right"> Phone Number </TableCell>
-            <TableCell align="right">  Date </TableCell>
+            <TableCell align="right">  House  </TableCell>
             <TableCell align="right">  Country </TableCell>
             <TableCell align="right">  Address </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row: any) => (
-            <Row key={row.name} row={row} />
+          {rows.map((row: any, key: Key) => (
+            <Row key={key} row={row} />
           ))}
         </TableBody>
       </Table>

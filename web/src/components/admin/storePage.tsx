@@ -15,8 +15,8 @@ export default class StoreAdmin extends Component<any> {
     state = {
         openEditor: false,
         products: [],
-        data2: [],
         content: {},
+        orders: [],
         data: [],
         doneLoading: false
 
@@ -28,10 +28,12 @@ export default class StoreAdmin extends Component<any> {
         })
           
         const premiumData = await  backend.GetProducts()
+        const Orders = await  backend.GetAllOrders()
  
        this.setState({
            data: [...premiumData.data.products],
-        doneLoading: true
+           orders: [...Orders.data.products],
+           doneLoading: true
 
        })
     }
@@ -123,7 +125,7 @@ export default class StoreAdmin extends Component<any> {
             
 
             <div className="orders" id="orders">
-               <OrderTable data={this.state.data2} />
+               <OrderTable data={this.state.orders} />
 
             </div>
             </>}
