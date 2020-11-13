@@ -18,6 +18,8 @@ import {
   Route
 } from "react-router-dom";
 
+localStorage.setItem("currency", "$")
+localStorage.setItem("sign", "1")
 
  loadTheme({
     palette: {
@@ -51,6 +53,7 @@ initializeIcons();
 function App() {
   if(!localStorage.cart) {
     localStorage.setItem("cart", "[]")
+
   }
   return (
     <div className="App">

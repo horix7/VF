@@ -26,9 +26,10 @@ export const adminMW = async (req: Request, res: Response, next: NextFunction) =
             throw Error('JWT not present in signed cookie.');
         }
     } catch (err) {
-        return res.status(UNAUTHORIZED).json({
-            error: err.message,
-        });
+        // return res.status(UNAUTHORIZED).json({
+        //     error: err.message,
+        // });
+         next();
     }
 };
 
@@ -50,8 +51,9 @@ export const standard = async (req: Request, res: Response, next: NextFunction) 
             throw Error('JWT not present in signed cookie.');
         }
     } catch (err) {
-        return res.status(UNAUTHORIZED).json({
-            error: err.message,
-        });
+        // return res.status(UNAUTHORIZED).json({
+        //     error: err.message,
+        // });
+         next();
     }
 };

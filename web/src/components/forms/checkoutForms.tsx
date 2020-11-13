@@ -140,7 +140,7 @@ export const PaymentForm: React.FunctionComponent<any> = (props: any) => {
     }
 
     const  chechStatusMomo = (id: string) => {
-      let link = `http://localhost:3000/api/payment/${id}`
+      let link = `https://sawafitness.herokuapp.com/api/payment/${id}`
       axios({
           method: 'get',
           url: link,
@@ -183,7 +183,7 @@ export const PaymentForm: React.FunctionComponent<any> = (props: any) => {
           "accountId": "6f5b098a-d46c-403c-b596-14181a054a87",
           "msisdn": phone,
           "amount": 100,
-          "callback": "https://vfitness-8a2c3.web.app/"
+          "callback": "https://sawafitness.herokuapp.com/"
       }
       setLoading(true)
 
@@ -191,7 +191,7 @@ export const PaymentForm: React.FunctionComponent<any> = (props: any) => {
       parseFloat(props.total)
 
          try {
-          const paymentReq = await axios.post("http://localhost:3000/api/payment/", postForPayment)
+          const paymentReq = await axios.post("https://sawafitness.herokuapp.com/api/payment/", postForPayment)
 
  
           if (paymentReq.data.data.state === "processing") {
