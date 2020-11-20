@@ -56,7 +56,8 @@ router.post('/signup', async (req: Request, res: Response) => {
       // Return
       return res.status(CREATED).json({
           AuthToken: jwt,
-          role: newUser.role
+          role: newUser.role,
+          id: newUser.id
       }).end();
   
 });
@@ -101,6 +102,7 @@ router.post('/login', async (req: Request, res: Response) => {
     // Return
     return res.status(OK).json({
         AuthToken: jwt,
+        id: user.id,
         role: user.role
     }).end();
 });

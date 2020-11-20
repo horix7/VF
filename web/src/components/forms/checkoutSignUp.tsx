@@ -4,7 +4,6 @@ import { IStackTokens, Stack } from 'office-ui-fabric-react/lib/Stack';
 import { DefaultButton, PrimaryButton , MessageBar, MessageBarType  } from 'office-ui-fabric-react';
 import BackendCalls from '../../server/backendCalls'
 import { Spinner } from 'office-ui-fabric-react/lib/Spinner';
-import { Link } from 'react-router-dom';
 
 
 const backend = new BackendCalls()
@@ -20,7 +19,7 @@ const stackTokens: IStackTokens = {
 
 
 
-export const SignUpForm: React.FunctionComponent = () => {
+export const SignUpForm: React.FunctionComponent<any> = (props: any) => {
 
 
   const [email , setEmail] = React.useState("")
@@ -46,7 +45,7 @@ export const SignUpForm: React.FunctionComponent = () => {
       const postLogin = await backend.Login(data)
         if(postLogin.status === 200) {
           localStorage.setItem("authToken" , postLogin.data.AuthToken)
-          window.location.href = "/"
+          props.handleNext()
         }else {
           setloading1(false)
           seterroMade(true)
@@ -71,7 +70,7 @@ export const SignUpForm: React.FunctionComponent = () => {
 
       if(postLogin.status === 200) {
         localStorage.setItem("authToken" , postLogin.data.AuthToken)
-        window.location.href = "/"
+        props.handleNext()
       }else {
       setloading(false)
       seterroMade2(true)
@@ -82,9 +81,8 @@ export const SignUpForm: React.FunctionComponent = () => {
   }
 
   return (
-    <>
-    { !localStorage.authToken ? <>
-      <div className="signUpF">
+
+<div className="signUpF">
 
 <div className="signUpPages">
 
@@ -160,19 +158,7 @@ label="Your  names "
 </div>
 </div>
 
-     </> : <div style={{padding: "20px"}}>
-     <MessageBar
-         
-         messageBarType={MessageBarType.success}
-         isMultiline={false}
-         >
-         Your Currently Signed In 
-        
-       </MessageBar>
-
-       <Link to="/"  className="articleWriterC"> <DefaultButton text="Go Back" style={{float: "left", marginTop: "20px"}} /> </Link>
-     </div>}
-    </>
+    
       
     );
 };

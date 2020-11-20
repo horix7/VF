@@ -32,8 +32,8 @@ const StyledTableRow = withStyles((theme: Theme) =>
   }),
 )(TableRow);
 
-function createData(name: string, price: number, amount: number, total: number) {
-  return { name, price, amount, total };
+function createData(name: string, price: number, options: any, amount: number, total: number) {
+  return { name, price, options ,amount, total };
 }
 
 
@@ -46,7 +46,7 @@ const useStyles = makeStyles({
 export default function CustomizedTables(props: any) {
   const classes = useStyles();
     
-const rows = [...props.data.map((elem: any) => createData(elem.head , elem.price, elem.amount || 1 , Number(elem.price) * (Number(elem.amount) || 1)))];
+const rows = [...props.data.map((elem: any) => createData(elem.head , elem.price, elem.options, elem.amount || 1 , Number(elem.price) * (Number(elem.amount) || 1)))];
   return (
     <TableContainer style={{width: "90%" , marginLeft: "5%"}} component={Paper}>
       <Table className={classes.table} aria-label="customized table">
@@ -54,6 +54,7 @@ const rows = [...props.data.map((elem: any) => createData(elem.head , elem.price
           <TableRow>
             <StyledTableCell>Product</StyledTableCell>
             <StyledTableCell align="right">price &nbsp;($)</StyledTableCell>
+            <StyledTableCell align="right">options &nbsp;($)</StyledTableCell>
             <StyledTableCell align="right">amount</StyledTableCell>
             <StyledTableCell align="right">total</StyledTableCell>
           </TableRow>
@@ -65,6 +66,7 @@ const rows = [...props.data.map((elem: any) => createData(elem.head , elem.price
                 {row.name}
               </StyledTableCell>
               <StyledTableCell align="right">{row.price}</StyledTableCell>
+              <StyledTableCell align="right">{JSON.parse(row.options)}</StyledTableCell>
               <StyledTableCell align="right">{row.amount}</StyledTableCell>
               <StyledTableCell align="right">{row.total}</StyledTableCell>
             </StyledTableRow>

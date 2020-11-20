@@ -2,7 +2,10 @@
 
 import axios from "axios";
 
+
+axios.defaults.headers["authorization"] = localStorage.authToken || null
 axios.defaults.withCredentials = true
+
 export default class Request {
 
 
@@ -19,6 +22,7 @@ export default class Request {
          method: "post",
          data: data,
          headers: {
+            "authorization": localStorage.authToken || null ,
              "Content-Type": "application/json",
              "Accept": "application/json"
          }
@@ -45,6 +49,7 @@ export default class Request {
             method: "post",
             data: data,
             headers: {
+               "authorization": localStorage.authToken || null ,
                "Content-Type": "application/json",
                "Accept": "application/json"
             }
@@ -70,6 +75,7 @@ export default class Request {
             method: "put",
             data: data,
             headers: {
+               "authorization": localStorage.authToken || null ,
                "Content-Type": "application/json",
                "Accept": "application/json"
             }
@@ -94,6 +100,7 @@ export default class Request {
             method: "put",
             data: data,
             headers: {
+               "authorization": localStorage.authToken || null ,
                "Content-Type": "application/json",
                "Accept": "application/json"
             }
@@ -118,6 +125,7 @@ export default class Request {
             url: "https://sawafitness.herokuapp.com" + route,
             method: "get",
             headers: {
+               "authorization": localStorage.authToken || null ,
                "Content-Type": "application/json",
                "Accept": "application/json"
             }
@@ -142,6 +150,7 @@ export default class Request {
             url: "https://sawafitness.herokuapp.com" + route + id,
             method: "get",
             headers: {
+               "authorization": localStorage.authToken || null ,
                "Content-Type": "application/json",
                "Accept": "application/json"
             }
@@ -166,6 +175,7 @@ export default class Request {
             url: "https://sawafitness.herokuapp.com" + route,
             method: "get",
             headers: {
+               "authorization": localStorage.authToken || null ,
                "Content-Type": "application/json",
                "Accept": "application/json"
             }
@@ -190,6 +200,7 @@ export default class Request {
             url: "https://sawafitness.herokuapp.com" + route + id,
             method: "get",
             headers: {
+               "authorization": localStorage.authToken || null ,
                "Content-Type": "application/json",
                "Accept": "application/json"
             }
@@ -208,7 +219,11 @@ export default class Request {
      CreateProduct = async (data: any): Promise<any> => {
 
        try {
-         const ProductPost =  axios.post("https://sawafitness.herokuapp.com/api/products/add", data)
+         const ProductPost =  axios.post("https://sawafitness.herokuapp.com/api/products/add", data , {
+            headers: {
+               "authorization": localStorage.authToken || null
+            }
+         })
  
          return (await ProductPost)
        } catch (error) {
@@ -220,7 +235,11 @@ export default class Request {
      UpdateProduct = async (data: any): Promise<any> => {
 
    try {
-      const ProductPost =  axios.put("https://sawafitness.herokuapp.com/api/products/update", data)
+      const ProductPost =  axios.put("https://sawafitness.herokuapp.com/api/products/update", data , {
+         headers: {
+            "authorization": localStorage.authToken || null
+         }
+      })
  
       return (await ProductPost)
    } catch (error) {
@@ -233,7 +252,11 @@ export default class Request {
      UpdateUser = async (data: any): Promise<any> => {
 
       try {
-         const userPost = axios.put("https://sawafitness.herokuapp.com/api/users/update", data)
+         const userPost = axios.put("https://sawafitness.herokuapp.com/api/users/update", data , {
+            headers: {
+               "authorization": localStorage.authToken || null
+            }
+         })
  
          return (await userPost)
       } catch (error) {
@@ -245,7 +268,7 @@ export default class Request {
   SignUp = async (data: any): Promise<any> => {
 
         try {
-         const userData =  axios.post( "https://sawafitness.herokuapp.com/api/auth/signup", data )
+         const userData =  axios.post( "https://sawafitness.herokuapp.com/api/auth/signup", {newUser: data} )
          
          return (await userData)
   
@@ -263,19 +286,41 @@ export default class Request {
             method: "post",
             data: data,
             headers: {
+               "authorization": localStorage.authToken || null ,
                "Content-Type": "application/json",
                "Accept": "application/json"
             }
          })
-         alert(JSON.stringify(userData.headers))
-         alert(document.cookie)
-         console.log(userData)
+
          return userData
        } catch (error) {
           return "error"
        }
  
      }
+
+     AdminLogin = async (data: any): Promise<any> => {
+
+      try {
+        const userData = await  axios({
+           url: "https://sawafitness.herokuapp.com" + "/api/auth/login",
+           method: "post",
+           data: data,
+           headers: {
+              "authorization": localStorage.authToken || null ,
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+           }
+        })
+
+       if(Number(userData.data.role) < 4 ) {
+          return "error"
+       }
+      } catch (error) {
+         return "error"
+      }
+
+    }
 
      GetUsers = async (): Promise<any> => {
 
@@ -284,6 +329,7 @@ export default class Request {
             url: "https://sawafitness.herokuapp.com" + "/api/users/all",
             method: "get",
             headers: {
+               "authorization": localStorage.authToken || null ,
                "Content-Type": "application/json",
                "Accept": "application/json"
             }
@@ -297,10 +343,14 @@ export default class Request {
      }
 
      Logout = async (): Promise<any> => {
-try {
+   
+  try {
    
    const logout =  axios.get("https://sawafitness.herokuapp.com/api/auth/logout")
- 
+
+   localStorage.clear()
+   window.location.reload()
+
    return (await logout)
 } catch (error) {
       return "error" 
@@ -338,6 +388,7 @@ try {
 
   const ProductPost =  await axios.post("https://sawafitness.herokuapp.com/api/reviews/add/" + id, {comment: review} , {
    headers: {
+      "authorization": localStorage.authToken || null ,
       "Content-Type": "application/json",
       "Accept": "application/json"
    }
@@ -356,6 +407,7 @@ CreateAnOrder = async ( data: any): Promise<any> => {
 
   const ProductPost =  await axios.post("https://sawafitness.herokuapp.com/api/orders/add/" , {product: data} , {
    headers: {
+      "authorization": localStorage.authToken || null ,
       "Content-Type": "application/json",
       "Accept": "application/json"
    }
@@ -373,7 +425,11 @@ CreateAnOrder = async ( data: any): Promise<any> => {
 GetAllOrders = async (): Promise<any> => {
    try {
 
-  const ProductPost =  await axios.get("https://sawafitness.herokuapp.com/api/orders/all/")
+  const ProductPost =  await axios.get("https://sawafitness.herokuapp.com/api/orders/all/", {
+     headers: {
+        "authorization": localStorage.authToken || null
+     }
+  })
 
 
   return (ProductPost)
@@ -399,7 +455,11 @@ GetAllOrders = async (): Promise<any> => {
      deleteUsers = async (id: string): Promise<any> => {
 
        try {
-         const deleted =  axios.delete("https://sawafitness.herokuapp.com/api/users/delete/" + id)
+         const deleted =  axios.delete("https://sawafitness.herokuapp.com/api/users/delete/" + id, {
+            headers: {
+               "authorization": localStorage.authToken || null
+            }
+         })
  
          return (await deleted)
        } catch (error) {
@@ -411,7 +471,11 @@ GetAllOrders = async (): Promise<any> => {
      deleteProduct = async (id: string): Promise<any> => {
 
         try {
-         const deleted =  axios.delete("https://sawafitness.herokuapp.com/api/products/delete/" + id)
+         const deleted =  axios.delete("https://sawafitness.herokuapp.com/api/products/delete/" + id , {
+            headers: {
+               "authorization": localStorage.authToken || null
+            }
+         })
  
          return  (await deleted)
   
@@ -427,7 +491,11 @@ GetAllOrders = async (): Promise<any> => {
          if(premium) route = "/api" + "/premium" + route
          else route = "/api" + "/fremium" + route
  
-         const deleted =  axios.delete("https://sawafitness.herokuapp.com" + route + id)
+         const deleted =  axios.delete("https://sawafitness.herokuapp.com" + route + id , {
+            headers: {
+               "authorization": localStorage.authToken || null
+            }
+         })
   
          return  (await deleted)
   
@@ -443,7 +511,11 @@ GetAllOrders = async (): Promise<any> => {
       if(premium) route = "/api" + "/premium" + route
       else route = "/api" + route
       
-      const deleted = axios.delete("https://sawafitness.herokuapp.com" + route + id)
+      const deleted = axios.delete("https://sawafitness.herokuapp.com" + route + id , {
+         headers: {
+            "authorization": localStorage.authToken || null
+         }
+      })
 
       return  (await deleted)
      } catch (error) {

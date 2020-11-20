@@ -37,7 +37,6 @@ const ErroMssage = (p: any) => (
 export const AdminLogin: React.FunctionComponent = () => {
 
     const AdminIcon: IIconProps = { iconName: 'Admin' };
-    const keyIcon: IIconProps = { iconName: 'View' };
 
     const [email, setEmail ] = useState("")
     const [password, setPassword ] = useState("")
@@ -52,7 +51,7 @@ export const AdminLogin: React.FunctionComponent = () => {
 
     const adminLogin = async () => {
         setLoading(true)
-        const resultz = await callz.Login({email: email, password: password})
+        const resultz = await callz.AdminLogin({email: email, password: password})
 
         
         if(resultz === "error") {
@@ -85,7 +84,6 @@ export const AdminLogin: React.FunctionComponent = () => {
         type="password"
         placeholder="Password"
         canRevealPassword={true} 
-        iconProps={keyIcon}
         onChange={(event: any) => inputChangeHandler(event, setPassword)}
 
         // description="A colorful description!"

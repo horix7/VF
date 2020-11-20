@@ -81,7 +81,7 @@ function App() {
 
           <Route path="/content/video/:id" render={(props: any) => <Fragment> <Video {...props}/>  <Footer /> </Fragment>} /> 
 
-          <Route  path="/levelup/:id" render={(props: any) => <LevelUpCheckOut {...props}/>} /> 
+          <Route  path="/levelup" render={() => <LevelUpCheckOut/>} /> 
               
           <Route  exact path="/store"> 
               <Store/>

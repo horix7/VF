@@ -13,12 +13,12 @@ const jwtService = new JwtService();
 export const adminMW = async (req: Request, res: Response, next: NextFunction) => {
     try {
         // Get json-web-token
-        const jwt = req.signedCookies[cookieProps.key];
-        if (!jwt) {
+        const authToken = req.headers["authorization"];
+        if (!authToken) {
             throw Error('JWT not present in signed cookie.');
         }
         // Make sure user role is an admin
-        const clientData = await jwtService.decodeJwt(jwt);
+        const clientData = await jwtService.decodeJwt(authToken);
         if (clientData.role === UserRoles.Admin) {
             res.locals.userId = clientData.id;
             next();
@@ -26,10 +26,9 @@ export const adminMW = async (req: Request, res: Response, next: NextFunction) =
             throw Error('JWT not present in signed cookie.');
         }
     } catch (err) {
-        // return res.status(UNAUTHORIZED).json({
-        //     error: err.message,
-        // });
-         next();
+        return res.status(UNAUTHORIZED).json({
+            error: err.message,
+        });
     }
 };
 
@@ -38,12 +37,13 @@ export const adminMW = async (req: Request, res: Response, next: NextFunction) =
 export const standard = async (req: Request, res: Response, next: NextFunction) => {
     try {
         // Get json-web-token
-        const jwt = req.signedCookies[cookieProps.key];
-        if (!jwt) {
+        const authToken = req.headers["authorization"];
+
+        if (!authToken) {
             throw Error('JWT not present in signed cookie.');
         }
         // Make sure user role is an admin
-        const clientData = await jwtService.decodeJwt(jwt);
+        const clientData = await jwtService.decodeJwt(authToken);
         if (clientData.role === UserRoles.Standard) {
             res.locals.userId = clientData.id;
             next();
@@ -51,9 +51,8 @@ export const standard = async (req: Request, res: Response, next: NextFunction) 
             throw Error('JWT not present in signed cookie.');
         }
     } catch (err) {
-        // return res.status(UNAUTHORIZED).json({
-        //     error: err.message,
-        // });
-         next();
+        return res.status(UNAUTHORIZED).json({
+            error: err.message,
+        });
     }
 };

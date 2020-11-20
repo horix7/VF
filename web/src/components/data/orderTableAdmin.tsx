@@ -7,6 +7,12 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
+
+
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -31,8 +37,8 @@ const StyledTableRow = withStyles((theme: Theme) =>
   }),
 )(TableRow);
 
-function createData(name: any, price: any, amount: any, total: any, image: any) {
-  return { name, price, amount, total, image };
+function createData(name: any, price: any, options: any , amount: any, total: any, image: any) {
+  return { name, price, options, amount, total, image };
 }
 
 
@@ -45,8 +51,10 @@ const useStyles = makeStyles({
 export default function CustomizedTables(props: any) {
 
 const classes = useStyles();
-const rows = [...props.data.map((elem: any) => createData(elem.head , elem.price, elem.amount || 1 , Number(elem.price) * (Number(elem.amount) || 1), elem.images[0] ))]
+const rows = [...props.data.map((elem: any) => createData(elem.head , elem.price,  elem.options || {options: "default "}, elem.amount || 1 , Number(elem.price) * (Number(elem.amount) || 1), elem.images[0] ))]
 const orderSum = [... props.data].map((elem: any) =>  Number(elem.price) * (Number(elem.amount) || 1)).reduce((a,b) => a + b )
+
+console.log(rows)
 
 return (
     <TableContainer style={{width: "90%" , marginLeft: "5%"}} component={Paper}>
@@ -56,6 +64,7 @@ return (
             <StyledTableCell> # </StyledTableCell>
             <StyledTableCell>Product</StyledTableCell>
             <StyledTableCell align="right">price &nbsp;($)</StyledTableCell>
+            <StyledTableCell align="right">options </StyledTableCell>
             <StyledTableCell align="right">amount</StyledTableCell>
             <StyledTableCell align="right">total</StyledTableCell>
           </TableRow>
@@ -68,6 +77,12 @@ return (
                 {row.name}
               </StyledTableCell>
               <StyledTableCell align="right">{row.price}</StyledTableCell>
+              <StyledTableCell align="right"> <List component="nav"  aria-label="mailbox folders"> 
+              {Object.keys(row.options).map((elem: any, key: Key ) => (
+                <ListItem key={key} button divider>
+                <ListItemText primary={elem} secondary={row.options[elem]} />
+              </ListItem>
+              ))}  </List> </StyledTableCell>
               <StyledTableCell align="right">{row.amount}</StyledTableCell>
               <StyledTableCell align="right">{row.total}</StyledTableCell>
             </StyledTableRow>
@@ -80,7 +95,7 @@ return (
               <StyledTableCell align="right"></StyledTableCell>
               <StyledTableCell align="right"></StyledTableCell>
               <StyledTableCell align="right"></StyledTableCell>
-              <StyledTableCell style={{color: "gold", fontWeight: "bold"}} align="right">{orderSum}</StyledTableCell>
+              <StyledTableCell style={{color: "black", fontWeight: "bold"}} align="right">{orderSum}</StyledTableCell>
             </StyledTableRow>
         </TableBody>
       </Table>

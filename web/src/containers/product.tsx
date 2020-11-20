@@ -1,12 +1,14 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React , { Component, Fragment } from "react"
+import React , { Component, Fragment, Key } from "react"
 import Homenav from '../components/navigation/home_nav'
 import Slider from "react-slick";
 import '../../node_modules/slick-carousel/slick/slick.css'
 import '../../node_modules/slick-carousel/slick/slick-theme.css'
-import { Dropdown } from 'office-ui-fabric-react/lib/Dropdown';
 import { Icon } from '@fluentui/react/lib/Icon';
-import {PrimaryButton} from "@fluentui/react"
+import {  
+    ComboBox,
+    IComboBox,
+    PrimaryButton} from "@fluentui/react"
 import {PivotIconCountExample} from '../components/UI/moreProducts'
 import BackendCalls from '../server/backendCalls'
 import BackDrop from '../components/UI/backDrop'
@@ -15,15 +17,17 @@ import { Spinner, SpinnerSize } from 'office-ui-fabric-react/lib/Spinner';
 const backend = new BackendCalls()
 
 export default class ProductPage extends Component<any> {
-    state = {
+    state: {[key: string] : any }= {
         amount: 1,
+        options: {},
         product_info: {
             head: null,
             id: null,
             images: [],
             price: null ,
             description: null,
-            review_id: null
+            review_id: null,
+            specs: []
         },
 
         loadingBtn: false,
@@ -31,9 +35,11 @@ export default class ProductPage extends Component<any> {
 
     }
 
+    comboBoxRef = React.createRef<IComboBox>();
+
     amountCHangeHanlder = (add: boolean) =>  {
 
-        const {amount } = {...this.state}
+        const amount = this.state.amount 
         if(add) {
             this.setState({
                 amount: amount + 1
@@ -66,6 +72,7 @@ export default class ProductPage extends Component<any> {
         let newProduct: MainArr ={...product_info}
 
         newProduct["amount"] = this.state.amount
+        newProduct["options"] = this.state.options
         const newCart = JSON.parse(localStorage.cart)
         newCart.push(newProduct)
         localStorage.setItem("cart", JSON.stringify(newCart))
@@ -123,19 +130,36 @@ export default class ProductPage extends Component<any> {
                         <div className="proSpecs">
                              <h1> {this.state.product_info.head}</h1>
                                <div className="specs">
-                               <Dropdown
-                                placeholder="Select Size "
-                                label="Size"
-                                options={[
-                                    { key: 'A', text: 'small' },
-                                    { key: 'B', text: 'large' },
-                                        { key: 'D', text: 'large' },
-                                    { key: 'E', text: 'x-large' },
-                                ]}
-                                required
-                                // styles={dropdownStyles}
-                                />
+                               {this.state.product_info.specs.map((elem:any, key: Key ) => (
+                                   <ComboBox
+                                   key={key}
+                                   placeholder={this.state.options[elem.name] || `Select  ${elem.name}`}
+                                   label={elem.name}
+                                   componentRef={this.comboBoxRef}
+                                   defaultValue={this.state.options[elem.name]}
+                                   allowFreeform
+                                    autoComplete="on"
+                                   onChange={(event: any, item: any) => {
+                                    let  options  = this.state.options
 
+                                    let options1: {[key: string] : any } = {...options}
+                                    options1[elem.name ] = item.text
+
+                                    this.setState({
+                                        options: options1
+                                    })
+                                   }}
+                                   options={[...elem.items.map((ele: any ) => {
+                                       return {
+                                           key: ele.text + Date.now(),
+                                           text: ele.text 
+                                       }
+                                   })]}
+                                   required
+                                   // styles={dropdownStyles}
+                                   />
+   
+                               ))}
                                <div>
                                    <p className="label">Amount</p>
                                <div className="adder">

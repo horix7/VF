@@ -137,7 +137,7 @@ export default class Home extends Component {
                            <p className="pheading">premium fitness content</p>
                             <p className="ppricing"> 20.99$ Monthly </p>
                            </div>
-                            <button className="main_btn"> Upgrade </button>
+                            <Link to="/levelup/"> <button className="main_btn"> Upgrade </button> </Link>
                         </div>
 
                        <div className="centerAlg">
@@ -147,7 +147,7 @@ export default class Home extends Component {
                             <p className="pheading">fitness plans / meal Plans</p>
                             <p className="ppricing"> 20.99$ Monthly </p>
                             </div>
-                            <button className="main_btn"> Upgrade </button>
+                            <Link to="/levelup/"> <button className="main_btn"> Upgrade </button> </Link>
                         </div>
 
                        </div>

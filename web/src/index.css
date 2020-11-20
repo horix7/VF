@@ -76,7 +76,6 @@ main {
   text-align: end;
   color: black;
   background-color: rgba(34, 34, 34, 0.182);
-  overflow: scroll;
 }
 
 button {
@@ -1635,11 +1634,6 @@ code {
     grid-template-columns: 100%;
   }
 
-  .sliderMnger {
-    width: 81%;
-  }
-
-
 
   .mainVideo {
     background-color: black;
@@ -1872,7 +1866,6 @@ code {
     margin-left: 10%;
     text-align: end;
     /* height: 10px; */
-    overflow: scroll;
     background-color: white;
   } 
 

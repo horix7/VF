@@ -10,6 +10,7 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { Toggle } from 'office-ui-fabric-react/lib/Toggle';
 import Moodal from '../models/models'
 import BackendCalls from '../../server/backendCalls'
+import { Select, MenuItem, Typography } from "@material-ui/core";
 import { Spinner } from 'office-ui-fabric-react/lib/Spinner';
 import FullScreenDialog from '../UI/fullscreenDialog'
 
@@ -102,6 +103,16 @@ export  default function  ArticleForm  (props: any) {
         }
         
 
+        const [open1, setOpen2] = React.useState(false);
+        const handleClose = () => {
+            setOpen2(false);
+        };
+
+        const handleOpen = () => {
+            setOpen2(true);
+        };
+
+
     const [currentOption  , setCurrt] = useState({key: "", text: ""})
 
         const options: any[] = [
@@ -112,10 +123,10 @@ export  default function  ArticleForm  (props: any) {
           ];
           
           const popCategory = (event: any , item: any) => {
-            setSelectedItem(item);
             
-            setCatt(item.key)
-            if(item.key === "kk_") {
+            setSelectedItem(item);
+            setCatt(item)
+            if(item === "Create New Category") {
                 setOpen(true)
             }
         };
@@ -168,7 +179,7 @@ export  default function  ArticleForm  (props: any) {
                     <PrimaryButton text="add"  onClick={(event) =>{
                         addCat()
                         setOpen(false)
-                        popCategory(event, options[0])
+                        popCategory(event, options[0].text)
                         }} />
                     </div>
                 </div>
@@ -196,7 +207,7 @@ export  default function  ArticleForm  (props: any) {
                     <input type="text" className="tittleInput" placeholder="Tittle " value={head} onChange={(event: any ) => setHead(event.target.value) }/>
                     <div className="artDrop">
                     <div className="articleWriterC">
-                    <Dropdown
+                    {/* <Dropdown
                         placeholder="Select Category"
                         // label="Article "
                         selectedKey={selectedItem ? selectedItem.key : undefined}
@@ -205,7 +216,23 @@ export  default function  ArticleForm  (props: any) {
                         // eslint-disable-next-line react/jsx-no-bind
                         onChange={popCategory}
                         // styles={dropdownStyles}
-                    />
+                    /> */}
+                    <Typography> Select Category  </Typography>
+
+
+                    <Select
+                    open={open1}
+                    onClose={handleClose}
+                    onOpen={handleOpen}
+                    value={selectedItem || null}
+                    label="select category"
+                    onChange={(e: any) => popCategory(e, e.target.value)}
+                    >
+                    {options.map((elem: any) => (<MenuItem value={elem.text} key={elem.key} >{elem.text} </MenuItem>))}
+                   
+                    
+                    </Select>
+                    
                     </div>
 
                     </div>
