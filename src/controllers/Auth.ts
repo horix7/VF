@@ -43,10 +43,10 @@ router.post('/signup', async (req: Request, res: Response) => {
   
       delete newUser.password
       
-      await userDao.add(newUser);
+      const newuu = await userDao.add(newUser);
   
       const jwt = await jwtService.getJwt({
-          id: newUser.id,
+          id: newuu,
           role: newUser.role,
       });
   
@@ -57,7 +57,7 @@ router.post('/signup', async (req: Request, res: Response) => {
       return res.status(CREATED).json({
           AuthToken: jwt,
           role: newUser.role,
-          id: newUser.id
+          id: newuu
       }).end();
   
 });

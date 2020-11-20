@@ -34,12 +34,12 @@ class UserDao implements IUserDao {
     }
 
 
-    public async add(user: IUser): Promise<void> {
+    public async add(user: IUser): Promise<any> {
         try {
             
-            await userCollection.add(user)
+           const added = await userCollection.add(user)
 
-            return;
+            return added.path.split("/")[1];
         } catch (err) {
             throw err;
         }
