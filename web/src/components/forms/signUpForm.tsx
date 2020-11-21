@@ -69,7 +69,7 @@ export const SignUpForm: React.FunctionComponent = () => {
     } else {
       const postLogin = await backend.SignUp(data)
 
-      if(postLogin.status === 200) {
+      if(postLogin.status === 201) {
         localStorage.setItem("authToken" , postLogin.data.AuthToken)
         window.location.href = "/"
       }else {

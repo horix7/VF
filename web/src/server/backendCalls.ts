@@ -249,8 +249,8 @@ export default class Request {
      }
 
 
-     UpdateUser = async (data: any): Promise<any> => {
-
+   UpdateUser = async (data: any): Promise<any> => {
+      console.log(data)
       try {
          const userPost = axios.put("https://sawafitness.herokuapp.com/api/users/update", data , {
             headers: {
@@ -268,9 +268,11 @@ export default class Request {
   SignUp = async (data: any): Promise<any> => {
 
         try {
-         const userData =  axios.post( "https://sawafitness.herokuapp.com/api/auth/signup", {newUser: data} )
+         const userData = await axios.post( "https://sawafitness.herokuapp.com/api/auth/signup", {newUser: data} )
          
-         return (await userData)
+         console.log(userData, data)
+
+         return (userData)
   
         } catch (error) {
             return "error"           

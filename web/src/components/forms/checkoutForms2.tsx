@@ -4,7 +4,7 @@ import { Stack, IStackProps, IStackStyles } from 'office-ui-fabric-react/lib/Sta
 import { ChoiceGroup, IChoiceGroupOption } from 'office-ui-fabric-react/lib/ChoiceGroup';
 import MomoPic from '../../assets/momo.png'
 import PayPal from '../../assets/paypal.png'
-import { ActionButton, PrimaryButton , MessageBar, MessageBarType  } from 'office-ui-fabric-react';
+import { PrimaryButton , MessageBar, MessageBarType  } from 'office-ui-fabric-react';
 import PayPalCheckout from '../../server/checkout/paypalCheckout'
 import axios from 'axios'
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
@@ -173,10 +173,26 @@ export const PaymentForm: React.FunctionComponent<any> = (props: any) => {
   
   }
   
-    const nextPage = () => {
+    const nextPage = async() => {
+      setLoadNext(true)
+
       if(sucess) {
-        props.handleNext()
+        const updateUser = await backend.UpdateUser({ id: localStorage.userId , user: {role: 3}})
+
+        if(updateUser !== "error") {
+          localStorage.clear()
+          localStorage.setItem("current_user", JSON.stringify({
+            upgraded: true
+          }))
+          props.handleNext()
+
       }else {
+        setLoadNext(false)
+
+      }
+
+      }else {
+        setLoadNext(false)
         alert("payement Not Made ")
       }
     }
@@ -252,7 +268,7 @@ export const PaymentForm: React.FunctionComponent<any> = (props: any) => {
         <>
          { key === "MOMO" ? <>
          <TextField label="Your Phone Number " type="number" onChange={(event: any ) => setphone(event.target.value)} />
-         { loadingBtn ? <div className="paymentLoader"><ProgressIndicator  description={label} /> </div> :<PrimaryButton className="articleWriterC" text="Pay" onClick={payMomo}/>}
+         { loadingBtn ? <div className="paymentLoader"> <ProgressIndicator  description={label} /> </div> :<PrimaryButton className="articleWriterC" text="Pay" onClick={payMomo}/>}
           </> : 
           <PayPalCheckout total={props.total} setSucess={setScucess} /> }
          

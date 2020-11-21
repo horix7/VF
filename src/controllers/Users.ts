@@ -4,12 +4,12 @@ import { ParamsDictionary } from 'express-serve-static-core';
 import { hashRounds } from '../shared/constants'
 import UserDao from '../models/User/User.model';
 import { paramMissingError } from '../shared/constants';
-import { adminMW } from '../middleware/middleware';
+import { adminMW, standard } from '../middleware/middleware';
 import { UserRoles } from '../entities/User';
 import bcrypt from 'bcrypt'
 
 // Init shared
-const router = Router().use(adminMW);
+const router = Router().use(standard);
 const userDao = new UserDao();
  
 
@@ -50,6 +50,8 @@ router.put('/update', async (req: Request, res: Response) => {
     // Check Parameters
     const { user } = req.body;
     const newuser = {...user}
+
+
     if (!user) {
         return res.status(BAD_REQUEST).json({
             error: paramMissingError,
@@ -60,7 +62,6 @@ router.put('/update', async (req: Request, res: Response) => {
         delete newuser.password
     }
     // Update user
-    console.log(newuser)
     await userDao.update(newuser, req.body.id);
     return res.status(OK).end();
 });

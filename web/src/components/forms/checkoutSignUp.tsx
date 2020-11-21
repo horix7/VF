@@ -45,6 +45,7 @@ export const SignUpForm: React.FunctionComponent<any> = (props: any) => {
       const postLogin = await backend.Login(data)
         if(postLogin.status === 200) {
           localStorage.setItem("authToken" , postLogin.data.AuthToken)
+          localStorage.setItem("userId" , postLogin.data.id)
           props.handleNext()
         }else {
           setloading1(false)
@@ -68,8 +69,9 @@ export const SignUpForm: React.FunctionComponent<any> = (props: any) => {
     } else {
       const postLogin = await backend.SignUp(data)
 
-      if(postLogin.status === 200) {
+      if(postLogin.status === 201) {
         localStorage.setItem("authToken" , postLogin.data.AuthToken)
+        localStorage.setItem("userId" , postLogin.data.id)
         props.handleNext()
       }else {
       setloading(false)

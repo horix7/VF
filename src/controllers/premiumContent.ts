@@ -3,7 +3,7 @@ import { BAD_REQUEST, CREATED, OK } from 'http-status-codes';
 import { ParamsDictionary } from 'express-serve-static-core';
 import Content from '../models/PremiumContent/condent.model';
 import { paramMissingError } from '../shared/constants';
-import { adminMW } from '../middleware/middleware';
+import {adminMW , premium } from '../middleware/middleware';
 
 // Init shared
 const router = Router();
@@ -14,7 +14,7 @@ const content = new Content();
  *                      Get All article - "GET /api/article/all"
  ******************************************************************************/
 
-router.get('/all', async (req: Request, res: Response) => {
+router.use(premium).get('/all', async (req: Request, res: Response) => {
     const article = await content.getAll();
 
     return res.status(OK).json({article});
@@ -25,7 +25,7 @@ router.get('/all', async (req: Request, res: Response) => {
  *                      search article - "GET /api/article/all"
  ******************************************************************************/
 
-router.get('/some/:name', async (req: Request, res: Response) => {
+router.use(premium).get('/some/:name', async (req: Request, res: Response) => {
     const { name } = req.params as ParamsDictionary;
 
     const article = await content.getSome(name);
@@ -36,7 +36,7 @@ router.get('/some/:name', async (req: Request, res: Response) => {
 
 
 
- router.get('/one/:id', async (req: Request, res: Response) => {
+ router.use(premium).get('/one/:id', async (req: Request, res: Response) => {
     const { id } = req.params as ParamsDictionary;
 
     const article = await content.getOne(id);
@@ -48,7 +48,7 @@ router.get('/some/:name', async (req: Request, res: Response) => {
  *                       Add One - "POST /api/article/add"
  ******************************************************************************/
 
-router.post('/add', async (req: Request, res: Response) => {
+router.use(adminMW).post('/add', async (req: Request, res: Response) => {
     // Check parameters
     console.log(req)
     const { article } = req.body;

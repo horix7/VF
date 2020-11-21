@@ -7,6 +7,7 @@ import StoreCheckout from './components/checkout/Storecheckout'
 import LevelUpCheckOut from './components/checkout/premiumCheckout'
 import Store from './containers/store'
 import HomePage from './containers/homePage'
+import SignedHome from './containers/signedContent'
 import AdminDash from './containers/adminPage';
 import ProdductPage from './containers/product'
 import ArticlePage from './containers/article'
@@ -93,7 +94,7 @@ function App() {
              
              
           <Route path="/" exact> 
-              <HomePage/>
+              {localStorage.authToken ? <SignedHome/> : <HomePage />}
               <Footer />
 
           </Route>

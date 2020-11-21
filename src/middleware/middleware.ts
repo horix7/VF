@@ -14,11 +14,14 @@ export const adminMW = async (req: Request, res: Response, next: NextFunction) =
     try {
         // Get json-web-token
         const authToken = req.headers["authorization"];
+       
+
         if (!authToken) {
             throw Error('JWT not present in signed cookie.');
         }
         // Make sure user role is an admin
         const clientData = await jwtService.decodeJwt(authToken);
+        
         if (clientData.role === UserRoles.Admin) {
             res.locals.userId = clientData.id;
             next();
@@ -29,12 +32,16 @@ export const adminMW = async (req: Request, res: Response, next: NextFunction) =
         return res.status(UNAUTHORIZED).json({
             error: err.message,
         });
+
+        
+
     }
 };
 
 
 // Middleware to verify if user is an admin
 export const standard = async (req: Request, res: Response, next: NextFunction) => {
+
     try {
         // Get json-web-token
         const authToken = req.headers["authorization"];
@@ -44,6 +51,9 @@ export const standard = async (req: Request, res: Response, next: NextFunction) 
         }
         // Make sure user role is an admin
         const clientData = await jwtService.decodeJwt(authToken);
+
+        
+
         if (clientData.role === UserRoles.Standard) {
             res.locals.userId = clientData.id;
             next();
@@ -54,5 +64,36 @@ export const standard = async (req: Request, res: Response, next: NextFunction) 
         return res.status(UNAUTHORIZED).json({
             error: err.message,
         });
+
+        
+    }
+};
+
+
+// Middleware to verify if user is a premium subscriber
+export const premium = async (req: Request, res: Response, next: NextFunction) => {
+
+    try {
+        // Get json-web-token
+        const authToken = req.headers["authorization"];
+
+        if (!authToken) {
+            throw Error('JWT not present in signed cookie.');
+        }
+        // Make sure user role is an admin
+        const clientData = await jwtService.decodeJwt(authToken);        
+
+        if (clientData.role >= UserRoles.Premium) {
+            res.locals.userId = clientData.id;
+            next();
+        } else {
+            throw Error('JWT not present in signed cookie.');
+        }
+    } catch (err) {
+        return res.status(UNAUTHORIZED).json({
+            error: err.message,
+        });
+
+        
     }
 };

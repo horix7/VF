@@ -3,7 +3,7 @@ import { BAD_REQUEST, CREATED, OK } from 'http-status-codes';
 import { ParamsDictionary } from 'express-serve-static-core';
 import Videos from '../models/premiumVidz/video.model';
 import { paramMissingError } from '../shared/constants';
-import { adminMW } from '../middleware/middleware';
+import { adminMW, premium } from '../middleware/middleware';
 
 // Init shared
 const router = Router()
@@ -11,7 +11,7 @@ const videos = new Videos();
  
 
 
-router.get('/all', async (req: Request, res: Response) => {
+router.use(premium).get('/all', async (req: Request, res: Response) => {
     const video = await videos.getAll();
     
     return res.status(OK).json({video});
@@ -19,7 +19,7 @@ router.get('/all', async (req: Request, res: Response) => {
 
 
 
-router.get('/some/:name', async (req: Request, res: Response) => {
+router.use(premium).get('/some/:name', async (req: Request, res: Response) => {
     const { name } = req.params as ParamsDictionary;
 
     const video = await videos.getSome(name);
@@ -30,7 +30,7 @@ router.get('/some/:name', async (req: Request, res: Response) => {
 
 
 
- router.get('/one/:id', async (req: Request, res: Response) => {
+ router.use(premium).get('/one/:id', async (req: Request, res: Response) => {
     const { id } = req.params as ParamsDictionary;
 
     const video = await videos.getOne(id);

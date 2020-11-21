@@ -73,7 +73,7 @@ export default class HomeNav extends Component {
                         <div className="desktopMobileH">
                         <div className="naav searBar">
                         <SearchBox placeholder="Search" onSearch={newValue => console.log('value is ' + newValue)} />
-                             </div>
+                        </div>
                        <NavLink to="/"> <div className="naav"> Home </div> </NavLink>
                        <NavLink to="/content" >  <div className="naav"> Content/Video </div> </NavLink>
                         <NavLink to="/store"> <div className="naav">
