@@ -155,7 +155,7 @@ export default class StorePage extends Component<any> {
 
                 {this.state.backDrop ? <BackDrop /> : <div className="mainPage">
 
-<div className="sliderHolder">
+    <div className="sliderHolder">
    <div>
    <p>Lorem ipsum dolor sit amet consectettionem error quia non deserunt, dolor</p>
     <PrimaryButton text="Shop Now " className="btnBig" type="large"/>

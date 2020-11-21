@@ -6,6 +6,10 @@ import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
 import HomeNav from '../components/navigation/home_nav'
 import { DefaultButton } from '@fluentui/react'
 import { FaYoutube , FaNewspaper } from "react-icons/fa";
+import { Link } from "react-router-dom"
+import { FaStream } from "react-icons/fa";
+import {  ArticleSlider, VideoPlayer } from '../components/UI/displayProAndContentz'
+
 
 const backend = new BackendCalls()
 
@@ -13,6 +17,8 @@ export default class Content extends Component<any> {
 
     state = {
         videos: [],
+        preArticles: [],
+        preVideos: [],
         articles: [],
         displayArticles: {
             current: 4,
@@ -23,12 +29,26 @@ export default class Content extends Component<any> {
             data:  []
         },
         loading: false,
+        upgraded: true,
         loading2: false
     }
 
     getAllData = async() => {
         const article = await backend.GetArticles(false)
         const video = await backend.GetVideos(false)
+        const premiumVideo = await backend.GetVideos(true)
+        const premiumArticle = await backend.GetArticles(true)
+
+        if(premiumArticle !== "error" && premiumVideo !== "error") {
+            this.setState({
+                preArticles: premiumArticle.data.article,
+                preVideos: premiumVideo.data.video,
+            })  
+        }else {
+            this.setState({
+                upgraded: false 
+            })
+        }
 
         this.setState({
             articles: article.data.article,
@@ -130,6 +150,31 @@ export default class Content extends Component<any> {
             <Fragment>
                 <HomeNav />
                 <div className="contentHolder">
+
+                <div className="smallHeadrInfo">
+                            <div className="iconName">
+                                <FaStream color="gold" />  &nbsp;
+                                <span>Premium Content </span>
+                            </div>
+
+                          <div></div>
+                        
+                        </div>
+        
+                    <div>
+                     {this.state.upgraded ? 
+                    <> 
+                    {this.state.preArticles.length >= 1 ? <ArticleSlider premium={true} articles={this.state.preArticles} /> :  <ProgressIndicator />} 
+                     {this.state.preVideos.length >= 1 ? <VideoPlayer premium={true} a  videos={this.state.preVideos} /> :  <ProgressIndicator />} 
+                 
+                      </>
+                    : <div className="upgradeIndicator">
+                         <p className="upgradeMessage"> Subscribe To View Premium Content </p>
+                         <Link to="/levelup" > <DefaultButton text="Level Up"/> </Link> 
+                     </div> }
+                     
+                    </div>
+
                         
                 <div className="smallHeadrInfo">
                         <div className="iconName2">
@@ -142,7 +187,7 @@ export default class Content extends Component<any> {
                         </div>
                     
                     </div>
-                
+
                     <div className="gridz">
                         {this.state.displayArticles.data.length > 0 ? 
                         this.state.displayArticles.data.map((elem: any, key: React.Key) => ( <div className="gridHolder"  key={key}> <ArtBox data={elem}/> </div>)) : <ProgressIndicator /> }

@@ -170,7 +170,7 @@ export default class ProductPage extends Component<any> {
                                </div>
 
                                <div className="priceInfo">
-                                     $<span>{this.state.product_info.price}</span>
+                                     {localStorage.currency} <span>{ Number(this.state.product_info.price) * Number(localStorage.rate)}</span>
                                </div>
 
                                {this.state.loadingBtn ? <Spinner style={{color: "black"}} color="black" size={SpinnerSize.medium} />  :  <PrimaryButton onClick={this.addToCart}> 

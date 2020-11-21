@@ -7,6 +7,9 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -46,7 +49,7 @@ const useStyles = makeStyles({
 export default function CustomizedTables(props: any) {
   const classes = useStyles();
     
-const rows = [...props.data.map((elem: any) => createData(elem.head , elem.price, elem.options, elem.amount || 1 , Number(elem.price) * (Number(elem.amount) || 1)))];
+const rows = [...props.data.map((elem: any) => createData(elem.head , elem.price, elem.options || {options: "default "},  elem.amount || 1 , Number(elem.price) * (Number(elem.amount) || 1)))];
   return (
     <TableContainer style={{width: "90%" , marginLeft: "5%"}} component={Paper}>
       <Table className={classes.table} aria-label="customized table">
@@ -65,10 +68,17 @@ const rows = [...props.data.map((elem: any) => createData(elem.head , elem.price
               <StyledTableCell component="th" scope="row">
                 {row.name}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.price}</StyledTableCell>
-              <StyledTableCell align="right">{JSON.parse(row.options)}</StyledTableCell>
+              <StyledTableCell align="right">{Number(row.price) * Number(localStorage.currency)}</StyledTableCell>
+              <StyledTableCell align="right"> 
+              <List component="nav"  aria-label="mailbox folders"> 
+              {Object.keys(row.options).map((elem: any, key: Key ) => (
+                <ListItem key={key} button divider>
+                <ListItemText primary={elem} secondary={row.options[elem]} />
+              </ListItem>
+              ))}  </List> 
+              </StyledTableCell>
               <StyledTableCell align="right">{row.amount}</StyledTableCell>
-              <StyledTableCell align="right">{row.total}</StyledTableCell>
+              <StyledTableCell align="right">{Number(row.total) * Number(localStorage.currency)}</StyledTableCell>
             </StyledTableRow>
           ))}
 
@@ -78,7 +88,7 @@ const rows = [...props.data.map((elem: any) => createData(elem.head , elem.price
               </StyledTableCell>
               <StyledTableCell align="right"></StyledTableCell>
               <StyledTableCell align="right"></StyledTableCell>
-              <StyledTableCell style={{color: "gold", fontWeight: "bold"}} align="right">{props.total}</StyledTableCell>
+              <StyledTableCell style={{color: "gold", fontWeight: "bold"}} align="right">{Number(props.total) * Number(localStorage.currency)}</StyledTableCell>
             </StyledTableRow>
         </TableBody>
       </Table>

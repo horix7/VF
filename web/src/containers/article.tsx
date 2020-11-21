@@ -19,7 +19,10 @@ export default class Article extends Component<any> {
 
     getArticleData = async () => {
         let article = await backend.GetOneArticle(false , this.props.match.params.id)
+        if(Object.keys(article.data).length === 0) article =  await backend.GetOneArticle(true , this.props.match.params.id)
+
         let newarticle = article.data.article.data
+
 
         this.setState({
             article_info: {...newarticle, id: article.data.article.id}

@@ -116,7 +116,7 @@ export  class VideoPlayer extends Component<any> {
                <div className="sliderMnger">
 
               <Slider {...prodSettings}>
-                  {this.props.videos.map((elem: any, key: React.Key) => ( <div key={key}> <VideoBox  data={elem} /> </div>)) }
+                  {this.props.videos.map((elem: any, key: React.Key) => ( <div key={key}> <VideoBox premium={this.props.premium}  data={elem} /> </div>)) }
                   </Slider>
                </div>
 
@@ -177,7 +177,7 @@ export class ArticleSlider extends Component<any> {
             <Fragment>
                <div className="sliderMnger">
                 <Slider {...settings}>
-                    {this.props.articles.map((elem: any, key: React.Key) => ( <div key={key}> <ArticleBox data={elem}/> </div>)) }
+                    {this.props.articles.map((elem: any, key: React.Key) => ( <div key={key}> <ArticleBox  premium={this.props.premium} data={elem}/> </div>)) }
                     </Slider>
                </div>
 

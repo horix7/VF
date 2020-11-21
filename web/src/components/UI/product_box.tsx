@@ -59,7 +59,7 @@ export default class Video extends Component<any> {
       <Fragment>
               
           <div className="product_box">
-          <div className="productImg">
+          <div className="productImg" onClickCapture={() => window.location.href = window.location.protocol + "//" + window.location.host + "/store/product/" + this.props.data.id } >
             <img
               src={this.props.data.images[0]}
               alt=""
@@ -82,12 +82,14 @@ export default class Video extends Component<any> {
               </IconContext.Provider>
             </div>
             <div className="price">
-              <p>${this.props.data.price}</p>
+            <a  href={ window.location.protocol + "//" + window.location.host + "/store/product/" + this.props.data.id}>
+            <p> {localStorage.currency}{Number(this.props.data.price) * Number(localStorage.rate)}</p>
               <IconContext.Provider
                 value={{ color: "gold", className: "card_view" }}
               >
                 <MdKeyboardArrowRight />
               </IconContext.Provider>
+              </a>
             </div>
           </div>
         </div>

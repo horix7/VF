@@ -226,6 +226,11 @@ video {
 }
 
 
+.currencyPicker {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  column-gap: 10px;
+}
 /* footer left*/
 
 .footer .footer-left {
@@ -1313,7 +1318,7 @@ code {
   display: grid;
   padding-bottom: 40px;
   width: 100%;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 70% 50%;
   background-color: rgb(36, 36, 36);
 
 }
@@ -1401,13 +1406,24 @@ code {
 }
 
 .price {
-  margin-left: 75px;
+  text-align: start;
+  float: left;
   padding: 7px;
+}
+
+.price a {
+  display: grid;
+  grid-template-columns: 90% 1%;
+  width: 100%;
+
+  float: left;
+
 }
 .price p {
   color: gold;
   font-size: small;
   margin-top: 2px;
+  width: 100%;
 }
 
 .card_view {
@@ -1472,7 +1488,7 @@ code {
   padding: 20px 0px 10px 20px;
   background-color: black;
   border-bottom: 1px solid rgba(255, 255, 255, 0.459);
-  grid-template-columns: 10% 15% 10% 30% 5% 10% 20%;
+  grid-template-columns: 10% 15% 10% 30% 5% 5% 25%;
   text-align: center;
 }
 
@@ -1490,10 +1506,21 @@ code {
  text-align: start;
 }
 
+.upgradeIndicator {
+  background-color: gold;
+  color: black;
+  padding: 10px;
+  margin-top: 10px;
+}
+.twoIconz {
+  display: grid;
+  grid-template-columns: 40% 70% ;
+  text-align: start;
+ }
 
 .searBar {
-  width: 90%;
-  margin-right: 10%;
+  width: 100%;
+  /* margin-left: 10%; */
 }
 
 .mainPage {
@@ -1874,10 +1901,11 @@ code {
   }
 
   .desktopMobileH {
+    position: absolute;
     width: 50%;
     height: 500px;
     position: absolute;
-    background-color: black;
+    background-color: red;
     padding-right: 20px;
     border-right: 1px solid rgb(39, 33, 0);
   }

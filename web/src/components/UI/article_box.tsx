@@ -1,13 +1,10 @@
 import React, { Component, Fragment } from "react";
-import { HiOutlineShare } from "react-icons/hi";
+// import { HiOutlineShare } from "react-icons/hi";
 import { IconContext } from "react-icons";
-
+import ShareBtn from '../UI/shareBtn'
 import { IoMdImages } from "react-icons/io";
 import {trimWorlds} from '../../server/conast&func'
 
-import {
-    Link,
-} from 'react-router-dom'
 
 export default class Article extends Component<any> {
   state = {};
@@ -17,7 +14,7 @@ export default class Article extends Component<any> {
       <Fragment>
            
                  <div className="articlebox">
-          <div className="imgBox">
+          <div className="imgBox"  onClickCapture={() => window.location.href =  window.location.protocol  + "//"  + window.location.host  + '/content/articles/' + this.props.data.id}>
             <div>
               <img
                 src={this.props.data.images}
@@ -37,11 +34,7 @@ export default class Article extends Component<any> {
           <a href={   window.location.protocol  + "//"  + window.location.host  + '/content/articles/' + this.props.data.id}>
             <p className="head"> {trimWorlds(this.props.data.head)}</p>
            </a>
-            <IconContext.Provider
-              value={{ color: "gold", className: "leftFloat" }}
-            >
-              <HiOutlineShare />
-            </IconContext.Provider>
+          <ShareBtn link={ window.location.protocol  + "//"  + window.location.host  + '/content/articles/' + this.props.data.id} />
           </div>
         </div>
     

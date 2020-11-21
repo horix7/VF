@@ -19,8 +19,10 @@ export default class Video extends Component<any> {
   };
 
   getContentData = async () => {
-    const video = await backend.GetOneVideo(false ,  this.props.match.params.id )
+    let video = await backend.GetOneVideo(false ,  this.props.match.params.id )
     const allData = await backend.GetVideos(false)
+    if(Object.keys(video.data).length === 0) video = await backend.GetOneVideo(true ,  this.props.match.params.id )
+
 
     this.setState({
       videoData: {...video.data.video.data, id: video.data.video.id},
