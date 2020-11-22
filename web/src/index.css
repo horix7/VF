@@ -25,6 +25,19 @@ body {
   padding: 0;
 }
 
+.choicestepper {
+  color: gray; 
+}
+
+
+.inputsStepper {
+  width: 300px;
+}
+
+.higlight {
+  color: white;
+}
+
 body::-webkit-scrollbar {
   width: 0.15rem;
 }
@@ -984,6 +997,19 @@ body {
   text-align: end;
   align-items: center;
   float: right;
+  justify-content: center;
+  padding-bottom: 30px;
+  /* margin-left: 50px; */
+}
+
+.formHolderxx {
+  padding-top: 20px;
+  /* padding-left: 150px; */
+  width: 85%;
+  padding-left: 9%;
+  text-align: end;
+  align-items: center;
+  /* float: right; */
   justify-content: center;
   padding-bottom: 30px;
   /* margin-left: 50px; */

@@ -31,6 +31,24 @@ const options: IChoiceGroupOption[] = [
 ];
 
 
+const optionsCustom: IChoiceGroupOption[] = [
+  {
+    key: 'MOMO',
+    imageSrc: MomoPic,
+    selectedImageSrc: MomoPic,
+    imageSize: { width: 150, height: 50 },
+    text: '', // This text is long to show text wrapping.
+  },
+  {
+    key: 'PAYPAL',
+    imageSrc: PayPal,
+    selectedImageSrc: PayPal,
+    imageSize: { width: 150, height: 50 },
+    text: '',
+  },
+];
+
+
 
 const stackTokens = { childrenGap: 50 };
 const iconProps = { iconName: 'Globe' };
@@ -266,3 +284,143 @@ export const PaymentForm: React.FunctionComponent<any> = (props: any) => {
     );
   };
   
+
+  
+export const CustomPaymentForm: React.FunctionComponent<any> = (props: any) => {
+  const [key, setKey ] = React.useState("MOMO")
+
+  const [sucess, setScucesz] = React.useState(true) 
+  const [loadingBtn, setLoading] = React.useState(false)
+  const [label, setLabel] = React.useState("Requesting Payment")
+  const [phone, setphone] = React.useState(null)
+  const [errorMade, seterrorMade] = React.useState(false)
+  
+  const setScucess = (bool: boolean) => {
+    setScucesz(bool)
+    props.next(bool)
+  }
+ 
+
+  const  chechStatusMomo = (id: string) => {
+    let link = `https://sawafitness.herokuapp.com/api/payment/${id}`
+    axios({
+        method: 'get',
+        url: link,
+    })
+        .then((response: any ) => {
+          console.log(response.data)
+            if (response.data.token === "pending") {
+                setLabel("Verify Payment On Your Mobile ")
+                chechStatusMomo(id)
+
+
+            } else if (response.data.token === "failed") {
+               
+                setLoading(false)
+
+                seterrorMade(true)
+
+            } else if (response.data.token === "successful") {
+              setLoading(false)
+              setScucess(true)
+            }
+
+        }).catch(err => {
+          setLabel("You Took Too long To Confirm")
+          setTimeout(() => {
+            setLoading(false)
+            seterrorMade(true)
+          }, 2000);
+        })
+
+}
+
+
+
+ const payMomo = async ( ) => {
+
+    let postForPayment = {
+        "trxRef": `${new Date().getTime()}-${Math.round(Math.random() * 10000123123141000).toString()}`,
+        "channelId": "momo-mtn-rw",
+        "accountId": "6f5b098a-d46c-403c-b596-14181a054a87",
+        "msisdn": phone,
+        "amount": 100,
+        "callback": "https://sawafitness.herokuapp.com/"
+    }
+    setLoading(true)
+
+
+    parseFloat(props.total)
+
+       try {
+        const paymentReq = await axios.post("https://sawafitness.herokuapp.com/api/payment/", postForPayment)
+
+
+        if (paymentReq.data.data.state === "processing") {
+          chechStatusMomo(postForPayment.trxRef)
+        } else {
+          seterrorMade(true)
+
+          setLoading(false)
+        }
+       } catch (error) {
+       
+        seterrorMade(true)
+        setLoading(false)
+
+         
+       }
+   
+}
+    
+
+  return (
+ <> 
+  <div className="formHolderxx">
+   
+    <div  className="efak2" >
+      <div>
+      <ChoiceGroup  defaultSelectedKey="MOMO" selectedKey={key} options={optionsCustom} onChanged={(event: any ) => setKey(event.key)} />
+      </div>
+      <div>
+      <div className="pricePresent">
+      Paying <span> ${props.total}</span>
+    </div>
+      
+      {errorMade ?  <MessageBar
+       
+       messageBarType={MessageBarType.error}
+       isMultiline={false}
+       >
+       something went wrong 
+      
+     </MessageBar> : null }
+      {sucess ? <> 
+        <MessageBar
+       
+        messageBarType={MessageBarType.success}
+        isMultiline={false}
+        >
+        Your Payment Was Made SuccesFull Click Next To finish the checkout 
+       
+      </MessageBar>
+      </>: 
+      <>
+       { key === "MOMO" ? <>
+       <TextField label="Your Phone Number " type="number" onChange={(event: any ) => setphone(event.target.value)} />
+       { loadingBtn ? <div className="paymentLoader"><ProgressIndicator  description={label} /> </div> :<PrimaryButton className="articleWriterC" text="Pay" onClick={payMomo}/>}
+        </> : 
+        <PayPalCheckout total={props.total} setSucess={setScucess} /> }
+       
+       </>}
+
+      </div>
+
+      </div>
+    
+    </div>
+    
+    </>
+
+  );
+};
