@@ -1,9 +1,10 @@
 import { Request, Response, Router } from 'express';
 import { BAD_REQUEST, CREATED, OK } from 'http-status-codes';
 import { ParamsDictionary } from 'express-serve-static-core';
-import Store from '../models/store/checkout.model';
+import Store from '../models/plans/plans.model';
 import { paramMissingError } from '../shared/constants';
 import { adminMW } from '../middleware/middleware';
+import { v4 } from 'uuid';
 
 // Init shared
 const router = Router();
@@ -14,15 +15,28 @@ const store = new Store();
  *                      Get All products - "GET /api/products/all"
  ******************************************************************************/
 
-router.use(adminMW).get('/all', async (req: Request, res: Response) => {
+router.get('/all', async (req: Request, res: Response) => {
     const products = await store.getAll();
     return res.status(OK).json({products});
 });
 
 
+/******************************************************************************
+ *                      search products - "GET /api/products/all"
+ ******************************************************************************/
+
+router.get('/some/:name', async (req: Request, res: Response) => {
+    const { name } = req.params as ParamsDictionary;
+
+    const products = await store.getSome(name);
+
+    return res.status(OK).json({products});
+
+});
 
 
- router.use(adminMW).get('/one/:id', async (req: Request, res: Response) => {
+
+ router.get('/one/:id', async (req: Request, res: Response) => {
     const { id } = req.params as ParamsDictionary;
 
     const products = await store.getOne(id);
@@ -34,15 +48,16 @@ router.use(adminMW).get('/all', async (req: Request, res: Response) => {
  *                       Add One - "POST /api/products/add"
  ******************************************************************************/
 
-router.post('/add', async (req: Request, res: Response) => {
+router.use(adminMW).post('/add', async (req: Request, res: Response) => {
     // Check parameters
-    const product  = req.body;
+    const { product } = req.body;
     if (!product) {
         return res.status(BAD_REQUEST).json({
             error: paramMissingError,
         });
     }
-
+    // Add new product
+    product.review_id = v4()
     await store.add(product);
     return res.status(CREATED).end();
 });
@@ -52,7 +67,7 @@ router.post('/add', async (req: Request, res: Response) => {
  *                       Update - "PUT /api/products/update"
  ******************************************************************************/
 
-router.put('/update', async (req: Request, res: Response) => {
+router.use(adminMW).put('/update', async (req: Request, res: Response) => {
     // Check Parameters
     const { product } = req.body;
     if (!product) {

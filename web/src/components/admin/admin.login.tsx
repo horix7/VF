@@ -53,13 +53,12 @@ export const AdminLogin: React.FunctionComponent = () => {
         setLoading(true)
         const resultz = await callz.AdminLogin({email: email, password: password})
 
-        
         if(resultz === "error") {
             setErrorMess(true)
             setLoading(false)
 
-        } else if (resultz.data.role >= 5 ) {
-            localStorage.setItem("authToken", resultz.data.AuthToken)
+        } else if (resultz.role >= 5 ) {
+            localStorage.setItem("authToken", resultz.AuthToken)
             window.location.reload()
         }
         

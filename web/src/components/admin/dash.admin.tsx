@@ -19,16 +19,20 @@ export default class StoreAdmin extends Component<any> {
     }
 
     
-    async componentDidMount ( ) {
+     getAllData = async () => {
         const premiumData = await  backend.GetProducts()
         const premiumData2 = await  backend.GetAllOrders()
- 
+        
        this.setState({
            data: [...premiumData.data.products],
            data2: [...premiumData2.data.products],
         doneLoading: true
 
        })
+    }
+
+    componentDidMount() {
+        this.getAllData()
     }
 
     openEditor = () => {

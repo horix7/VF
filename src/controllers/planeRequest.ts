@@ -1,7 +1,7 @@
 import { Request, Response, Router } from 'express';
 import { BAD_REQUEST, CREATED, OK } from 'http-status-codes';
 import { ParamsDictionary } from 'express-serve-static-core';
-import Store from '../models/store/checkout.model';
+import Store from '../models/plans/checkout.model';
 import { paramMissingError } from '../shared/constants';
 import { adminMW } from '../middleware/middleware';
 

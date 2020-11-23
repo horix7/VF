@@ -248,6 +248,39 @@ export default class Request {
  
      }
 
+   
+     createMealPlan = async (data: any): Promise<any> => {
+
+      try {
+        const ProductPost =  axios.post("https://sawafitness.herokuapp.com/api/plans/add", data , {
+           headers: {
+              "authorization": localStorage.authToken || null
+           }
+        })
+
+        return (await ProductPost)
+      } catch (error) {
+         return "error"
+      }
+
+    }
+
+    UpdateMealpPlan = async (data: any): Promise<any> => {
+
+  try {
+     const ProductPost =  axios.put("https://sawafitness.herokuapp.com/api/plans/update", data , {
+        headers: {
+           "authorization": localStorage.authToken || null
+        }
+     })
+
+     return (await ProductPost)
+  } catch (error) {
+     return "error" 
+  }
+
+    }
+
 
    UpdateUser = async (data: any): Promise<any> => {
       console.log(data)
@@ -314,9 +347,11 @@ export default class Request {
               "Accept": "application/json"
            }
         })
-
+        
        if(Number(userData.data.role) < 4 ) {
           return "error"
+       } else {
+          return userData.data
        }
       } catch (error) {
          return "error"
@@ -371,6 +406,18 @@ export default class Request {
                return "error"           
          }
      }
+
+     getMealPlans = async (): Promise<any> => {
+      try {
+         
+     const ProductPost =  axios.get("https://sawafitness.herokuapp.com/api/plans/all")
+
+     return (await ProductPost)
+
+      } catch (error) {
+            return "error"           
+      }
+  }
 
      getReviews = async (id: string): Promise<any> => {
       try {

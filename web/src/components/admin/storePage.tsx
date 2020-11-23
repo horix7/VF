@@ -4,9 +4,12 @@ import Tables from '../data/product.tables'
 import Chart from '../data/charts'
 import {Icon } from '@fluentui/react/lib/Icon'
 import ProductForm from '../forms/products'
+import MealForm from '../forms/ceateMealPlan'
 import OrderTable from '../data/ordersTables'
 import BackendCalls from '../../server/backendCalls'
 import BackDrop from '../UI/backDrop'
+import { stat } from 'fs'
+
 
 
 const backend = new BackendCalls()
@@ -14,9 +17,11 @@ export default class StoreAdmin extends Component<any> {
 
     state = {
         openEditor: false,
+        openPlan: false,
         products: [],
         content: {},
         orders: [],
+        meal: [],
         data: [],
         doneLoading: false
 
@@ -28,11 +33,14 @@ export default class StoreAdmin extends Component<any> {
         })
           
         const premiumData = await  backend.GetProducts()
+        const MealDatat = await  backend.getMealPlans()
+        console.log(MealDatat)
         const Orders = await  backend.GetAllOrders()
  
        this.setState({
            data: [...premiumData.data.products],
            orders: [...Orders.data.products],
+        //    meal: [...MealDatat.data.products],
            doneLoading: true
 
        })
@@ -94,6 +102,25 @@ export default class StoreAdmin extends Component<any> {
         
 
     }
+
+    openPlan = () => {
+        const { openPlan } = {...this.state}
+        this.setState( {
+            openEditor: !openPlan
+        })
+
+        if(openPlan) {
+            this.setState({
+                meal: {}
+            })
+
+            this.getProductData()
+        }
+        
+
+    }
+
+
     render () {
 
                     
@@ -101,8 +128,15 @@ export default class StoreAdmin extends Component<any> {
         <Fragment>
             {this.state.doneLoading ? null : <BackDrop /> }
 
+            {this.state.openPlan ? 
+            <MealForm goBack={this.openPlan} content={this.state.meal} />
+             : null }
+            
+
             {this.state.openEditor ?
              <ProductForm  goBack={this.openEditor} content={this.state.content} categories={[...new Set(this.state.data.map((elem: any) => elem.category))].map((elem) =>  {return  {key: elem, text: elem}})}  /> : <>
+           
+           
             <div className="towEl">
                 <div className="actionBtn">
                 <div></div>
@@ -118,6 +152,10 @@ export default class StoreAdmin extends Component<any> {
              <p>Create A Product</p>
              </div>
                 </div>
+            <div className="viewReport"  onClick={this.openPlan} >
+             <Icon iconName="EatDrink" className="bigIcon"/>
+             <p>Create A Meal Plan </p>
+            </div>
              <Chart chartData={{ }}  type={"sales"}  />
 
            </div>

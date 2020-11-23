@@ -8,6 +8,8 @@ import PremiumContent from '../controllers/premiumContent'
 import PremiumVideo from '../controllers/premiumVideos'
 import Reviews from "../controllers/contentReviews";
 import Orders from "../controllers/orders";
+import Plans from "../controllers/plans";
+import PlanRequest from "../controllers/planeRequest";
 import axios from "axios"
 import { OK } from 'http-status-codes';
 // Init router and path
@@ -17,6 +19,8 @@ const router = Router();
 router.use('/users', UserRouter);
 router.use('/auth', AuthRouter);
 router.use('/products', StoreRoutes);
+router.use('/plans', Plans);
+router.use('/request', PlanRequest);
 router.use('/reviews', Reviews);
 router.use('/orders', Orders);
 router.use('/fremium/content', ContentRoutes);
