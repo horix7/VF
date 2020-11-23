@@ -1,15 +1,15 @@
-import React , {Fragment , Component} from 'react'
+import React , {Fragment , Component, Key} from 'react'
 import BackendCalls  from '../server/backendCalls'
 import VideoBox from '../components/UI/video'
 import ArtBox from '../components/UI/article_box'
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
 import HomeNav from '../components/navigation/home_nav'
 import { DefaultButton } from '@fluentui/react'
-import { FaYoutube , FaNewspaper } from "react-icons/fa";
+import { FaYoutube, FaStream , FaNewspaper } from "react-icons/fa";
 import { Link } from "react-router-dom"
-import { FaStream } from "react-icons/fa";
+import { FcCloseUpMode } from "react-icons/fc";
 import {  ArticleSlider, VideoPlayer } from '../components/UI/displayProAndContentz'
-
+import MealBox from '../components/UI/mealPlanBox'
 
 const backend = new BackendCalls()
 
@@ -20,6 +20,7 @@ export default class Content extends Component<any> {
         preArticles: [],
         preVideos: [],
         articles: [],
+        plans: [],
         displayArticles: {
             current: 4,
             data:  []
@@ -36,12 +37,15 @@ export default class Content extends Component<any> {
     getAllData = async() => {
         const article = await backend.GetArticles(false)
         const video = await backend.GetVideos(false)
+        const mealPlans = await backend.getMealPlans()
+
         const premiumVideo = await backend.GetVideos(true)
         const premiumArticle = await backend.GetArticles(true)
 
         if(premiumArticle !== "error" && premiumVideo !== "error") {
             this.setState({
                 preArticles: premiumArticle.data.article,
+                plans: mealPlans.data.products,
                 preVideos: premiumVideo.data.video,
             })  
         }else {
@@ -175,7 +179,26 @@ export default class Content extends Component<any> {
                      
                     </div>
 
+                    <div>
                         
+                <div className="smallHeadrInfo">
+                            <div className="iconName">
+                                <FcCloseUpMode color="gold" />  &nbsp;
+                                <span>Meal Plans </span>
+                            </div>
+
+                           <div>
+                            
+                           </div>
+                        
+                    </div>
+                   <div className="mealPlansDisplayer">
+                      {this.state.plans.length > 1 ? this.state.plans.map((elem: any, key: Key) => <div key={key}><MealBox data={elem} /> </div> ) : <ProgressIndicator /> } 
+
+                        
+                    </div>
+                   </div>
+                
                 <div className="smallHeadrInfo">
                         <div className="iconName2">
                             <FaNewspaper color="gold" />  &nbsp;
@@ -195,6 +218,9 @@ export default class Content extends Component<any> {
                    {this.state.loading ? <ProgressIndicator /> :  <DefaultButton style={{marginLeft: "20px"}} onClick={() => this.getMoreData("article")} text="Load More" />}
                     
                 </div>
+
+                 
+
 
                  <div className="contentHolder" id="video">
                  <div className="smallHeadrInfo">

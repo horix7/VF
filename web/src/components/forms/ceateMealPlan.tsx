@@ -6,10 +6,8 @@ import BackendCalls from '../../server/backendCalls'
 import { Spinner } from 'office-ui-fabric-react/lib/Spinner';
 import FullScreenDialog from '../UI/fullscreenDialog'
 
-// import { CompoundButton } from 'office-ui-fabric-react';
 
-
-export  default function  CreateVideo  (props: any) {
+export  default function  CreateMeal  (props: any) {
   
     // eslint-disable-next-line react-hooks/rules-of-hooks
      
@@ -31,6 +29,7 @@ export  default function  CreateVideo  (props: any) {
               head: head,
               body: body,
               images: images,
+              price: price,
               published_on : new Date().toString(),
               made_by: "admin"
           }
@@ -64,6 +63,7 @@ export  default function  CreateVideo  (props: any) {
             const plans = {
                 head: head,
                 body: body,
+                price: price,
                 images: images,
             }
   
@@ -105,34 +105,34 @@ export  default function  CreateVideo  (props: any) {
             </MessageBar>
           );
 
-
+            console.log(props)
         return (
             
           
         <Fragment>
-            <FullScreenDialog open={true} close={props.goBack} head={Object.keys(props.content).length > 1 ? "Update Video" : "Create Video"}>
+            <FullScreenDialog open={true} close={props.goBack} head={Object.keys(props.content).length > 1 ? "Update Meal Plan" : "Create Meal Plan"}>
 
             
             <div id="topper" > 
             </div>
                 <div className="">
-                   <div className="videform">
+                   <div className="mealFromPlan">
 
-                    <div className="inputz">
-                    <TextField type="text" placeholder="Meal Plan Name" value={head}  variant="filled"  onChange={(event: any ) => setHead(event.target.value)}/>
+                    <div className="mealInputz">
+                    <TextField rows={3} rowsMax={5} style={{color: "black", borderColor: "black"}} color="primary" className="mealInput" type="text" placeholder="Meal Plan Name" value={head}  variant="filled"  onChange={(event: any ) => setHead(event.target.value)}/>
                     </div>
 
-                    <div className="inputz">
-                    <TextField type="text" placeholder="Meal Plan Description" multiline value={body}  variant="filled"  onChange={(event: any ) => setBody(event.target.value)}/>
+                    <div className="mealInputz">
+                    <TextField rows={3} rowsMax={5} style={{color: "black", borderColor: "black"}} color="primary" className="mealInput" type="text" placeholder="Meal Plan Description" multiline value={body}  variant="filled"  onChange={(event: any ) => setBody(event.target.value)}/>
                     </div>
 
-                    <div className="inputz">
-                    <TextField type="number" placeholder="COst"  label="Price"  value={price}  variant="filled"  onChange={(event: any ) => setprice(event.target.value)}/>
+                    <div className="mealInputz">
+                    <TextField rows={3} rowsMax={5} style={{color: "black", borderColor: "black"}} color="primary" className="mealInput" type="number" placeholder="COst"  label="Price"  value={price}  variant="filled"  onChange={(event: any ) => setprice(event.target.value)}/>
                     </div>
 
 
 
-                   <div className="leftMM">
+                   <div className="">
                  
                    <div className="articleWriterC">
 
@@ -142,7 +142,7 @@ export  default function  CreateVideo  (props: any) {
 
                      {errorMess ? <div className="erromessage"><ErroMssage /></div> : null }
 
-                     {Object.keys(props.content).length > 1 ?  <button className="publish" onClick={updateVideo}> {lodading ? <Spinner label="Updating..." ariaLive="assertive" labelPosition="right" />  : "Update"} </button> :  <button className="publish" onClick={publishVideo}> {lodading ? <Spinner label="publishing..." ariaLive="assertive" labelPosition="right" />  : "Publish"} </button>}
+                     {Object.keys(props.content).length > 1 ?  <button className="pubish2" onClick={updateVideo}> {lodading ? <Spinner label="Updating..." ariaLive="assertive" labelPosition="right" />  : "Update"} </button> :  <button className="pubish2" onClick={publishVideo}> {lodading ? <Spinner label="publishing..." ariaLive="assertive" labelPosition="right" />  : "Publish"} </button>}
 
                     </div>
 

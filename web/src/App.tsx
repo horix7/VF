@@ -12,6 +12,7 @@ import MealPlan from './containers/mealPlan'
 import AdminDash from './containers/adminPage';
 import ProdductPage from './containers/product'
 import ArticlePage from './containers/article'
+import MealCheckout from './components/checkout/planCheckout'
 import Video from './containers/videoArea'
 import Content from './containers/contentVideoz'
 import Footer from './components/navigation/footer'
@@ -20,6 +21,24 @@ import {
   Route
 } from "react-router-dom";
 
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: '#616161',
+      main: '#424242',
+      dark: '#212121',
+      contrastText: '#000',
+    },
+    secondary: {
+      light: '#ffd740',
+      main: '#ffd600',
+      dark: '#ff6d00',
+      contrastText: '#fff',
+    },
+  },
+});
 
  loadTheme({
     palette: {
@@ -62,6 +81,8 @@ function App() {
   }
   return (
     <div className="App">
+        <ThemeProvider theme={theme}>
+
 
         <Switch>
 
@@ -99,6 +120,9 @@ function App() {
 
           </Route>
 
+          <Route  exact path="/mealrequest/:price" render={(props: any) => <MealCheckout {...props} />} /> 
+             
+          
           <Route path="/store/product/:id" render={(props: any) => (<Fragment>  <ProdductPage {...props}/>  <Footer /></Fragment> )} /> 
              
              
@@ -109,6 +133,7 @@ function App() {
           </Route>
          
         </Switch>
+        </ThemeProvider>
 
     </div>
   );

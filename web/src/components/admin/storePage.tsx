@@ -1,6 +1,7 @@
 /* eslint-disable no-restricted-globals */
 import React , { Component, Fragment } from 'react'
 import Tables from '../data/product.tables'
+import MealTables from '../data/mealPlan.tables'
 import Chart from '../data/charts'
 import {Icon } from '@fluentui/react/lib/Icon'
 import ProductForm from '../forms/products'
@@ -8,7 +9,6 @@ import MealForm from '../forms/ceateMealPlan'
 import OrderTable from '../data/ordersTables'
 import BackendCalls from '../../server/backendCalls'
 import BackDrop from '../UI/backDrop'
-import { stat } from 'fs'
 
 
 
@@ -18,6 +18,7 @@ export default class StoreAdmin extends Component<any> {
     state = {
         openEditor: false,
         openPlan: false,
+        mealContent: {},
         products: [],
         content: {},
         orders: [],
@@ -34,13 +35,12 @@ export default class StoreAdmin extends Component<any> {
           
         const premiumData = await  backend.GetProducts()
         const MealDatat = await  backend.getMealPlans()
-        console.log(MealDatat)
         const Orders = await  backend.GetAllOrders()
  
        this.setState({
            data: [...premiumData.data.products],
            orders: [...Orders.data.products],
-        //    meal: [...MealDatat.data.products],
+           meal: [...MealDatat.data.products],
            doneLoading: true
 
        })
@@ -49,6 +49,22 @@ export default class StoreAdmin extends Component<any> {
     async componentDidMount ( ) {
         this.getProductData()
       
+    }
+
+    deleteMealPlan =  (deleteItems: any) => {
+
+        this.setState({
+            doneLoading: false
+        })
+
+         deleteItems.forEach(async (element: any) => {
+          await backend.deleteMealPlan(element)
+
+        });
+
+      
+        this.getProductData()
+
     }
 
     deleteProduct =  (deleteItems: any) => {
@@ -86,6 +102,26 @@ export default class StoreAdmin extends Component<any> {
     }
 
 
+
+    getOneMealPlan = async (id: any) => {
+
+        this.setState({
+            doneLoading: false
+        })
+
+
+           const content =  await backend.GetOneMealPlan(id)
+
+
+           this.setState({
+               mealContent: {...content.data.products.data , id: content.data.products.id},
+               doneLoading: true
+           })
+
+           this.openPlan()
+    }
+
+
     openEditor = () => {
         const { openEditor } = {...this.state}
         this.setState( {
@@ -106,12 +142,12 @@ export default class StoreAdmin extends Component<any> {
     openPlan = () => {
         const { openPlan } = {...this.state}
         this.setState( {
-            openEditor: !openPlan
+            openPlan: !openPlan
         })
 
         if(openPlan) {
             this.setState({
-                meal: {}
+                meal: []
             })
 
             this.getProductData()
@@ -129,7 +165,7 @@ export default class StoreAdmin extends Component<any> {
             {this.state.doneLoading ? null : <BackDrop /> }
 
             {this.state.openPlan ? 
-            <MealForm goBack={this.openPlan} content={this.state.meal} />
+            <MealForm goBack={this.openPlan} content={this.state.mealContent} />
              : null }
             
 
@@ -160,6 +196,8 @@ export default class StoreAdmin extends Component<any> {
 
            </div>
            <Tables data={this.state.data} editContent={(id: any ) => this.getOneProduct(id)} deleteContents={(ids : any ) => this.deleteProduct(ids)} />
+           
+           <MealTables data={this.state.meal} editContent={(id: any ) => this.getOneMealPlan(id)} deleteContents={(ids : any ) => this.deleteMealPlan(ids)} />
             
 
             <div className="orders" id="orders">

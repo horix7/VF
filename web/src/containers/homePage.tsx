@@ -1,4 +1,4 @@
-import React , { Component, Fragment } from "react"
+import React , { Component, Fragment, Key } from "react"
 import Homenav from '../components/navigation/home_nav'
 import homeImg from '../assets/chineke.jpg'
 import appleAppImg from '../assets/apple.png'
@@ -8,8 +8,9 @@ import { ProductDsiplayer, ArticleSlider, VideoPlayer } from '../components/UI/d
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
 import { Link } from "react-router-dom"
 import { FaStoreAlt, FaStream, FaArrowRight } from "react-icons/fa";
+import { FcCloseUpMode } from "react-icons/fc";
 import { DefaultButton } from "@fluentui/react"
-
+import MealBox from '../components/UI/mealPlanBox'
 
 
 const backend = new BackendCalls()
@@ -17,6 +18,7 @@ export default class Home extends Component {
     state = {
         products: [],
         articles: [],
+        plans: [],
         videos: [],
         loading: true
     }
@@ -25,12 +27,13 @@ export default class Home extends Component {
     fetchDataFromNet = async() => {
 
         const productData = await backend.GetProducts()
-
+        const mealPlans = await backend.getMealPlans()
         const articleData = await backend.GetArticles(false)
         const videoData = await backend.GetVideos(false)
 
         this.setState({
             products: productData.data.products ,
+            plans: mealPlans.data.products,
             articles: articleData.data.article,
             videos: videoData.data.video,
             loading: false 
@@ -74,7 +77,7 @@ export default class Home extends Component {
 
                     <div className="smallHeadrInfo">
                             <div className="iconName">
-                                <FaStream color="gold" />  &nbsp;
+                                <FcCloseUpMode color="gold" />  &nbsp;
                                 <span>Articles / Video</span>
                             </div>
 
@@ -95,7 +98,24 @@ export default class Home extends Component {
                      
                     </div>
 
-                   
+                   <div>
+
+                   <div className="smallHeadrInfo">
+                            <div className="iconName">
+                                <FaStream color="gold" />  &nbsp;
+                                <span>Meal Plans </span>
+                            </div>
+
+                           <div>
+                            
+                           </div>
+                        
+                        </div>
+                   <div className="mealPlansDisplayer">
+                      {this.state.plans.length > 1 ? this.state.plans.map((elem: any, key: Key) => <div key={key}><MealBox data={elem} /> </div> ) : <ProgressIndicator /> } 
+                        
+                    </div>
+                   </div>
                     <div className="adbbaneer">
 
                         <div>
@@ -142,13 +162,13 @@ export default class Home extends Component {
 
                        <div className="centerAlg">
                            
-                       <div className="premiumBox">
+                       {/* <div className="premiumBox">
                             <div>
                             <p className="pheading">fitness plans / meal Plans</p>
                             <p className="ppricing"> 20.99$ Monthly </p>
                             </div>
                             <Link to="/levelup/"> <button className="main_btn"> Upgrade </button> </Link>
-                        </div>
+                        </div> */}
 
                        </div>
                     </div>

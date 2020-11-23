@@ -892,6 +892,22 @@ main {
   transform: rotate(-180deg);
 }
 
+.mealPlansDisplayer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.mealPlansDisplayer div {
+  flex: 300px;
+}
+.MealBox {
+  background-color: rgba(255, 255, 255, 0.267);
+  padding: 10px;
+  margin: 10px;
+  display: grid;
+  grid-template-rows: 270px 200px;
+  text-align: start;
+}
 
 
 .dark {
@@ -985,6 +1001,32 @@ body {
 }
 
 
+.mealFromPlan {
+  /* width: 400px; */
+  text-align: start;
+  padding: 20px;
+}
+
+.mealInputz {
+  padding-top: 10px;
+
+}
+.mealInput {
+  padding-top: 10px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.pubish2 {
+  border: none;
+  width: 130px;
+  height: 40px;
+  border-radius: 10px;
+  margin-top: 20px;
+  background-color: black;
+  color: white;
+  
+}
 /* .floatBottom {
   float: right;
 } */
