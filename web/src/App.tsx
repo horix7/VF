@@ -22,16 +22,17 @@ import {
 } from "react-router-dom";
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import HomeNav from './components/navigation/home_nav';
 
 const theme = createMuiTheme({
   palette: {
-    primary: {
+    secondary: {
       light: '#616161',
       main: '#424242',
       dark: '#212121',
       contrastText: '#000',
     },
-    secondary: {
+    primary: {
       light: '#ffd740',
       main: '#ffd600',
       dark: '#ff6d00',
@@ -116,6 +117,7 @@ function App() {
           </Route>
 
           <Route  exact path="/mealplan"> 
+              <HomeNav />
               <MealPlan/>
 
           </Route>

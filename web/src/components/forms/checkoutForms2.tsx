@@ -112,7 +112,7 @@ render() {
 export const PaymentForm: React.FunctionComponent<any> = (props: any) => {
     const [key, setKey ] = React.useState("MOMO")
 
-    const [sucess, setScucess] = React.useState(true) 
+    const [sucess, setScucess] = React.useState(false) 
     const [loadingBtn, setLoading] = React.useState(false)
     const [loadinNext, setLoadNext] = React.useState(false)
     const [label, setLabel] = React.useState("Requesting Payment")

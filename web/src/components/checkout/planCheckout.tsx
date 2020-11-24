@@ -8,12 +8,15 @@ import StepConnector from '@material-ui/core/StepConnector';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { StepIconProps } from '@material-ui/core/StepIcon';
-import { PaymentForm } from '../forms/checkoutForms2'
-import { SignUpForm }  from '../forms/checkoutSignUp'
+import { CustomPaymentForm2 } from '../forms/checkoutForms'
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import {DefaultButton, Icon } from "@fluentui/react"
-import { MessageBar, MessageBarType  } from 'office-ui-fabric-react';
+import { Dropdown, MessageBar, MessageBarType, PrimaryButton, TextField  } from 'office-ui-fabric-react';
+import BackendCalss  from '../../server/backendCalls'
+
+const backend = new BackendCalss()
+
 
 const Newtheme = createMuiTheme({
   palette: {
@@ -81,9 +84,8 @@ function ColorlibStepIcon(props: StepIconProps) {
   const { active, completed } = props;
 
   const icons: { [index: string]: React.ReactElement } = {
-    1:  <Icon style={{color: "black", fontWeight:"bold"}} iconName="Accounts" />,
-    2:  <Icon style={{color: "black", fontWeight:"bold"}} iconName="PaymentCard"  />,
-    3:  <Icon style={{color: "black", fontWeight:"bold"}} iconName="TextDocument"   />,
+    1:  <Icon style={{color: "black", fontWeight:"bold"}} iconName="PaymentCard"  />,
+    2:  <Icon style={{color: "black", fontWeight:"bold"}} iconName="TextDocument"   />,
   };
 
   return (
@@ -117,11 +119,77 @@ function getSteps() {
   return [ 'Confirm Payment', 'Reciept'];
 }
 
-function getStepContent(step: number, handleNext: Function, total: any) {
-  switch (step) {
+
+export default function CustomizedSteppers(props: any) {
+  const classes = useStyles();
+  const [activeStep, setActiveStep] = React.useState(0);
+  const [name, setname] = React.useState('');
+  const [phone, setphone] = React.useState('');
+  const [email, setemail] = React.useState('');
+  const [gender, setgender] = React.useState('');
+  const steps = getSteps();
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+
+  const handleReset = () => {
+    setActiveStep(0);
+  };
+
+const postOrder = async() => {
+  const meal = {
+    name: name,
+    email: email,
+    phone: phone,
+    gender: gender
+  }
+
+  if(Object.values(meal).some((elem: any) => elem === "")) {
+      return "error"
+  } else {
+    const createMeal = await backend.createMealPlanRequest(meal)
+
+    if(createMeal === "error") {
+        return "error"
+    } else {
+      handleNext()
+      return true 
+    }
+  }
+
+}
+const GetStepContent: React.FunctionComponent<any> = (props: any) => {
+  switch (props.step) {
 
     case 0:
-      return <PaymentForm  handleNext={handleNext} total={total}/>;
+      return <> 
+      <div className="formHolder">
+      <div className="checkoutFF">
+      <TextField label="Your Names " value={name} type="text" onChange={(event : any) =>  setname(event.target.value)} />
+            <TextField label="Your Email Address "value={email}  type="email" onChange={(event : any) =>  setemail(event.target.value)} />
+            <TextField label="Your Phone Number "value={phone} type="phone" onChange={(event : any) =>  setphone(event.target.value)} />
+            <Dropdown
+              selectedKey={gender}
+              onChange={(event: any, option: any) => setgender(option.key)}
+
+              options={[
+                {
+                  key: "MALE",
+                  text: "MALE"
+                },
+                {
+                  key: "FEMALE",
+                  text: "FEMALE"
+                }
+              ]}
+            />
+      </div>
+      </div>
+         <CustomPaymentForm2 next={props.handleNext} total={props.total}/>
+         {/* <PrimaryButton text="submit" onClick={props.handleNext} /> */}
+      </>;
     case 1:
       return <>
          <MessageBar
@@ -136,23 +204,9 @@ function getStepContent(step: number, handleNext: Function, total: any) {
        <DefaultButton text="Continue" style={{float: "left", marginTop: "20px"}} onClick={() => window.location.href = "/"}  />
       </>;
     default:
-      return ' ';
+      return null;
   }
 }
-
-export default function CustomizedSteppers(props: any) {
-  const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
-  const steps = getSteps();
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-
-  const handleReset = () => {
-    setActiveStep(0);
-  };
 
 
   return (
@@ -178,7 +232,8 @@ export default function CustomizedSteppers(props: any) {
           </div>
         ) : (
           <div>
-            <Typography className={classes.instructions}>{getStepContent(activeStep, handleNext, props.match.params.price)}</Typography>
+
+            <GetStepContent step={activeStep} handleNext={postOrder} total={props.match.params.price} /> 
             <div>
               {/* <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                 Back

@@ -180,6 +180,8 @@ export default class Content extends Component<any> {
                     </div>
 
                     <div>
+
+                  
                         
                 <div className="smallHeadrInfo">
                             <div className="iconName">
@@ -192,6 +194,12 @@ export default class Content extends Component<any> {
                            </div>
                         
                     </div>
+
+                    <div className="upgradeIndicator">
+                         <p className="upgradeMessage"> Create Your Own Custom Meal Plan </p>
+                         <Link to="/mealplan" > <DefaultButton text="ReQuest Meal Plan"/> </Link> 
+                     </div>
+
                    <div className="mealPlansDisplayer">
                       {this.state.plans.length > 1 ? this.state.plans.map((elem: any, key: Key) => <div key={key}><MealBox data={elem} /> </div> ) : <ProgressIndicator /> } 
 

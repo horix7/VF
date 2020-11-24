@@ -9,6 +9,7 @@ import MealForm from '../forms/ceateMealPlan'
 import OrderTable from '../data/ordersTables'
 import BackendCalls from '../../server/backendCalls'
 import BackDrop from '../UI/backDrop'
+import MealRequestTable from '../data/MealordersTable'
 
 
 
@@ -20,6 +21,7 @@ export default class StoreAdmin extends Component<any> {
         openPlan: false,
         mealContent: {},
         products: [],
+        mealRequest: [],
         content: {},
         orders: [],
         meal: [],
@@ -34,12 +36,14 @@ export default class StoreAdmin extends Component<any> {
         })
           
         const premiumData = await  backend.GetProducts()
+        const MealReq = await  backend.getAllMealRequest()
         const MealDatat = await  backend.getMealPlans()
         const Orders = await  backend.GetAllOrders()
  
        this.setState({
            data: [...premiumData.data.products],
            orders: [...Orders.data.products],
+           mealRequest: [...MealReq.data.products],
            meal: [...MealDatat.data.products],
            doneLoading: true
 
@@ -161,7 +165,8 @@ export default class StoreAdmin extends Component<any> {
 
                     
        return  (
-        <Fragment>
+       <div className="adminStorePage">
+            <Fragment>
             {this.state.doneLoading ? null : <BackDrop /> }
 
             {this.state.openPlan ? 
@@ -173,24 +178,31 @@ export default class StoreAdmin extends Component<any> {
              <ProductForm  goBack={this.openEditor} content={this.state.content} categories={[...new Set(this.state.data.map((elem: any) => elem.category))].map((elem) =>  {return  {key: elem, text: elem}})}  /> : <>
            
            
-            <div className="towEl">
+            <div className="towEl1">
                 <div className="actionBtn">
-                <div></div>
-
             <div className="viewReport" onClick={() => location.href = "#orders"}>
 
              <Icon iconName="CRMReport" className="bigIcon" />
              <p>View Orders</p>
              </div>
 
+           
              <div className="viewReport"  onClick={this.openEditor} >
              <Icon iconName="AddTo" className="bigIcon"/>
              <p>Create A Product</p>
              </div>
-                </div>
+                
+             <div className="viewReport" onClick={() => location.href = "#meal"}>
+
+             <Icon iconName="ProductList" className="bigIcon" />
+             <p>View Meal Request </p>
+             </div>
+
+             
             <div className="viewReport"  onClick={this.openPlan} >
              <Icon iconName="EatDrink" className="bigIcon"/>
              <p>Create A Meal Plan </p>
+            </div>
             </div>
              <Chart chartData={{ }}  type={"sales"}  />
 
@@ -204,9 +216,18 @@ export default class StoreAdmin extends Component<any> {
                <OrderTable data={this.state.orders} />
 
             </div>
+
+            <div className="orders" id="meal">
+                
+               <MealRequestTable className="articleWriterC" data={this.state.mealRequest} />
+
+            </div>
+
             </>}
         </Fragment>
-       )
+     
+       </div>
+     )
     }
 
 }

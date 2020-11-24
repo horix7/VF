@@ -488,6 +488,43 @@ GetAllOrders = async (): Promise<any> => {
    }
 }
 
+createMealPlanRequest = async ( data: any): Promise<any> => {
+   try {
+
+  const ProductPost =  await axios.post("https://sawafitness.herokuapp.com/api/request/add/" , {product: data} , {
+   headers: {
+      "authorization": localStorage.authToken || null ,
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+   }
+  })
+
+
+  return (ProductPost)
+
+   } catch (error) {
+         return "error"           
+   }
+}
+
+
+getAllMealRequest = async (): Promise<any> => {
+   try {
+
+   const ProductPost =  await axios.get("https://sawafitness.herokuapp.com/api/request/all/", {
+     headers: {
+        "authorization": localStorage.authToken || null
+     }
+  })
+
+
+  return (ProductPost)
+
+   } catch (error) {
+         return "error"           
+   }
+}
+
 
      GetOneProducts = async (id: string ): Promise<any> => {
       try {
@@ -544,6 +581,23 @@ GetAllOrders = async (): Promise<any> => {
          return "error"           
         }
      }
+
+
+     deleteMealRequest = async (id: string): Promise<any> => {
+
+      try {
+       const deleted =  axios.delete("https://sawafitness.herokuapp.com/api/request/delete/" + id , {
+          headers: {
+             "authorization": localStorage.authToken || null
+          }
+       })
+
+       return  (await deleted)
+
+      } catch (error) {
+       return "error"           
+      }
+   }
 
      deleteMealPlan = async (id: string): Promise<any> => {
 

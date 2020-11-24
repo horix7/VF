@@ -16,8 +16,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
     head: {
-      backgroundColor: "black",
-      color: "gold",
+      backgroundColor: "white",
+      color: "black",
     },
     body: {
       fontSize: 14,
@@ -53,10 +53,9 @@ const classes = useStyles();
 const rows = [...props.data.map((elem: any) => createData(elem.head , elem.price,  elem.options || {options: "default "}, elem.amount || 1 , Number(elem.price) * (Number(elem.amount) || 1), elem.images[0] ))]
 const orderSum = [... props.data].map((elem: any) =>  Number(elem.price) * (Number(elem.amount) || 1)).reduce((a,b) => a + b )
 
-console.log(rows)
 
 return (
-    <TableContainer style={{width: "90%" , marginLeft: "5%"}} component={Paper}>
+    <TableContainer style={{width: "100%" , marginLeft: "0%"}} component={Paper}>
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
@@ -87,10 +86,11 @@ return (
             </StyledTableRow>
           ))}
 
-        <StyledTableRow>
-              <StyledTableCell style={{color: "gold", fontWeight: "bold"}} component="th" scope="row">
+        <StyledTableRow style={{color: "black", backgroundColor: "gold"}}>
+              <StyledTableCell style={{color: "black", fontWeight: "bold"}} component="th" scope="row">
                 Total 
               </StyledTableCell>
+              <StyledTableCell align="right"></StyledTableCell>
               <StyledTableCell align="right"></StyledTableCell>
               <StyledTableCell align="right"></StyledTableCell>
               <StyledTableCell align="right"></StyledTableCell>

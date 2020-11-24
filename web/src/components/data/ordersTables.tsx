@@ -84,6 +84,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
 
 export default function CollapsibleTable(props: any) {
 
+  console.log(props)
   const rows = props.data.map((element: any) => createData(element.product.user.names,  element.product.user.phone,element.product.user.country , element.product.user.address, element.product.user.house , element.product.user.total , element.product.data))
     
   return (
@@ -92,6 +93,7 @@ export default function CollapsibleTable(props: any) {
 
   </div>
     <TableContainer component={Paper}>
+      <Typography> Product Orders </Typography>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
