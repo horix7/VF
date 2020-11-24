@@ -3,7 +3,6 @@ import { BAD_REQUEST, CREATED, OK } from 'http-status-codes';
 import { ParamsDictionary } from 'express-serve-static-core';
 import Store from '../models/plans/checkout.model';
 import { paramMissingError } from '../shared/constants';
-import { adminMW } from '../middleware/middleware';
 
 // Init shared
 const router = Router();
@@ -14,7 +13,7 @@ const store = new Store();
  *                      Get All products - "GET /api/products/all"
  ******************************************************************************/
 
-router.use(adminMW).get('/all', async (req: Request, res: Response) => {
+router.get('/all', async (req: Request, res: Response) => {
     const products = await store.getAll();
     return res.status(OK).json({products});
 });
@@ -22,7 +21,7 @@ router.use(adminMW).get('/all', async (req: Request, res: Response) => {
 
 
 
- router.use(adminMW).get('/one/:id', async (req: Request, res: Response) => {
+ router.get('/one/:id', async (req: Request, res: Response) => {
     const { id } = req.params as ParamsDictionary;
 
     const products = await store.getOne(id);
@@ -71,7 +70,7 @@ router.put('/update', async (req: Request, res: Response) => {
  *                    Delete - "DELETE /api/products/delete/:id"
  ******************************************************************************/
 
-router.use(adminMW).delete('/delete/:id', async (req: Request, res: Response) => {
+router.delete('/delete/:id', async (req: Request, res: Response) => {
     const { id } = req.params as ParamsDictionary;
     await store.delete(id);
     return res.status(OK).end(); 
