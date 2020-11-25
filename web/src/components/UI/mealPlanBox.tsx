@@ -32,7 +32,7 @@ export default class MealBox extends Component<any> {
             <p className="headfis"> {trimWorlds(this.props.data.head)}</p>
             <p className="headsec"> {trimWorlds2(this.props.data.body)}</p>
 
-            <Link to={"/mealrequest/" + this.props.data.price } onClick={() => {
+            <Link to={"/mealrequest/" + this.props.data.head } onClick={() => {
                 localStorage.setItem("mealPlan", JSON.stringify({...this.props.data}))
             }} >
             <PrimaryButton text={"ReQuest Now"} />

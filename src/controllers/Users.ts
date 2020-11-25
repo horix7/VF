@@ -4,12 +4,12 @@ import { ParamsDictionary } from 'express-serve-static-core';
 import { hashRounds } from '../shared/constants'
 import UserDao from '../models/User/User.model';
 import { paramMissingError } from '../shared/constants';
-import { adminMW, standard } from '../middleware/middleware';
+import { adminMW } from '../middleware/middleware';
 import { UserRoles } from '../entities/User';
 import bcrypt from 'bcrypt'
 
 // Init shared
-const router = Router().use(standard);
+const router = Router().use(adminMW);
 const userDao = new UserDao();
  
 
@@ -21,6 +21,15 @@ router.get('/all', async (req: Request, res: Response) => {
     const users = await userDao.getAll();
     return res.status(OK).json({users});
 });
+
+
+router.get('/one/:id', async (req: Request, res: Response) => {
+    const { id } = req.params as ParamsDictionary;
+
+    const article = await userDao.getOneId(id);
+    return res.status(OK).json({article});
+});
+
 
 
 /******************************************************************************

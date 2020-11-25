@@ -172,6 +172,7 @@ const GetStepContent: React.FunctionComponent<any> = (props: any) => {
             <TextField label="Your Phone Number "value={phone} type="phone" onChange={(event : any) =>  setphone(event.target.value)} />
             <Dropdown
               selectedKey={gender}
+              label="Your Gender"
               onChange={(event: any, option: any) => setgender(option.key)}
 
               options={[
@@ -233,7 +234,7 @@ const GetStepContent: React.FunctionComponent<any> = (props: any) => {
         ) : (
           <div>
 
-            <GetStepContent step={activeStep} handleNext={postOrder} total={props.match.params.price} /> 
+            <GetStepContent step={activeStep} handleNext={postOrder} total={Number(JSON.parse(localStorage.mealPlan).price)} /> 
             <div>
               {/* <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                 Back

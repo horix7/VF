@@ -42,7 +42,7 @@ router.use(premium).get('/some/:name', async (req: Request, res: Response) => {
  *                       Add One - "POST /api/video/add"
  ******************************************************************************/
 
-router.use(adminMW).post('/add', async (req: Request, res: Response) => {
+router.use(premium).post('/add', async (req: Request, res: Response) => {
     // Check parameters
     const { video } = req.body;
     if (!video) {

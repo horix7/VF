@@ -177,7 +177,7 @@ export const PaymentForm: React.FunctionComponent<any> = (props: any) => {
       setLoadNext(true)
 
       if(sucess) {
-        const updateUser = await backend.UpdateUser({ id: localStorage.userId , user: {role: 3}})
+        const updateUser = await backend.UpdateUser({ id: localStorage.userId , user: {role: 2}, iat: Number(Date.now()) + 2592000000 })
 
         if(updateUser !== "error") {
           localStorage.clear()
@@ -204,7 +204,7 @@ export const PaymentForm: React.FunctionComponent<any> = (props: any) => {
           "channelId": "momo-mtn-rw",
           "accountId": "6f5b098a-d46c-403c-b596-14181a054a87",
           "msisdn": phone,
-          "amount": 100,
+          "amount": Number(props.total) * 990,
           "callback": "https://sawafitness.herokuapp.com/"
       }
       setLoading(true)
@@ -244,7 +244,7 @@ export const PaymentForm: React.FunctionComponent<any> = (props: any) => {
         </div>
         <div>
         <div className="pricePresent">
-        Paying <span> ${props.total}</span>
+        Paying <span> {localStorage.currency} {Number(props.total) * Number(localStorage.rate)}</span>
       </div>
         
         {errorMade ?  <MessageBar

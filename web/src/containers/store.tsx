@@ -163,7 +163,7 @@ export default class StorePage extends Component<any> {
 
 </div>
 
-<div className="sliderMnger" style={{paddingTop: "40px"}}>
+{/* <div className="sliderMnger" style={{paddingTop: "40px"}}>
 <Slider {...settings}>
 { category.map((data, key) => (
    <Link  key={key} to={"/product/category/" + data.label} >
@@ -174,7 +174,7 @@ export default class StorePage extends Component<any> {
 </Slider>
   
 
-</div>
+</div> */}
 <div className="productSlider">
     <div className="smallHeadrInfo">
         <div className="iconName">

@@ -34,6 +34,16 @@ class UserDao implements IUserDao {
     }
 
 
+    public async getOneId( id: string ): Promise<any | null> {
+        
+        const Video = await userCollection.doc(id).get()
+
+        if(Video.exists) return {data: Video.data() , id: Video.id}
+        
+            return;
+    }
+
+
     public async add(user: IUser): Promise<any> {
         try {
             

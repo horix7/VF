@@ -220,7 +220,7 @@ export default function VerticalLinearStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [gender, setKey] = useState("MALE");
   const [target, setTarget] = useState("LOSE");
-  const [Paid, setPaid] = useState(true);
+  const [Paid, setPaid] = useState(false);
   const [errorMade, seterrorMade] = useState({
     loading: false,
     error: false

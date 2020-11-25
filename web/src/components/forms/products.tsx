@@ -5,7 +5,7 @@ import { PrimaryButton,
 import React, {  Component, Fragment, useState } from 'react'
 import { UploadMultipleFile } from '../models/uploadModalMultiple'
 import ArticleWriter from '../editors/ArticleEditor'
-import { Dropdown, IDropdownOption,DropdownMenuItemType, } from 'office-ui-fabric-react/lib/Dropdown';
+import { DropdownMenuItemType } from 'office-ui-fabric-react/lib/Dropdown';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Moodal from '../models/models'
 import { Icon } from '@fluentui/react/lib/Icon'

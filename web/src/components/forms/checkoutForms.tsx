@@ -130,7 +130,7 @@ render() {
 export const CustomPaymentForm2: React.FunctionComponent<any> = (props: any) => {
     const [key, setKey ] = React.useState("MOMO")
 
-    const [sucess, setScucess] = React.useState(true) 
+    const [sucess, setScucess] = React.useState(false) 
     const [loadingBtn, setLoading] = React.useState(false)
     const [loadinNext, setLoadNext] = React.useState(false)
     const [label, setLabel] = React.useState("Requesting Payment")
@@ -205,7 +205,7 @@ export const CustomPaymentForm2: React.FunctionComponent<any> = (props: any) => 
           "channelId": "momo-mtn-rw",
           "accountId": "6f5b098a-d46c-403c-b596-14181a054a87",
           "msisdn": phone,
-          "amount": 100,
+          "amount": Number(props.total) * 990,
           "callback": "https://sawafitness.herokuapp.com/"
       }
       setLoading(true)
@@ -245,7 +245,7 @@ export const CustomPaymentForm2: React.FunctionComponent<any> = (props: any) => 
         </div>
         <div>
         <div className="pricePresent">
-        Paying <span> ${props.total}</span>
+    Paying <span> {localStorage.currency} {Number(props.total) * Number(localStorage.rate)}</span>
       </div>
         
         {errorMade ?  <MessageBar
@@ -364,7 +364,7 @@ export const PaymentForm: React.FunctionComponent<any> = (props: any) => {
         "channelId": "momo-mtn-rw",
         "accountId": "6f5b098a-d46c-403c-b596-14181a054a87",
         "msisdn": phone,
-        "amount": 100,
+        "amount": Number(props.total) * 990,
         "callback": "https://sawafitness.herokuapp.com/"
     }
     setLoading(true)
@@ -404,7 +404,7 @@ export const PaymentForm: React.FunctionComponent<any> = (props: any) => {
       </div>
       <div>
       <div className="pricePresent">
-      Paying <span> ${props.total}</span>
+  Paying <span> {localStorage.currency} {Number(props.total) * Number(localStorage.rate)}</span>
     </div>
       
       {errorMade ?  <MessageBar
@@ -453,7 +453,7 @@ export const PaymentForm: React.FunctionComponent<any> = (props: any) => {
 export const CustomPaymentForm: React.FunctionComponent<any> = (props: any) => {
   const [key, setKey ] = React.useState("MOMO")
 
-  const [sucess, setScucesz] = React.useState(true) 
+  const [sucess, setScucesz] = React.useState(false) 
   const [loadingBtn, setLoading] = React.useState(false)
   const [label, setLabel] = React.useState("Requesting Payment")
   const [phone, setphone] = React.useState(null)
@@ -508,7 +508,7 @@ export const CustomPaymentForm: React.FunctionComponent<any> = (props: any) => {
         "channelId": "momo-mtn-rw",
         "accountId": "6f5b098a-d46c-403c-b596-14181a054a87",
         "msisdn": phone,
-        "amount": 100,
+        "amount": Number(props.total) * 990,
         "callback": "https://sawafitness.herokuapp.com/"
     }
     setLoading(true)
@@ -548,7 +548,7 @@ export const CustomPaymentForm: React.FunctionComponent<any> = (props: any) => {
       </div>
       <div>
       <div className="pricePresent">
-      Paying <span> ${props.total}</span>
+  Paying <span> {localStorage.currency} {Number(props.total) * Number(localStorage.rate)}</span>
     </div>
       
       {errorMade ?  <MessageBar

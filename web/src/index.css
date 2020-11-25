@@ -1518,7 +1518,7 @@ code {
 
 .price a {
   display: grid;
-  grid-template-columns: 90% 1%;
+  grid-template-columns: 80% 10%;
   width: 100%;
 
   float: left;
