@@ -68,7 +68,7 @@ const rows = [...props.data.map((elem: any) => createData(elem.head , elem.price
               <StyledTableCell component="th" scope="row">
                 {row.name}
               </StyledTableCell>
-              <StyledTableCell align="right">{Number(row.price) * Number(localStorage.currency)}</StyledTableCell>
+          <StyledTableCell align="right">{localStorage.currency} {Number(row.price) * Number(localStorage.rate)}</StyledTableCell>
               <StyledTableCell align="right"> 
               <List component="nav"  aria-label="mailbox folders"> 
               {Object.keys(row.options).map((elem: any, key: Key ) => (

@@ -37,6 +37,62 @@ export default class Request {
 
     }
 
+    CreatePlanQuestion = async (data: any): Promise<any> => {
+
+      try {
+       let  route = "/content/addin"
+       route = `/api/fremium${route}`
+ 
+       const ArticlePost = await  axios({
+          url: "https://sawafitness.herokuapp.com" + route,
+          method: "post",
+          data:  {
+             article: data
+          },
+          headers: {
+             "authorization": localStorage.authToken || null ,
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+          }
+       })
+ 
+ 
+ 
+       return ArticlePost
+      } catch (error) {
+          return "error"
+      }
+ 
+     }
+
+     UpdateQuestion = async (data: any): Promise<any> => {
+
+      try {
+       let  route = "/content/addin"
+       route = `/api/fremium${route}`
+ 
+       const ArticlePost = await  axios({
+          url: "https://sawafitness.herokuapp.com" + route,
+          method: "put",
+          data:  {
+             article: data
+          },
+          headers: {
+             "authorization": localStorage.authToken || null ,
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+          }
+       })
+ 
+ 
+ 
+       return ArticlePost
+      } catch (error) {
+          return "error"
+      }
+ 
+     }
+
     CreateVideo = async (data: any, premium: boolean): Promise<any> => {
 
        try {
@@ -137,6 +193,30 @@ export default class Request {
      }
  
      }
+
+     GetQuestions = async (): Promise<any> => {
+
+      try {
+       let  route = "/content/allin"
+       route = "/api"  + "/fremium" + route
+ 
+       const ArticlePost = await  axios({
+             url: "https://sawafitness.herokuapp.com" + route,
+             method: "get",
+             headers: {
+                "authorization": localStorage.authToken || null ,
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+             }
+          })
+ 
+       return ArticlePost
+      } catch (error) {
+          return "error"
+      }
+  
+      }
+
 
           
     GetOneArticle = async (premium: boolean , id: string ): Promise<any> => {

@@ -45,7 +45,7 @@ export default class HomeNav extends Component {
             window.location.reload()
         }else {
             localStorage.setItem("currency", "RWF")
-            localStorage.setItem("rate", "2")
+            localStorage.setItem("rate", "990")
             window.location.reload()
 
         }
@@ -115,7 +115,7 @@ export default class HomeNav extends Component {
                         </div>
                        <NavLink to="/">
                        <div className="naav1">
-                            <img src={logo} width="35%" alt=""/>
+                            <img src={logo} width="45%" alt=""/>
                         </div>
                        </NavLink>
 

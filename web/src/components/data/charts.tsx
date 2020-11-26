@@ -1,3 +1,5 @@
+import { DefaultButton, Icon } from '@fluentui/react';
+import { Typography } from '@material-ui/core';
 import React, { PureComponent } from 'react';
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
@@ -32,45 +34,62 @@ if(this.props.type === "sales") {
 
 
     return (
-     <div className="chartHolder">
-       <div className="spacing">
+    //  <div className="chartHolder">
+    //    <div className="spacing">
 
-       </div>
+    //    </div>
 
-         {window.matchMedia("(max-width: 700px)").matches ?
-          <LineChart
-          width={380}
-          height={200}
-          data={data}
-          margin={{
-            top: 5, right: 30, left: 20, bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="pv" stroke="#8884d8" strokeDasharray="5 5" />
-          <Line type="monotone" dataKey={this.props.type} stroke="#82ca9d" strokeDasharray="3 4 5 2" />
-        </LineChart> : <LineChart
-        width={550}
-        height={300}
-        data={data}
-        margin={{
-          top: 5, right: 30, left: 20, bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Line type="monotone" dataKey="pv" stroke="#8884d8" strokeDasharray="5 5" />
-        <Line type="monotone" dataKey={this.props.type} stroke="#82ca9d" strokeDasharray="3 4 5 2" />
-      </LineChart>}
+    //      {window.matchMedia("(max-width: 700px)").matches ?
+    //       <LineChart
+    //       width={380}
+    //       height={200}
+    //       data={data}
+    //       margin={{
+    //         top: 5, right: 30, left: 20, bottom: 5,
+    //       }}
+    //     >
+    //       <CartesianGrid strokeDasharray="3 3" />
+    //       <XAxis dataKey="name" />
+    //       <YAxis />
+    //       <Tooltip />
+    //       <Legend />
+    //       <Line type="monotone" dataKey="pv" stroke="#8884d8" strokeDasharray="5 5" />
+    //       <Line type="monotone" dataKey={this.props.type} stroke="#82ca9d" strokeDasharray="3 4 5 2" />
+    //     </LineChart> : <LineChart
+    //     width={550}
+    //     height={300}
+    //     data={data}
+    //     margin={{
+    //       top: 5, right: 30, left: 20, bottom: 5,
+    //     }}
+    //   >
+    //     <CartesianGrid strokeDasharray="3 3" />
+    //     <XAxis dataKey="name" />
+    //     <YAxis />
+    //     <Tooltip />
+    //     <Legend />
+    //     <Line type="monotone" dataKey="pv" stroke="#8884d8" strokeDasharray="5 5" />
+    //     <Line type="monotone" dataKey={this.props.type} stroke="#82ca9d" strokeDasharray="3 4 5 2" />
+    //   </LineChart>}
  
+    //  </div>
+    
+    <div className="chartHolder">
+    <div className="spacing">
+
+    </div>
+    <div className="emptyChart">
+     <div>
+       <Icon iconName="Info"  style={{fontSize: "xx-large" , marginBottom:"10px"}}/>
+      <Typography>
+     Checkout Site Stats on Analytics  
+
+      </Typography>
+      <button style={{marginTop: "10px"}} className="view_more_btn" > View More  </button>
      </div>
+    </div>
+    </div>
+    
     );
   }
 }

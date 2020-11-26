@@ -11,6 +11,7 @@ import { FaStoreAlt, FaStream, FaArrowRight } from "react-icons/fa";
 import { FcCloseUpMode } from "react-icons/fc";
 import { DefaultButton } from "@fluentui/react"
 import MealBox from '../components/UI/mealPlanBox'
+import { Typography } from "@material-ui/core"
 
 
 const backend = new BackendCalls()
@@ -61,12 +62,12 @@ export default class Home extends Component {
                         <div></div>
                         <div className="first_descr">
                             <p> Lorem ipsum dolor sit amet consec  adi </p>
-                            <button className="main_btn"> Level Up </button>
+                            <button onClick={() => window.location.href = "#level_up"} className="main_btn"> Level Up </button>
                         </div>
                     </div>
 
                     <div className="appBanner">
-                        <span>Our App available on </span>
+                        <Typography >Our App available on </Typography >
                         <div></div>
                        <div className="appLinks">
                        <img src={googleAppImg} width="150px"  alt=""/>
@@ -125,7 +126,7 @@ export default class Home extends Component {
 
                         <div>
                         <p>Upgrade To Our Premium Package </p>
-                        <DefaultButton text="level up" />
+                        <DefaultButton onClick={() => window.location.href = "#level_up"} text="level up" />
                         </div>
                     
                     </div>
@@ -154,7 +155,7 @@ export default class Home extends Component {
                       {this.state.products.length > 1 ? <ProductDsiplayer products={this.state.products} /> : <ProgressIndicator />} 
                     </div>
 
-                    <div className="level_up">
+                    <div className="level_up" id="level_up">
                         <h3>Level Up </h3>
 
                         <div className="premiumBox">

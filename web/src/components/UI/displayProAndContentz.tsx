@@ -172,6 +172,7 @@ export class ArticleSlider extends Component<any> {
               }
             ]
           };
+          console.log(this.props)
 
         return (
             <Fragment>

@@ -216,8 +216,29 @@ video {
   margin-top: -2px;
   margin-left: -17px;
 
+  
 }
 
+.emptyChart {
+  background-color:rgba(92, 78, 0, 0.453) ;
+  color: black;
+  width: 100%;
+  height: 100%;
+}
+
+
+.emptyChart div {
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.view_more_btn {
+  color: white;
+  background-color: black;
+  border: none;
+  height: 34px;
+  width: 120px;
+}
 
 .featuredV p {
   font-size: small;
@@ -593,7 +614,7 @@ i {
 }
 
 .recentContent , .recentProducts {
-  width: 98%;
+  width: 100%;
   height: 100%;
 }
 
@@ -656,10 +677,15 @@ i {
   color: gold;
   padding-top: 20px;
 }
+
+.add_cart .ms-Spinner {
+  visibility: visible;
+}
+
 .adbbaneer {
   background-color: gold;
   color: black;
-  padding: 10px;
+  padding: 20px;
 }
 .paymentLoader {
   padding-top: 20px;
@@ -1694,11 +1720,38 @@ code {
   border: none;
 }
 
+.efakk {
+  margin-left: -0%;
+  padding-top: 30px;
+}
+
+
 @media screen and (max-width: 800px) {
   body {
     background-color: black;
   }
+  .sliderMnger {
+    width: 85%;
+  }
+  
+  .efakk {
+    margin-left: -60%;
+    padding-top: 30px;
+  }
 
+  
+
+  .productAction {
+    display: grid;
+    padding-bottom: 40px;
+    width: 100%;
+    grid-template-columns: 40% 80%;
+    background-color: rgb(36, 36, 36);
+  
+  }
+  .add_cart .ms-Spinner {
+    visibility: hidden;
+  }
   
   .checkoutFF {
     width: 80%;
@@ -1783,7 +1836,7 @@ code {
   }
 
   .product_box {
-    width: 300px;
+    width: 280px;
     text-align: center;
     background-color: black;
     margin: 20px;
@@ -1852,12 +1905,7 @@ code {
     padding: 20px;
   }
 
-  .efakk {
-    margin-left: -50%;
-    padding-top: 30px;
-  }
 
-  
 
   .formHolder {
     padding-top: 20px;
@@ -2077,6 +2125,11 @@ code {
     height: 4rem;
   }
 
+  .emptyChart {
+    height: 200px;
+  }
+  
+  
 
   .editor {
     width: 100%;

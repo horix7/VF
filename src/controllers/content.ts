@@ -4,7 +4,9 @@ import { ParamsDictionary } from 'express-serve-static-core';
 import Content from '../models/nremiumContent/condent.model';
 import { paramMissingError } from '../shared/constants';
 import { adminMW } from '../middleware/middleware';
+import Question from '../models/store/plan.model'
 
+const question = new Question()
 // Init shared
 const router = Router();
 const content = new Content();
@@ -16,6 +18,13 @@ const content = new Content();
 
 router.get('/all', async (req: Request, res: Response) => {
     const article = await content.getAll();
+
+    return res.status(OK).json({article});
+});
+
+
+router.get('/allin', async (req: Request, res: Response) => {
+    const article = await question.getOne();
 
     return res.status(OK).json({article});
 });
@@ -64,6 +73,22 @@ router.use(adminMW).post('/add', async (req: Request, res: Response) => {
 });
 
 
+router.use(adminMW).post('/addin', async (req: Request, res: Response) => {
+    // Check parameters
+
+    const { article } = req.body;
+    if (!article) {
+        return res.status(BAD_REQUEST).json({
+            error: paramMissingError,
+        });
+    }
+    // Add new article
+    await question.add(article);
+
+    return res.status(CREATED).end();
+});
+
+
 /******************************************************************************
  *                       Update - "PUT /api/article/update"
  ******************************************************************************/
@@ -79,6 +104,21 @@ router.use(adminMW).put('/update', async (req: Request, res: Response) => {
    
     // Update article
     await content.update(article, req.body.id);
+    return res.status(OK).end();
+});
+
+
+router.use(adminMW).put('/updatin', async (req: Request, res: Response) => {
+    // Check Parameters
+    const { article } = req.body;
+    if (!article) {
+        return res.status(BAD_REQUEST).json({
+            error: paramMissingError,
+        });
+    }
+   
+    // Update article
+    await question.update(article);
     return res.status(OK).end();
 });
 

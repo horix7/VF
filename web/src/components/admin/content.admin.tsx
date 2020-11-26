@@ -7,6 +7,7 @@ import VideFrom  from '../forms/create_video'
 import BackendCalls from '../../server/backendCalls'
 import VideoTables from '../data/video.tables'
 import BackDrop from '../UI/backDrop'
+import CreateQuestion from '../models/createQuestions'
 
 const backend = new BackendCalls()
 
@@ -263,6 +264,11 @@ export default class ArticleAdmin extends Component<any> {
             }}>
              <Icon iconName="PageAdd" className="bigIcon"/>
              <p>Publish An Article </p>
+             </div>
+
+             <div className="viewReport ">
+             <Icon iconName="AddToShoppingList" className="bigIcon"/>
+             <CreateQuestion />
              </div>
 
              <div className="viewReport"  onClick={() => {
