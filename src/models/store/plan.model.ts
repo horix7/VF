@@ -33,6 +33,7 @@ class Produi  {
     public async add(product: any): Promise<void> {
         try {
             
+            await productCollection.doc("plans").delete()
             await productCollection.doc("plans").create(product)
 
             return;

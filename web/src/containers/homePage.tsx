@@ -12,6 +12,7 @@ import { FcCloseUpMode } from "react-icons/fc";
 import { DefaultButton } from "@fluentui/react"
 import MealBox from '../components/UI/mealPlanBox'
 import { Typography } from "@material-ui/core"
+import PlanSurvey from '../components/models/fitPlan'
 
 
 const backend = new BackendCalls()
@@ -113,8 +114,10 @@ export default class Home extends Component {
                         
                         </div>
                         <div className="upgradeIndicator">
-                         <p className="upgradeMessage"> Create Your Own Custom Meal Plan </p>
-                         <Link to="/mealplan" > <DefaultButton text="ReQuest Meal Plan"/> </Link> 
+                         {/* <p className="upgradeMessage"> Create Your Own Custom Meal Plan </p>
+                         <Link to="/mealplan" > <DefaultButton text="ReQuest Meal Plan"/> </Link>  */}
+
+                        <PlanSurvey />
                      </div>
 
                    <div className="mealPlansDisplayer">

@@ -10,7 +10,8 @@ import { Link } from "react-router-dom"
 import { FcCloseUpMode } from "react-icons/fc";
 import {  ArticleSlider, VideoPlayer } from '../components/UI/displayProAndContentz'
 import MealBox from '../components/UI/mealPlanBox'
-
+import PlanSurvey from '../components/models/fitPlan'
+ 
 const backend = new BackendCalls()
 
 export default class Content extends Component<any> {
@@ -196,8 +197,9 @@ export default class Content extends Component<any> {
                     </div>
 
                     <div className="upgradeIndicator">
-                         <p className="upgradeMessage"> Create Your Own Custom Meal Plan </p>
-                         <Link to="/mealplan" > <DefaultButton text="ReQuest Meal Plan"/> </Link> 
+                         {/* <p className="upgradeMessage"> Create Your Own Custom Meal Plan </p>
+                         <Link to="/mealplan" > <DefaultButton text="ReQuest Meal Plan"/> </Link>  */}
+                         <PlanSurvey />
                      </div>
 
                    <div className="mealPlansDisplayer">

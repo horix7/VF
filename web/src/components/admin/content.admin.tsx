@@ -8,6 +8,7 @@ import BackendCalls from '../../server/backendCalls'
 import VideoTables from '../data/video.tables'
 import BackDrop from '../UI/backDrop'
 import CreateQuestion from '../models/createQuestions'
+import { CircularProgress } from '@material-ui/core'
 
 const backend = new BackendCalls()
 
@@ -18,6 +19,7 @@ export default class ArticleAdmin extends Component<any> {
         editor2: false ,
         data: [],
         videoData: [],
+        formData: {},
         articleContent: {},
         videoContent: {},
         videoCategory: [],
@@ -32,6 +34,9 @@ export default class ArticleAdmin extends Component<any> {
 
        const fremiumData =await  backend.GetArticles(false)
 
+       const formData = await backend.GetQuestions()
+
+       
        const premiumDataVid = await  backend.GetVideos(true)
 
        const fremiumDataVid =await  backend.GetVideos(false)
@@ -89,8 +94,8 @@ export default class ArticleAdmin extends Component<any> {
           data: [...fremiumDataN, ...premiumDataN],
           videoData: [ ...fremiumDataNV , ...premiumDataNV],
           doneLoading: true,
+          formData: formData.data.article.data,
           articleCategory:[ ...[...new Set (premiumData.data.article.map((elem: any) => elem.category))].map((elem : any) =>  {return { key: elem, text: elem}}),...[ ...new Set (fremiumData.data.article.map( (elem: any) => elem.category))].map((elem : any) =>  {return { key: elem, text: elem}})],
-
           videoCategory:[   ...[...new Set(premiumDataVid.data.video.map((elem: any) => elem.category))].map((elem : any) =>  {return { key: elem, text: elem}}), ...[...new Set(fremiumDataVid.data.video.map((elem: any) =>  elem.category))].map((elem : any) =>  {return { key: elem, text: elem}})]
 
       })
@@ -268,7 +273,7 @@ export default class ArticleAdmin extends Component<any> {
 
              <div className="viewReport ">
              <Icon iconName="AddToShoppingList" className="bigIcon"/>
-             <CreateQuestion />
+             {this.state.doneLoading ?  <CreateQuestion data={this.state.formData}  /> : <CircularProgress color="secondary" />}
              </div>
 
              <div className="viewReport"  onClick={() => {

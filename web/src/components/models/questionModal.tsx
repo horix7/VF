@@ -6,7 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { IconButton, ListItemSecondaryAction } from '@material-ui/core';
 import EditSharpIcon from '@material-ui/icons/EditSharp';
-
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 
 
 export interface SimpleDialogProps {
@@ -118,6 +118,19 @@ function SimpleDialog(props: SimpleDialogProps) {
                             }} edge="end">
                                 <EditSharpIcon color="secondary" />
                             </IconButton>
+
+                            <IconButton onClick={() => {
+                                setname(elem)
+                                const newDataq : {[key: string] : any }   = {}
+                                Object.keys(props.data2).filter((elm: any) =>  elm !== elem).forEach((element: string ) => {
+                                    newDataq[element] = props.data2[element]
+                                });
+                                props.setdata(newDataq)
+                            }}
+                             edge="end">
+                                <DeleteOutlineIcon color="secondary" />
+                            </IconButton>
+
                         </ListItemSecondaryAction>
                     </ListItem>
                 )}

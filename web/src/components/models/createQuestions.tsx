@@ -8,6 +8,10 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Paper, { PaperProps } from '@material-ui/core/Paper';
 import Draggable from 'react-draggable';
 import Questionaire from './questionModal'
+import BackendCalls from '../../server/backendCalls'
+import { CircularProgress } from '@material-ui/core';
+
+const backend = new BackendCalls()
 
 function PaperComponent(props: PaperProps) {
   return (
@@ -17,9 +21,12 @@ function PaperComponent(props: PaperProps) {
   );
 }
 
-export default function DraggableDialog() {
+
+export default function DraggableDialog(props: any) {
+
   const [open, setOpen] = React.useState(false);
-  const [data, setdata] = React.useState<{[key: string] : any}>({});
+  const [loading, setloading] = React.useState(false);
+  const [data, setdata] = React.useState<{[key: string] : any}>(props.data);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -32,9 +39,28 @@ export default function DraggableDialog() {
       newD[newData.name] = newData.data
 
       setdata(newD)
-      console.log(data)
+     
   }
 
+  
+
+
+  const saveData = async() => {
+    setloading(true)
+    if(Object.values(data).length < 1) {
+       alert("No Information Provided")
+    } else {
+        const createData = await backend.CreatePlanQuestion(data)
+
+        if(createData === "error") {
+            setloading(false)
+        }else {
+            setloading(false)
+            console.log(createData)
+        }
+ 
+    }
+  }
   const handleClose = () => {
     setOpen(false);
   };
@@ -59,15 +85,17 @@ export default function DraggableDialog() {
           <DialogContentText>
 
 
-            <Questionaire data2={data} createData={createData} />
+            <Questionaire data2={data} setdata={setdata} createData={createData} />
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose} color="secondary">
-            Cancel
+            close
           </Button>
-          <Button color="secondary">
-                save
+          <Button color="secondary" onClick={saveData}>
+
+               {loading ? <CircularProgress /> : "save"}
+
           </Button>
         </DialogActions>
       </Dialog>
