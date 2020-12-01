@@ -56,7 +56,6 @@ export default function DraggableDialog(props: any) {
             setloading(false)
         }else {
             setloading(false)
-            console.log(createData)
         }
  
     }

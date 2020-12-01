@@ -17,6 +17,15 @@ class Produi  {
             return;
     }
 
+    public async getOneHome(): Promise<any | null> {
+        
+        const product = await productCollection.doc("home").get()
+
+        if(product.exists) return {data: product.data(), id: product.id}
+        
+            return;
+    }
+
 
     public async getAll(): Promise<any> {
  
@@ -41,6 +50,25 @@ class Produi  {
 
             try {
                 await productCollection.doc("plans").update(product)
+
+                 return;
+            } catch (error) {
+                throw err;   
+            }
+           
+        }
+    }
+
+    public async addHomeContent(product: any): Promise<void> {
+        try {
+            
+            await productCollection.doc("home").create(product)
+
+            return;
+        } catch (err) {
+
+            try {
+                await productCollection.doc("home").update(product)
 
                  return;
             } catch (error) {

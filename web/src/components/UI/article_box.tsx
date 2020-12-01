@@ -13,7 +13,7 @@ export default class Article extends Component<any> {
     return (
       <Fragment>
            
-                 <div className="articlebox">
+           <div className="articlebox">
           <div className="imgBox"  onClickCapture={() => window.location.href =  window.location.protocol  + "//"  + window.location.host  + '/content/articles/' + this.props.data.id}>
             <div>
               <img
@@ -26,7 +26,7 @@ export default class Article extends Component<any> {
             <IconContext.Provider
               value={{ color: "gold", className: "article_icon" }}
             >
-              <IoMdImages />
+              {/* <IoMdImages /> */}
             </IconContext.Provider>
           </div>
 

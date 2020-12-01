@@ -9,6 +9,7 @@ import VideoTables from '../data/video.tables'
 import BackDrop from '../UI/backDrop'
 import CreateQuestion from '../models/createQuestions'
 import { CircularProgress } from '@material-ui/core'
+import HomeUpdate from '../forms/homeContent'
 
 const backend = new BackendCalls()
 
@@ -24,7 +25,8 @@ export default class ArticleAdmin extends Component<any> {
         videoContent: {},
         videoCategory: [],
         articleCategory: [],
-        doneLoading: false
+        doneLoading: false,
+        doneLoading2: false 
         
     }
 
@@ -254,11 +256,16 @@ export default class ArticleAdmin extends Component<any> {
 
             {this.state.doneLoading ? null : <BackDrop /> }
 
+            {this.state.doneLoading2 ? <HomeUpdate  groBack={() => {
+                this.setState({
+                    doneLoading2: false
+                })
+            }} /> : null }
+
             {this.state.openEditor || this.state.editor2 ?  this.state.editor2 ? <VideFrom goBack={this.opeEditor2} content={this.state.videoContent}  categories={this.state.videoCategory}  />  :
              <ArticleFrom goBack={this.openEditor}  content={this.state.articleContent} categories={this.state.articleCategory}  />   : <>
-            <div className="towEl">
+            <div className="towEl1">
                 <div className="actionBtn">
-                <div></div>
 
             <div className="viewReport " onClick={() => {
                 this.setState({
@@ -274,6 +281,15 @@ export default class ArticleAdmin extends Component<any> {
              <div className="viewReport ">
              <Icon iconName="AddToShoppingList" className="bigIcon"/>
              {this.state.doneLoading ?  <CreateQuestion data={this.state.formData}  /> : <CircularProgress color="secondary" />}
+             </div>
+
+             <div className="viewReport " onClick={() => {
+                 this.setState({
+                    doneLoading2: true
+                 })
+             }}>
+             <Icon iconName="AddHome" className="bigIcon"/>
+             <p>Update Home Content </p>
              </div>
 
              <div className="viewReport"  onClick={() => {

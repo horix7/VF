@@ -9,7 +9,7 @@ const backend = new Backend()
 
 const modelProps = {
   isBlocking: false,
-  topOffsetFixed: true,
+  topOffsetFixed: false,
 };
 
 

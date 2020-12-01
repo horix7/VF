@@ -76,10 +76,10 @@ export default class Article extends Component<any> {
                            <PivotIconCountExample info={{review_id: this.state.article_info.review_id || this.state.article_info.id }} />
                         </div>
 
-                        <ArticleSlider articles={this.state.allArticles} /> 
+                       
                     </div>
                 </div>
-                 
+                <ArticleSlider articles={this.state.allArticles} /> 
                 </>
                  : <BackDrop />}
                                

@@ -30,6 +30,13 @@ router.get('/allin', async (req: Request, res: Response) => {
 });
 
 
+router.get('/allhome', async (req: Request, res: Response) => {
+    const article = await question.getOneHome();
+
+    return res.status(OK).json({article});
+});
+
+
 /******************************************************************************
  *                      search article - "GET /api/article/all"
  ******************************************************************************/
@@ -87,6 +94,25 @@ router.use(adminMW).post('/addin', async (req: Request, res: Response) => {
 
     return res.status(CREATED).end();
 });
+
+
+
+
+router.use(adminMW).post('/addhome', async (req: Request, res: Response) => {
+    // Check parameters
+
+    const { article } = req.body;
+    if (!article) {
+        return res.status(BAD_REQUEST).json({
+            error: paramMissingError,
+        });
+    }
+    // Add new article
+    await question.add(article);
+
+    return res.status(CREATED).end();
+});
+
 
 
 /******************************************************************************

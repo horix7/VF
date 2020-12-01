@@ -37,6 +37,33 @@ export default class Request {
 
     }
 
+    CreateHomeContent = async (data: any): Promise<any> => {
+
+      try {
+       let  route = "/content/addhome"
+       route = `/api/fremium${route}`
+ 
+       const ArticlePost = await  axios({
+          url: "https://sawafitness.herokuapp.com" + route,
+          method: "post",
+          data:  {
+             article: data
+          },
+          headers: {
+             "authorization": localStorage.authToken || null ,
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+          }
+       })
+ 
+ 
+ 
+       return ArticlePost
+      } catch (error) {
+          return "error"
+      }
+ 
+     }
     CreatePlanQuestion = async (data: any): Promise<any> => {
 
       try {
@@ -216,6 +243,29 @@ export default class Request {
       }
   
       }
+   
+      GetHomeContent = async (): Promise<any> => {
+
+         try {
+          let  route = "/content/allhome"
+          route = "/api"  + "/fremium" + route
+    
+          const ArticlePost = await  axios({
+                url: "https://sawafitness.herokuapp.com" + route,
+                method: "get",
+                headers: {
+                   "authorization": localStorage.authToken || null ,
+                   "Content-Type": "application/json",
+                   "Accept": "application/json"
+                }
+             })
+    
+          return ArticlePost
+         } catch (error) {
+             return "error"
+         }
+     
+         }
 
 
           

@@ -466,22 +466,22 @@ a {
 }
 
 .viewReport {
-  width: 100px;
+  width: 98%;
   background-color: gold;
   height: 100px;
   color: black;
-  padding: 10px;
+  padding-top: 10px;
   cursor: pointer;
 }
 
 .actionBtn {
   text-align: center;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr ;
   flex-wrap: wrap;
 }
 
 .actionBtn div {
-  flex: 200px;
   margin: 3px;
 }
 i {
@@ -1999,12 +1999,12 @@ code {
   }
 
   .viewReport {
-    width: 90%;
+    width: 97%;
     background-color: gold;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     height: 100px;
     color: black;
-    padding: 20px;
+    /* padding: 20px; */
     cursor: pointer;
   }
   
@@ -2022,8 +2022,9 @@ code {
     text-align: center;
     display: grid;
     grid-template-columns: 1fr;
-    padding: 10px;
-    column-gap: 20px;
+    grid-template-rows: 150px 150px 150px 150px ;
+    /* padding: 10px; */
+    row-gap: 3px;
   }
 
   .towEl {
