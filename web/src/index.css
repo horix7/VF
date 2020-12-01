@@ -25,6 +25,33 @@ body {
   padding: 0;
 }
 
+.HomeEditro {
+  width: 90%;
+  margin-left: 5%;
+  padding-bottom: 50px;
+}
+
+
+
+.homeInputs {
+  width: 90%;
+  margin-top: 10px;
+}
+
+.homeInputSub {
+  margin-top: 20px;
+}
+
+.imgDescription {
+  margin-top: 20px;
+}
+
+
+.imgDescription img {
+  object-fit: cover;
+  height: 100px;
+}
+
 .choicestepper {
   color: gray; 
 }
@@ -581,6 +608,19 @@ i {
 .specs {
   width: 200px;
   font-family:     'Noto Sans', sans-serif; 
+}
+
+
+.inputFlex {
+  display: flex;
+  flex-wrap: wrap;
+  /* flex-direction: column; */
+
+}
+
+.inputFlex .homeInputs {
+  flex: 150px;
+  margin: 5px;
 }
 
 .proSpecs h1 {

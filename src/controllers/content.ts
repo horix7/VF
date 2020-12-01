@@ -108,7 +108,7 @@ router.use(adminMW).post('/addhome', async (req: Request, res: Response) => {
         });
     }
     // Add new article
-    await question.add(article);
+    await question.addHomeContent(article);
 
     return res.status(CREATED).end();
 });

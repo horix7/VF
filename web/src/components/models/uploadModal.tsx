@@ -42,7 +42,7 @@ export const DialogweUploadByBtn = (props: any ) => {
   return (
     <>
       <div className="articleWriterC">
-      { coverPhoto !== "null" ? <img src={coverPhoto} width="100px" alt=""/> : <DefaultButton secondaryText="upload Article cover photo " onClick={toggleHideDialog} text=" Upload Cover image" />}
+      { coverPhoto !== "null" ? <img src={coverPhoto} width="100px" alt=""/> : <DefaultButton secondaryText="upload Article cover photo " onClick={toggleHideDialog} text=" Upload An image" />}
       </div>
       <Dialog
         hidden={hideDialog}
