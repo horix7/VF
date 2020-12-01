@@ -17,9 +17,10 @@ import PlanSurvey from '../components/models/fitPlan'
 
 const backend = new BackendCalls()
 export default class Home extends Component {
-    state = {
+    state: { [key: string] : any } = {
         products: [],
         articles: [],
+        homeContent: {},
         plans: [],
         videos: [],
         loading: true
@@ -29,6 +30,7 @@ export default class Home extends Component {
     fetchDataFromNet = async() => {
 
         const productData = await backend.GetProducts()
+        const GetHomeContent = await backend.GetHomeContent()
         const mealPlans = await backend.getMealPlans()
         const articleData = await backend.GetArticles(false)
         const videoData = await backend.GetVideos(false)
@@ -38,6 +40,7 @@ export default class Home extends Component {
             plans: mealPlans.data.products,
             articles: articleData.data.article,
             videos: videoData.data.video,
+            homeContent: GetHomeContent.data.article.data,
             loading: false 
         })
 
@@ -58,14 +61,15 @@ export default class Home extends Component {
                 <Homenav />
 
                 <div className="home_main">
-                    <div className="firstMain">
-                        <img src={homeImg} width="90%" alt=""/>
+                    {Object.keys(this.state.homeContent).length > 1 ? <div className="firstMain">
+                      <img src={this.state.homeContent.home.pic} width="90%" alt=""/>
                         <div></div>
                         <div className="first_descr">
-                            <p> Lorem ipsum dolor sit amet consec  adi </p>
+                           
+                            <p> {this.state.homeContent.home.content}</p>
                             <button onClick={() => window.location.href = "#level_up"} className="main_btn"> Level Up </button>
                         </div>
-                    </div>
+                    </div>  :  <ProgressIndicator /> }
 
                     <div className="appBanner">
                         <Typography >Our App available on </Typography >

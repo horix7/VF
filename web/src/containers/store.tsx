@@ -18,6 +18,7 @@ export default class StorePage extends Component<any> {
         hot: [],
         recent: [],
         allProducts: [],
+        home: {},
         categories: [],
         loading: false,
         backDrop: true,
@@ -71,6 +72,7 @@ export default class StorePage extends Component<any> {
 
     getProductData = async () => {
         const newProductData = await backend.GetProducts()
+        const homeData = await backend.GetHomeContent()
         const recent = [...newProductData.data.products].reverse()
 
         const categories = [...new Set(newProductData.data.products.map((elem: any) => elem.category))].map((elem: any ) => {
@@ -94,8 +96,10 @@ export default class StorePage extends Component<any> {
             hot: newProductData.data.products,
             recent: recent ,
             allProducts: newProductData.data.products,
-            backDrop: false,
-            categories: categories
+            home: homeData.data.article.data,
+            categories: categories,
+            backDrop: false
+
         })
 
         this.getMoreData("article")
@@ -153,11 +157,11 @@ export default class StorePage extends Component<any> {
             <Fragment>
                <HomeNav />
 
-                {this.state.backDrop ? <BackDrop /> : <div className="mainPage">
-
+                {this.state.backDrop ? <BackDrop /> :
+ <div className="mainPage">
     <div className="sliderHolder">
    <div>
-   <p>Lorem ipsum dolor sit amet consectettionem error quia non deserunt, dolor</p>
+   <p>{this.state.home.store.content}</p>
     <PrimaryButton text="Shop Now " className="btnBig" type="large"/>
    </div>
 

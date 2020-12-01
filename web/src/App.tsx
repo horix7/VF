@@ -16,6 +16,7 @@ import MealCheckout from './components/checkout/planCheckout'
 import Video from './containers/videoArea'
 import Content from './containers/contentVideoz'
 import Footer from './components/navigation/footer'
+
 import {
   Switch,
   Route
