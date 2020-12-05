@@ -19,7 +19,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(cookieParser(cookieProps.secret));
 
 app.use((req, res, next) => {
-    const allowedOrigins = [ 'http://localhost:3001' , "https://vfitness-8a2c3.web.app", 'http://localhost:3000'];
+    const allowedOrigins = [ 'http://localhost:3001' , "https://xyzcheckout.web.app/", "https://vfitness-8a2c3.web.app", 'http://localhost:3000'];
     const origin = req.headers.origin || "null";
     if (allowedOrigins.includes(origin.toString())) {
          res.setHeader('Access-Control-Allow-Origin', origin);
