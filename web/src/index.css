@@ -13,6 +13,11 @@
   --transition-speed: 600ms;
 }
 
+.contactForm {
+  max-width: 400px;
+  text-align: start;
+  padding: 20px;
+}
 
 * {
   font-family: 'Noto sans', sans-serif;
@@ -32,7 +37,15 @@ body {
 }
 
 
+.towdivz {
+  display: grid;
+  grid-template-columns: 135px 135px;
+  column-gap: 30px;
+}
 
+.fullWid {
+  width: 100%;
+}
 .homeInputs {
   width: 90%;
   margin-top: 10px;
@@ -122,6 +135,33 @@ button {
   cursor: pointer;
   outline: none;
 }
+
+#contact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.aboutaddress {
+  padding: 20px;
+}
+
+.one_info_holder {
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 50px 1fr ;
+  text-align: start;
+}
+
+.one_info_holder p {
+  margin-top: -0px;
+  padding-left: 20px;
+}
+
+.contact_icons {
+  color: gold;
+  font-size: xx-large;
+}
+
 .publish {
   width: 150px;
   height: 40px;
@@ -461,7 +501,15 @@ a {
   width: 90%;
   padding-left: 20px;
 }
+.chipManager {
+  display: flex;
+  margin: 10px;
+  flex-wrap: wrap;
+}
 
+.chip {
+  margin: 5px;
+}
 .towEl {
   display: grid;
   grid-template-columns: 50%  50% ;
@@ -1256,13 +1304,16 @@ code {
 }
 
 .appBanner {
-  background-color: gold;
+  color: gold;
   height: 55px;
   padding-top: 15px;
   display: grid;
   grid-template-columns: 50% 20% 30%;
 }
 
+.upgradeMessage {
+  font-size: xx-large;
+}
 .appBanner img {
   padding: 0px;
 }
@@ -1275,7 +1326,7 @@ code {
 .appBanner p {
   font-size: large;
   text-transform: uppercase;
-  color: black;
+  color: gold;
   padding-bottom: 2px;
 }
 
@@ -1679,6 +1730,7 @@ code {
 
 .upgradeIndicator {
   background-color: gold;
+  text-align: start;
   color: black;
   padding: 10px;
   margin-top: 10px;

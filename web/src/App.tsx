@@ -8,7 +8,7 @@ import LevelUpCheckOut from './components/checkout/premiumCheckout'
 import Store from './containers/store'
 import HomePage from './containers/homePage'
 import SignedHome from './containers/signedContent'
-import MealPlan from './containers/mealPlan'
+import MealPlan from './containers/mealPlanReal'
 import AdminDash from './containers/adminPage';
 import ProdductPage from './containers/product'
 import ArticlePage from './containers/article'

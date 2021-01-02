@@ -48,7 +48,7 @@ export default class  DialogTopOffsetFixedExample extends React.Component<any> {
 
         return (
           <>
-            <DefaultButton secondaryText="Opens the Sample Dialog" onClick={this.toggleHideDialog} text="Get Your Personlized Fitness/Meal plan" />
+            <DefaultButton secondaryText="Opens the Sample Dialog" onClick={this.toggleHideDialog} text="Take A Survey" />
             
             <Dialog hidden={this.state.hideDialog} onDismiss={this.toggleHideDialog} minWidth={320} maxWidth={700} modalProps={modelProps}>
            

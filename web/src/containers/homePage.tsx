@@ -1,6 +1,5 @@
 import React , { Component, Fragment, Key } from "react"
-import Homenav from '../components/navigation/home_nav'
-import homeImg from '../assets/chineke.jpg'
+import Homenav from '../components/navigation/homepagenav'
 import appleAppImg from '../assets/apple.png'
 import googleAppImg from '../assets/google.png'
 import BackendCalls from '../server/backendCalls'
@@ -9,11 +8,11 @@ import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
 import { Link } from "react-router-dom"
 import { FaStoreAlt, FaStream, FaArrowRight } from "react-icons/fa";
 import { FcCloseUpMode } from "react-icons/fc";
-import { DefaultButton } from "@fluentui/react"
+import { DefaultButton, Icon } from "@fluentui/react"
 import MealBox from '../components/UI/mealPlanBox'
 import { Typography } from "@material-ui/core"
 import PlanSurvey from '../components/models/fitPlan'
-
+import ContactUs from '../components/forms/contact-us'
 
 const backend = new BackendCalls()
 export default class Home extends Component {
@@ -81,7 +80,7 @@ export default class Home extends Component {
                     </div>
 
 
-                    <div className="smallHeadrInfo">
+                    <div className="smallHeadrInfo" id="content">
                             <div className="iconName">
                                 <FcCloseUpMode color="gold" />  &nbsp;
                                 <span>Articles / Video</span>
@@ -118,8 +117,8 @@ export default class Home extends Component {
                         
                         </div>
                         <div className="upgradeIndicator">
-                         {/* <p className="upgradeMessage"> Create Your Own Custom Meal Plan </p>
-                         <Link to="/mealplan" > <DefaultButton text="ReQuest Meal Plan"/> </Link>  */}
+                         <p className="upgradeMessage"> Get A Personalized Meal Plan For Your Body Type  </p>
+                          
 
                         <PlanSurvey />
                      </div>
@@ -142,7 +141,7 @@ export default class Home extends Component {
 
                     </div>
 
-                    <div className="smallHeadrInfo">
+                    <div className="smallHeadrInfo"  id="store">
                             <div className="iconName">
                                 <FaStoreAlt color="gold" />  &nbsp;
                                 <span>Our Products</span>
@@ -173,6 +172,7 @@ export default class Home extends Component {
                             <Link to="/levelup/"> <button className="main_btn"> Upgrade </button> </Link>
                         </div>
 
+
                        <div className="centerAlg">
                            
                        {/* <div className="premiumBox">
@@ -186,10 +186,29 @@ export default class Home extends Component {
                        </div>
                     </div>
 
-                    <div className="home_about">
+                    <div id="contact">
+                        <div className="aboutaddress">
+                            <div className="one_info_holder">
+                                <Icon iconName="MapDirections" className="contact_icons" />
+                                <p>  {Object.keys(this.state.homeContent).length > 1 ? this.state.homeContent.address.content : null }  </p>
+                            </div>
 
+                            <div className="one_info_holder">
+                                <Icon iconName="CellPhone" className="contact_icons" />
+                                <p>  {Object.keys(this.state.homeContent).length > 1 ? this.state.homeContent.number.content : null }  </p>
+                            </div>
+
+                            <div className="one_info_holder">
+                                <Icon iconName="Mail" className="contact_icons" />
+                                <p>  {Object.keys(this.state.homeContent).length > 1 ? this.state.homeContent.email.content : null }  </p>
+                            </div>
+                        </div>
+                    <ContactUs />
 
                     </div>
+
+                   
+
 
                 </div>
 
