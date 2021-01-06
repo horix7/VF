@@ -13,12 +13,28 @@
   --transition-speed: 600ms;
 }
 
+.blackBackground {
+  background-color: black;
+}
 .contactForm {
   max-width: 400px;
   text-align: start;
   padding: 20px;
 }
 
+.firstBackground {
+  background-image: url("./assets/backgrountwo.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.backgroundsecond {
+  background-image: url("./assets/backgroundone.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
 * {
   font-family: 'Noto sans', sans-serif;
   word-wrap: break-word;
@@ -312,6 +328,7 @@ video {
 }
 .footer {
   background-color: black;
+  border-top: 3px solid gold;
   text-align: left;
   font-weight: bold;
   font-size: 16px;
@@ -1304,7 +1321,7 @@ code {
 }
 
 .appBanner {
-  color: gold;
+  color: white;
   height: 55px;
   padding-top: 15px;
   display: grid;
@@ -1326,13 +1343,13 @@ code {
 .appBanner p {
   font-size: large;
   text-transform: uppercase;
-  color: gold;
   padding-bottom: 2px;
 }
 
 
 .firstMain {
   display: grid;
+  background: rgba(0, 0, 0, 0.467);
   grid-template-columns: 400px 1fr 40%;
 }
 
@@ -1496,6 +1513,10 @@ code {
   padding: 20px;
 }
 
+.blackBackgroundtrans {
+  background: rgba(0, 0, 0, 0.753);
+
+}
 
 .smallHeadrInfo {
   display: grid;
@@ -1572,9 +1593,7 @@ code {
 }
 
 .level_up {
-  width: 70%;
   text-align: start;
-  margin-left: 15%;
   padding: 30px;
 }
 
@@ -1710,7 +1729,7 @@ code {
   padding: 20px 0px 10px 20px;
   background-color: black;
   border-bottom: 1px solid rgba(255, 255, 255, 0.459);
-  grid-template-columns: 10% 15% 10% 30% 5% 5% 25%;
+  grid-template-columns: 10% 15% 10% 30% 10% 5% 20%;
   text-align: center;
 }
 
@@ -1729,9 +1748,8 @@ code {
 }
 
 .upgradeIndicator {
-  background-color: gold;
   text-align: start;
-  color: black;
+  color: gold;
   padding: 10px;
   margin-top: 10px;
 }
@@ -1822,6 +1840,11 @@ code {
   body {
     background-color: black;
   }
+
+  #contact {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
   .sliderMnger {
     width: 85%;
   }
@@ -1857,13 +1880,15 @@ code {
   margin-left: 2%;
 }
 
+.makeFronImg {
+  min-height: 400px;
+}
   .appLinks {
     margin-top: 10px;
   }
  
 
   .level_up {
-    width: 90%;
     text-align: start;
     margin-left: 0%;
     padding: 0px;

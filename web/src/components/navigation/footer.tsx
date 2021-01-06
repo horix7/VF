@@ -57,8 +57,9 @@ class FooterPage extends Component<any> {
   <div className="footer-right col-md-4 col-sm-6">
     <h2>  <img src={logo} width="200px" alt=""/></h2>
     <p className="menu">
-      <a href="/"> Home</a> &nbsp;  |  &nbsp; 
-      <a href="#levelup"> Upgrade</a>  &nbsp;  
+      <a href="#"> Home</a> &nbsp;  |  &nbsp; 
+      <a href="#store"> Store</a> &nbsp;  |  &nbsp; 
+      <a href="#content"> content</a> &nbsp;   
     </p>
     <p className="name">  &copy; {new Date().getFullYear()} Copyright: <a href="https://www.sawafit.com" style={{textDecoration: "none" , textTransform: "uppercase" , color: "gold"}}> sawafit.com </a>
     </p>

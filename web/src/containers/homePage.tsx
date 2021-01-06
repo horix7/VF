@@ -60,8 +60,11 @@ export default class Home extends Component {
                 <Homenav />
 
                 <div className="home_main">
+                <div className="firstBackground">
+
                     {Object.keys(this.state.homeContent).length > 1 ? <div className="firstMain">
-                      <img src={this.state.homeContent.home.pic} width="90%" alt=""/>
+                      {/* <img src={this.state.homeContent.home.pic} width="90%" alt=""/> */}
+                        <div className="makeFronImg"></div>
                         <div></div>
                         <div className="first_descr">
                            
@@ -69,9 +72,10 @@ export default class Home extends Component {
                             <button onClick={() => window.location.href = "#level_up"} className="main_btn"> Level Up </button>
                         </div>
                     </div>  :  <ProgressIndicator /> }
+                    <div className="blackBackground">
 
                     <div className="appBanner">
-                        <Typography >Our App available on </Typography >
+                        <Typography >Download Our App on </Typography >
                         <div></div>
                        <div className="appLinks">
                        <img src={googleAppImg} width="150px"  alt=""/>
@@ -95,6 +99,8 @@ export default class Home extends Component {
                            </Link>
                         
                         </div>
+                        </div>
+                        </div>
         
                     <div>
                       {this.state.articles.length > 1 ? <ArticleSlider articles={this.state.articles} /> :  <ProgressIndicator />} 
@@ -103,8 +109,10 @@ export default class Home extends Component {
                      
                     </div>
 
-                   <div>
+                  
 
+<div className="backgroundsecond">
+<div className="blackBackgroundtrans">
                    <div className="smallHeadrInfo">
                             <div className="iconName">
                                 <FaStream color="gold" />  &nbsp;
@@ -117,7 +125,7 @@ export default class Home extends Component {
                         
                         </div>
                         <div className="upgradeIndicator">
-                         <p className="upgradeMessage"> Get A Personalized Meal Plan For Your Body Type  </p>
+                         <p className="upgradeMessage"> Get A Personalized Meal Plan <br /> For Your Body Type  </p>
                           
 
                         <PlanSurvey />
@@ -161,7 +169,7 @@ export default class Home extends Component {
                       {this.state.products.length > 1 ? <ProductDsiplayer products={this.state.products} /> : <ProgressIndicator />} 
                     </div>
 
-                    <div className="level_up" id="level_up">
+                    <div className="level_up blackBackgroundtrans" id="level_up">
                         <h3>Level Up </h3>
 
                         <div className="premiumBox">
@@ -172,6 +180,7 @@ export default class Home extends Component {
                             <Link to="/levelup/"> <button className="main_btn"> Upgrade </button> </Link>
                         </div>
 
+                        </div>
 
                        <div className="centerAlg">
                            

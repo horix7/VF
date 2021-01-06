@@ -4,7 +4,7 @@ import { Icon } from '@fluentui/react/lib/Icon';
 import {NavLink } from 'react-router-dom'
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
 import { CartHolder } from '../UI/cart'
-import MobileNav from '../UI/leftDrwaer'
+import MobileNav from '../UI/homerdrawe'
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
@@ -83,7 +83,7 @@ export default class HomeNav extends Component {
                             <img src={logo} width="35%" alt=""/>
                         </div></a>
                         
-                       <a href='#auth'>  <div className="naav2"> <div className="twoIconx">  {localStorage.authToken ?  localStorage.current_user ? JSON.parse(localStorage.current_user).upgraded ? <Icon className="navIconz"style={{color: "gold" , fontWeight: "bolder"}} iconName="6PointStar"/> : null : <Icon className="navIconz" onClick={() => localStorage.clear()} iconName="SignOut"/>  :  <Icon className="navIconz" iconName="Signin"/>}  </div> </div> </a>
+                       <a href='#contact'> <div className="naav">contact us </div> </a>
                          <div className="naav" onClick={this.openCart}><div className="cartHolder"><Icon className="navIconz" iconName="ShoppingCart" /> <span> {JSON.parse(localStorage.cart).length}</span></div></div>
                         <div className="naav2 searBar">
                                 <div className="currencyPicker">
